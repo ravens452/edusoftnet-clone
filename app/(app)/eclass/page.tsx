@@ -18,6 +18,57 @@ const TYPE_LABEL: Record<string, string> = {
 export default async function EclassPage() {
   const user = await requireSession();
 
+  // ── DIRECTION / ADMIN: panorama global ──
+  if (user.role === 'DIRECTION' || user.role === 'ADMIN') {
+    const assignments = await prisma.assignment.findMany({
+      include: {
+        courseAssignment: {
+          include: {
+            course: true,
+            teacher: { include: { user: true } },
+            section: { include: { grade: true } },
+          },
+        },
+        submissions: true,
+      },
+      orderBy: { dueDate: 'desc' },
+      take: 80,
+    });
+    return (
+      <div className="space-y-6">
+        <PageHeader title="eclass" description="Tareas y entregas — todos los cursos" />
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {assignments.length === 0 ? (
+            <p className="text-sm text-[var(--muted-foreground)] col-span-full">Sin tareas registradas.</p>
+          ) : assignments.map((a) => {
+            const total = a.submissions.length;
+            const submitted = a.submissions.filter((s) => s.status !== 'PENDING').length;
+            const graded = a.submissions.filter((s) => s.status === 'GRADED').length;
+            return (
+              <Card key={a.id} className="h-full">
+                <CardHeader>
+                  <div className="flex items-start justify-between gap-2">
+                    <CardTitle className="text-sm leading-snug">{a.title}</CardTitle>
+                    <Badge variant="outline">{TYPE_LABEL[a.type]}</Badge>
+                  </div>
+                </CardHeader>
+                <CardContent className="text-xs space-y-1.5 text-[var(--muted-foreground)]">
+                  <div>{a.courseAssignment.course.name} · {a.courseAssignment.section.grade.name} "{a.courseAssignment.section.name}"</div>
+                  <div>Docente: {a.courseAssignment.teacher.user.firstName} {a.courseAssignment.teacher.user.lastName}</div>
+                  <div className="flex items-center gap-3 pt-1">
+                    <Badge variant="muted">{formatDate(a.dueDate)}</Badge>
+                    <span>{submitted}/{total} entregas</span>
+                    <span>{graded} calificadas</span>
+                  </div>
+                </CardContent>
+              </Card>
+            );
+          })}
+        </div>
+      </div>
+    );
+  }
+
   if (user.role === 'TEACHER') {
     const t = await prisma.teacher.findUnique({ where: { userId: user.id } });
     if (!t) return <div>Sin perfil</div>;

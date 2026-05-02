@@ -44,6 +44,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es" className={`${outfit.variable} ${inter.variable} ${merriweather.variable}`}>
+      <head>
+        <script src="/theme-init.js" />
+      </head>
       <body className="min-h-screen antialiased">{children}</body>
     </html>
   );

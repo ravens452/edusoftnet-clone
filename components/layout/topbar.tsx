@@ -3,6 +3,7 @@ import { useTransition } from 'react';
 import { useRouter } from 'next/navigation';
 import { Bell, Search, LogOut, User, Menu } from 'lucide-react';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import { ThemeToggle } from './theme-toggle';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -63,6 +64,9 @@ export function Topbar({
       </div>
       {/* Spacer en mobile */}
       <div className="flex-1 sm:hidden" />
+
+      {/* Theme toggle */}
+      <ThemeToggle />
 
       {/* Notifs */}
       <button className="relative h-9 w-9 grid place-items-center rounded-xl hover:bg-[var(--muted)] transition-colors">
