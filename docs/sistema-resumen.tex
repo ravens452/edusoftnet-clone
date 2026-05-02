@@ -1,0 +1,443 @@
+\documentclass[11pt,a4paper]{article}
+
+% ==== Paquetes ====
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-tabla]{babel}
+\usepackage[margin=2.2cm,top=2.6cm,bottom=2.2cm]{geometry}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{tcolorbox}
+\usepackage{array}
+\usepackage{multicol}
+\usepackage{parskip}
+\usepackage{tikz}
+\usepackage[hidelinks]{hyperref}
+\tcbuselibrary{skins,breakable}
+
+% ==== Colores Mercedarios ====
+\definecolor{merBlue}{HTML}{003366}
+\definecolor{merBlueDark}{HTML}{001A33}
+\definecolor{merBlueMid}{HTML}{004080}
+\definecolor{merOrange}{HTML}{FF8C00}
+\definecolor{merLime}{HTML}{7AC143}
+\definecolor{merGray}{HTML}{1E293B}
+\definecolor{merMuted}{HTML}{64748B}
+\definecolor{merBg}{HTML}{F4F2EC}
+\definecolor{softBlue}{HTML}{E8F0F9}
+\definecolor{softOrange}{HTML}{FFF1DC}
+\definecolor{softLime}{HTML}{ECF7DC}
+
+\hypersetup{
+  pdftitle={Plataforma Educativa El Mercedario - Resumen para Direccion},
+  pdfauthor={I.E.P. El Mercedario RVDO. P.E.A.B.}
+}
+
+% ==== Cabecera/pie ====
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\color{merMuted}I.E.P. \textit{El Mercedario} \textbullet\ Cayma}
+\fancyhead[R]{\small\color{merMuted}Plataforma Educativa}
+\fancyfoot[L]{\small\color{merMuted}Para la Dirección · 2026}
+\fancyfoot[R]{\small\color{merMuted}\thepage\ / \pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\renewcommand{\headrule}{\color{merBlue}\hrule height 0.5pt}
+\renewcommand{\footrule}{\color{merBlue}\hrule height 0.4pt}
+
+% ==== Estilos de título ====
+\titleformat{\section}
+  {\Large\bfseries\color{merBlue}}
+  {\thesection.}{0.5em}{}
+\titleformat{\subsection}
+  {\large\bfseries\color{merBlueDark}}
+  {}{0em}{}
+\titlespacing*{\section}{0pt}{1.5em}{0.6em}
+\titlespacing*{\subsection}{0pt}{1.0em}{0.4em}
+
+% ==== Cajas ====
+\newtcolorbox{quotebox}[1][]{
+  enhanced, breakable,
+  colback=softBlue, colframe=merBlue,
+  boxrule=0pt, leftrule=3pt,
+  arc=2pt,
+  left=14pt, right=12pt, top=10pt, bottom=10pt, #1
+}
+\newtcolorbox{accentbox}[1][]{
+  enhanced, breakable,
+  colback=softOrange, colframe=merOrange,
+  boxrule=0pt, leftrule=3pt,
+  arc=2pt,
+  left=14pt, right=12pt, top=10pt, bottom=10pt, #1
+}
+\newtcolorbox{plainbox}[1][]{
+  enhanced, breakable,
+  colback=merBg, colframe=merBlue!20,
+  boxrule=0.4pt, arc=4pt,
+  left=12pt, right=12pt, top=8pt, bottom=8pt, #1
+}
+\newtcolorbox{successbox}[1][]{
+  enhanced, breakable,
+  colback=softLime, colframe=merLime,
+  boxrule=0pt, leftrule=3pt,
+  arc=2pt,
+  left=14pt, right=12pt, top=10pt, bottom=10pt, #1
+}
+
+% ==== Listas ====
+\setlist[itemize]{leftmargin=1.4em, itemsep=3pt, topsep=4pt}
+\setlist[enumerate]{leftmargin=1.6em, itemsep=3pt, topsep=4pt}
+
+\renewcommand{\familydefault}{\sfdefault}
+
+\begin{document}
+
+% ===================== PORTADA =====================
+\begin{titlepage}
+  \begin{center}
+    \vspace*{0.5cm}
+
+    {\color{merMuted}\large\textsc{Institución Educativa Particular}}
+
+    \vspace{1cm}
+    \includegraphics[width=4.8cm]{../public/logo.png}
+
+    \vspace{0.8cm}
+    {\Huge\bfseries\color{merBlue} El Mercedario}
+
+    \vspace{0.3cm}
+    {\Large\color{merOrange}\textit{Reverendo Padre Eleuterio Alarcón Bejarano}}
+
+    \vspace{0.3cm}
+    {\large\color{merMuted}Cayma · Arequipa · Perú}
+
+    \vspace{2.8cm}
+    \begin{tcolorbox}[
+      colback=merBlue, colframe=merBlue,
+      arc=10pt, boxrule=0pt,
+      left=22pt,right=22pt,top=20pt,bottom=20pt,
+      width=14cm
+    ]
+      \centering
+      {\color{white}\Large\textbf{Plataforma Educativa Digital}}\\[8pt]
+      {\color{white!85}\large Una sola herramienta para gestionar todo el colegio}\\[8pt]
+      {\color{white!70}\small Resumen para la Dirección}
+    \end{tcolorbox}
+
+    \vfill
+    {\large\color{merMuted}\textit{Educación con Fe y Valores}}\\[3pt]
+    {\small\color{merMuted}I.E.P. El Mercedario RVDO. P.E.A.B. \textbullet\ Año 2026}
+  \end{center}
+\end{titlepage}
+
+% ===================== 1. PRESENTACIÓN =====================
+\section{¿Qué es esta plataforma?}
+
+\begin{quotebox}
+Es una herramienta digital, hecha a la medida del colegio \textbf{El Mercedario}, que reúne en un solo lugar todo lo que hoy se hace en distintos cuadernos, archivos de Excel, papeles y mensajes de WhatsApp.
+\end{quotebox}
+
+Cada persona del colegio --- docentes, apoderados, alumnos y administración --- entra con su usuario y contraseña, y ve solo lo que le corresponde a su rol.
+
+\subsection*{¿Qué problemas resuelve?}
+
+\begin{itemize}
+\item \textbf{Padres preguntando por las notas:} ahora las pueden ver al instante en la plataforma.
+\item \textbf{Olvido de pagos de pensión:} el sistema avisa antes y después del vencimiento.
+\item \textbf{Comunicados que no llegan:} los apoderados los reciben en su panel y como notificación.
+\item \textbf{Asistencia en cuaderno:} se registra digitalmente y los padres son avisados ese mismo día.
+\item \textbf{Tareas perdidas:} los alumnos ven en su panel todas sus tareas y entregas.
+\item \textbf{Trámites en mesa de partes:} los padres solicitan constancias o justificaciones desde su casa.
+\item \textbf{Reuniones difíciles de coordinar:} las entrevistas docente-familia se agendan en línea.
+\item \textbf{Información dispersa:} cada estudiante tiene un \textbf{expediente único} con sus notas, asistencia, salud y conducta.
+\end{itemize}
+
+% ===================== 2. QUIENES LA USAN =====================
+\section{¿Quiénes la usan?}
+
+La plataforma tiene \textbf{nueve perfiles} distintos. Cada uno ve un panel personalizado con las herramientas que necesita.
+
+\begin{tabularx}{\textwidth}{@{}lX@{}}
+\toprule
+\textbf{Perfil} & \textbf{Qué puede hacer} \\
+\midrule
+\textcolor{merBlue}{\textbf{Dirección}} &
+Ver el panorama completo del colegio en un tablero: alumnos, recaudación, asistencia, comunicados, prospectos de admisión. \\
+\addlinespace
+\textcolor{merBlue}{\textbf{Docente}} &
+Registrar notas y asistencia, comunicarse con apoderados, asignar tareas, ver el horario, planificar sus clases. \\
+\addlinespace
+\textcolor{merBlue}{\textbf{Apoderado}} &
+Consultar las notas y asistencia de sus hijos, pagar pensiones, conversar con los docentes, recibir comunicados, agendar entrevistas. \\
+\addlinespace
+\textcolor{merBlue}{\textbf{Alumno}} &
+Ver sus calificaciones, sus tareas pendientes, el horario, los comunicados y la biblioteca virtual. \\
+\addlinespace
+\textcolor{merBlue}{\textbf{Psicología}} &
+Llevar fichas socio-emocionales de los estudiantes, aplicar tests, registrar seguimientos. \\
+\addlinespace
+\textcolor{merBlue}{\textbf{Tesorería}} &
+Emitir boletas, registrar pagos, ver morosidad, generar reportes de cobranza. \\
+\addlinespace
+\textcolor{merBlue}{\textbf{Secretaría}} &
+Atender la mesa de partes, gestionar admisión, matrículas y trámites de los apoderados. \\
+\addlinespace
+\textcolor{merBlue}{\textbf{Portería}} &
+Registrar las entradas y salidas con motivo, mantener un control de quién está en el colegio. \\
+\addlinespace
+\textcolor{merBlue}{\textbf{Administrador del sistema}} &
+Crear y desactivar usuarios, configurar año escolar, supervisar el funcionamiento. \\
+\bottomrule
+\end{tabularx}
+
+% ===================== 3. QUE TIENE LA PLATAFORMA =====================
+\section{¿Qué hace por dentro?}
+
+La plataforma se organiza en cinco grandes áreas. Cada área tiene varias herramientas.
+
+% ---- Académico ----
+\subsection*{\textcolor{merBlue}{$\bullet$} Área académica}
+\begin{plainbox}
+\textbf{Notas y boletas} -- Cada docente registra las calificaciones de sus alumnos por bimestre. Los apoderados y estudiantes ven la boleta en cualquier momento.
+
+\textbf{Asistencia diaria} -- Se marca presencia, tardanza, ausencia o justificación. Los padres son avisados en el mismo día.
+
+\textbf{Tareas y entregas} -- El docente publica tareas. El alumno y el padre las ven en su panel. Se registra qué está pendiente, qué fue entregado y qué fue calificado.
+
+\textbf{Plan de clases} -- Cada docente registra su planificación anual, sus unidades de aprendizaje y sus sesiones.
+
+\textbf{Plan lector} -- Los libros del año, asignados por nivel, con evaluación de comprensión lectora (literal, inferencial y crítica).
+
+\textbf{Talleres extracurriculares} -- Inscripción y seguimiento de talleres deportivos, artísticos y académicos.
+
+\textbf{Horario semanal} -- Cronograma visual por estudiante o por docente, con aula y materia.
+\end{plainbox}
+
+% ---- Comunicación ----
+\subsection*{\textcolor{merBlue}{$\bullet$} Área de comunicación}
+\begin{plainbox}
+\textbf{Mensajería interna} -- Cada apoderado puede conversar directamente con los docentes de su hijo. Los mensajes quedan registrados.
+
+\textbf{Comunicados oficiales} -- La Dirección publica avisos a toda la comunidad o por niveles (solo padres, solo docentes, solo estudiantes).
+
+\textbf{Calendario escolar} -- Aniversario, días del logro, reuniones, simulacros, actividades pastorales.
+
+\textbf{Entrevistas} -- Los docentes y los padres agendan reuniones presenciales o virtuales, con tema, fecha y acuerdos firmados.
+
+\textbf{Notificaciones} -- Cada usuario recibe avisos personalizados: una nota nueva, una tarea próxima, un pago vencido, una entrevista confirmada.
+\end{plainbox}
+
+% ---- Familia ----
+\subsection*{\textcolor{merBlue}{$\bullet$} Área de familia y estudiante}
+\begin{plainbox}
+\textbf{Mis hijos} -- Para padres con varios hijos: una sola pantalla con el resumen completo de cada uno (notas, asistencia, pagos, hoja de vida).
+
+\textbf{Hoja de vida estudiantil} -- Los logros, comentarios formativos, conductas y reconocimientos del alumno a lo largo del año.
+
+\textbf{Psicología (\textit{ecare})} -- Casos socio-emocionales con seguimiento. Tests de estilos de aprendizaje, autoestima e intereses vocacionales.
+
+\textbf{Salud y enfermería} -- Atenciones del tópico escolar, alergias, cartilla de vacunación completa.
+\end{plainbox}
+
+% ---- Operaciones ----
+\subsection*{\textcolor{merBlue}{$\bullet$} Área de operaciones}
+\begin{plainbox}
+\textbf{Tesorería} -- Emisión de boletas, registro de pagos, control de morosidad, reportes de recaudación mensual.
+
+\textbf{Admisión (\textit{efamily})} -- Tablero de prospectos: \textit{Lead → Contactado → Entrevista → Evaluación → Pre-matrícula → Matriculado}. Permite hacer seguimiento a cada familia interesada.
+
+\textbf{Matrícula} -- Inscripción digital con asignación de sección.
+
+\textbf{Mesa de partes} -- Los apoderados solicitan constancias, justificaciones y trámites desde la plataforma. Cada solicitud tiene un número y un estado.
+
+\textbf{Portería} -- Control de entradas y salidas con motivo (recoge a su hijo, reunión, trámite).
+
+\textbf{Documentos institucionales} -- Repositorio del PAT, PEI, PCI, Reglamento Interno, Plan Lector, Manual de Convivencia, etc.
+
+\textbf{Drive institucional} -- Almacenamiento compartido de archivos por área.
+
+\textbf{Activos fijos} -- Inventario del colegio (mobiliario, equipos, audiovisual).
+\end{plainbox}
+
+% ===================== 4. PAGO DE PENSIONES =====================
+\section{Pago de pensiones (lo más usado)}
+
+Los apoderados pueden \textbf{pagar las pensiones desde su casa} con cualquiera de los siguientes medios. La plataforma les muestra paso a paso qué hacer en cada uno.
+
+\begin{tabularx}{\textwidth}{@{}p{4cm}X@{}}
+\toprule
+\textbf{Medio de pago} & \textbf{Cómo funciona} \\
+\midrule
+{\color[HTML]{E12027}\rule{0.6cm}{8pt}}~\textbf{Caja Arequipa} & Pago en agencia, agente Caja o desde Caja Móvil. La plataforma da el código de empresa y el código del alumno. \\
+\addlinespace
+{\color[HTML]{002A5C}\rule{0.6cm}{8pt}}~\textbf{BCP} & Banca Móvil, web o agente BCP. \\
+\addlinespace
+{\color[HTML]{00A859}\rule{0.6cm}{8pt}}~\textbf{Interbank} & App, web o agente Express. \\
+\addlinespace
+{\color[HTML]{EE3424}\rule{0.6cm}{8pt}}~\textbf{Scotiabank} & App o agente. \\
+\addlinespace
+{\color[HTML]{004481}\rule{0.6cm}{8pt}}~\textbf{BBVA} & App o agente. \\
+\addlinespace
+{\color[HTML]{742282}\rule{0.6cm}{8pt}}~\textbf{Yape} & Transferencia inmediata con celular. \\
+\addlinespace
+{\color[HTML]{00B0AC}\rule{0.6cm}{8pt}}~\textbf{Plin} & Transferencia inmediata con celular. \\
+\addlinespace
+{\color[HTML]{1B8A4A}\rule{0.6cm}{8pt}}~\textbf{Efectivo en tesorería} & Pago presencial en ventanilla del colegio. \\
+\addlinespace
+{\color[HTML]{1E293B}\rule{0.6cm}{8pt}}~\textbf{Tarjeta} & Visa, Mastercard o American Express (en línea). \\
+\bottomrule
+\end{tabularx}
+
+\subsection*{\textcolor{merBlue}{Ejemplo del paso a paso (Caja Arequipa)}}
+\begin{enumerate}
+\item El padre entra a la plataforma y ve la boleta de mayo pendiente: \textit{S/ 480.00}.
+\item Hace click en \textbf{Pagar} y elige \textbf{Caja Arequipa}.
+\item La plataforma le muestra: \textit{``Empresa: I.E.P. El Mercedario · Código: 01254 · Código de alumno: ALU-XXXX''}.
+\item Va a su agencia, agente Caja o app, paga y guarda el número de operación.
+\item Vuelve a la plataforma, escribe el número de operación y confirma.
+\item El sistema marca la boleta como pagada y genera un \textbf{comprobante imprimible}.
+\end{enumerate}
+
+\subsection*{Conceptos que se cobran a través del sistema}
+\begin{multicols}{2}
+\begin{itemize}
+\item Matrícula del año
+\item Cuota de ingreso
+\item Pensión mensual
+\item Plan lector (libros)
+\item Material didáctico
+\item Uniforme y buzo
+\item Carnet escolar
+\item Salidas pedagógicas
+\item Talleres extracurriculares
+\item Cuota APAFA
+\item Pagos parciales / cuotas
+\end{itemize}
+\end{multicols}
+
+\begin{accentbox}
+\textbf{Importante:} la plataforma soporta también \textbf{pagos parciales} (el padre paga la mitad y queda saldo) y \textbf{recordatorios automáticos} antes y después del vencimiento.
+\end{accentbox}
+
+% ===================== 5. NUMEROS DEL SISTEMA =====================
+\section{Lo que ya tiene cargado}
+
+El sistema está cargado con los datos reales del colegio (alumnos, docentes y apoderados de la base actual) más datos de demostración para que la Dirección pueda recorrer cada módulo y ver cómo funciona.
+
+\begin{tabularx}{\textwidth}{@{}Xr@{}}
+\toprule
+\textbf{Categoría} & \textbf{Cantidad} \\
+\midrule
+Alumnos registrados (datos reales) & 437 \\
+Apoderados registrados (datos reales) & 430 \\
+Docentes registrados (datos reales) & 34 \\
+Secciones activas (Inicial, Primaria, Secundaria) & 23 \\
+Cursos del plan de estudios & 28 \\
+\addlinespace
+Calificaciones registradas & $\sim$10\,500 \\
+Días de asistencia registrados por alumno & 60 \\
+Tareas asignadas con entregas calificadas & $\sim$240 \\
+Lecciones de clase registradas & 120 \\
+Planes curriculares (anual, unidad, sesión) & 45 \\
+Libros del plan lector & 20 \\
+Lecturas asignadas con evaluación & 911 \\
+\addlinespace
+Comunicados oficiales & 29 \\
+Conversaciones docente-padre & 35 \\
+Mensajes intercambiados & 183 \\
+Entrevistas agendadas & 40 \\
+Notificaciones enviadas & 1\,002 \\
+\addlinespace
+Boletas de pago emitidas & 3\,896 \\
+Pagos registrados & 2\,365 \\
+Trámites en mesa de partes & 22 \\
+Prospectos de admisión activos & 60 \\
+Entradas/salidas en portería & 130 \\
+\addlinespace
+Casos de psicología con seguimiento & 50 \\
+Atenciones en el tópico escolar & 95 \\
+Vacunas registradas & 2\,292 \\
+Entradas en hoja de vida estudiantil & 1\,311 \\
+\addlinespace
+Documentos institucionales (PAT, PEI, PCI...) & 24 \\
+Talleres extracurriculares activos & 8 \\
+Activos fijos en inventario & 30 \\
+\bottomrule
+\end{tabularx}
+
+% ===================== 6. BENEFICIOS =====================
+\section{¿Qué gana el colegio?}
+
+\begin{successbox}
+\textbf{Para la Dirección}
+\begin{itemize}
+\item Tablero único con el panorama del colegio: cuántos alumnos hay, cuánto se ha recaudado, cuántas inasistencias, cuántos prospectos de admisión.
+\item Trazabilidad: todo queda registrado, con fecha, autor y cambio.
+\item Comunicación masiva inmediata con todos los apoderados.
+\item Reportes oficiales para SIAGIE listos en un click.
+\end{itemize}
+\end{successbox}
+
+\begin{successbox}
+\textbf{Para los docentes}
+\begin{itemize}
+\item Adiós al cuaderno de notas perdido. Todo se registra digitalmente.
+\item Comunicación directa y archivada con cada apoderado.
+\item Planificación curricular en línea, lista para ser revisada por coordinación.
+\item Menos tiempo en papeleo, más tiempo en enseñar.
+\end{itemize}
+\end{successbox}
+
+\begin{successbox}
+\textbf{Para los apoderados}
+\begin{itemize}
+\item Saber al instante cómo va su hijo (notas, asistencia, conducta).
+\item Pagar pensiones desde casa por el medio que prefieran.
+\item Recibir comunicados sin depender de WhatsApp ni de la agenda.
+\item Solicitar trámites sin necesidad de venir presencialmente.
+\end{itemize}
+\end{successbox}
+
+\begin{successbox}
+\textbf{Para los alumnos}
+\begin{itemize}
+\item Ver sus tareas pendientes y su horario.
+\item Acceder a la biblioteca virtual y al material de los docentes.
+\item Recibir reconocimientos formativos en su hoja de vida.
+\end{itemize}
+\end{successbox}
+
+% ===================== 7. SIGUIENTE PASO =====================
+\section{Próximos pasos sugeridos}
+
+\begin{enumerate}
+\item \textbf{Demostración a la Dirección y al Consejo Directivo} para validar la propuesta.
+\item \textbf{Capacitación interna} a docentes y administrativos (1 sesión por área, $\sim$2 horas cada una).
+\item \textbf{Carga oficial de los datos del año escolar} y verificación con Coordinación Académica.
+\item \textbf{Comunicación a las familias:} envío del usuario y contraseña a cada apoderado.
+\item \textbf{Marcha blanca} durante un bimestre para detectar mejoras antes del despliegue completo.
+\item \textbf{Integraciones futuras opcionales:} pasarela de pago en línea (para pagar con tarjeta sin salir de la plataforma) y aplicación móvil.
+\end{enumerate}
+
+\begin{quotebox}
+\textbf{Estado actual:} la plataforma está \textbf{lista para ser usada}. Se ha probado con los \textbf{437 alumnos reales} del colegio y los \textbf{34 docentes del CSV oficial 2026}. Puede entrar a verla cualquier persona del colegio con su usuario asignado.
+\end{quotebox}
+
+% ===================== CIERRE =====================
+\vspace{1.5em}
+\begin{center}
+{\color{merBlue}\hrule height 1pt}
+\vspace{0.8em}
+\includegraphics[width=2cm]{../public/logo.png}\\[6pt]
+{\large\bfseries\color{merBlue}I.E.P. ``El Mercedario'' RVDO. P.E.A.B.}\\[2pt]
+{\color{merMuted}\textit{Educación con Fe y Valores}}\\[2pt]
+{\color{merMuted}\small Cayma · Arequipa · Perú · 2026}
+\end{center}
+
+\end{document}
