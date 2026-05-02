@@ -137,7 +137,73 @@ export default async function NotasPage() {
     if (p) studentIds.push(...p.children.map((c) => c.studentId));
     description = 'Notas de tus hijos';
   } else {
-    description = 'Promedios consolidados';
+    // DIRECTION / ADMIN: consolidado por sección con promedios
+    description = 'Promedios consolidados por sección';
+    const sections = await prisma.section.findMany({
+      include: {
+        grade: true,
+        enrollments: { include: { student: { include: { user: true } } }, take: 30 },
+      },
+      orderBy: [{ grade: { ordinal: 'asc' } }, { name: 'asc' }],
+    });
+
+    const sectionBlocks = await Promise.all(
+      sections.map(async (sec) => {
+        const studentIdsInSec = sec.enrollments.map((e) => e.studentId);
+        if (!studentIdsInSec.length) return { section: sec, rows: [] };
+        const finals = await prisma.finalScore.findMany({
+          where: { studentId: { in: studentIdsInSec }, periodId: { in: periodIds } },
+          include: { courseAssignment: { include: { course: true } } },
+        });
+        const byStudent = new Map<string, number[]>();
+        for (const fs of finals) {
+          if (!byStudent.has(fs.studentId)) byStudent.set(fs.studentId, []);
+          byStudent.get(fs.studentId)!.push(fs.value);
+        }
+        const rows = sec.enrollments.map((e) => {
+          const vals = byStudent.get(e.studentId) || [];
+          const avg = vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : null;
+          return { student: e.student, avg, courseCount: new Set(finals.filter((f) => f.studentId === e.studentId).map((f) => f.courseAssignment.courseId)).size };
+        }).sort((a, b) => (b.avg ?? 0) - (a.avg ?? 0));
+        return { section: sec, rows };
+      })
+    );
+
+    return (
+      <div className="space-y-6">
+        <PageHeader title={pageTitle} description={description} />
+        {sectionBlocks.filter((b) => b.rows.length).length === 0 ? (
+          <p className="text-sm text-[var(--muted-foreground)]">Sin datos.</p>
+        ) : sectionBlocks.filter((b) => b.rows.length).map((b) => (
+          <Card key={b.section.id}>
+            <CardContent className="p-0">
+              <div className="px-6 py-4 border-b border-[var(--border)]">
+                <div className="font-semibold">{b.section.grade.name} "{b.section.name}"</div>
+                <div className="text-xs text-[var(--muted-foreground)]">{b.rows.length} alumnos</div>
+              </div>
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Alumno</TableHead>
+                    <TableHead>Cursos con nota</TableHead>
+                    <TableHead>Promedio general</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {b.rows.map((r) => (
+                    <TableRow key={r.student.id}>
+                      <TableCell className="font-medium">{r.student.user.lastName}, {r.student.user.firstName}</TableCell>
+                      <TableCell className="text-sm text-[var(--muted-foreground)]">{r.courseCount}</TableCell>
+                      <TableCell><GradeCell value={r.avg} /></TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+    );
   }
 
   const students = studentIds.length
