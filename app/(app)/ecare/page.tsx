@@ -15,7 +15,6 @@ export default async function EcarePage() {
   });
   const tests = await prisma.psychologicalTest.findMany({
     orderBy: { takenAt: 'desc' },
-    include: { },
     take: 30,
   });
 
