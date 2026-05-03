@@ -7,14 +7,14 @@ const badgeVariants = cva(
   {
     variants: {
       variant: {
-        default:     'bg-[var(--soft-blue)] text-[var(--brand-blue)] ring-1 ring-inset ring-[var(--brand-blue)]/15',
-        secondary:   'bg-[var(--soft-orange)] text-[#7A4500] ring-1 ring-inset ring-[var(--brand-orange)]/20',
+        default:     'bg-[var(--soft-blue)] text-[var(--primary-on-soft)] ring-1 ring-inset ring-[var(--brand-blue)]/15',
+        secondary:   'bg-[var(--soft-orange)] text-[var(--secondary-on-soft)] ring-1 ring-inset ring-[var(--secondary-on-soft-ring)]',
         outline:     'border border-[var(--border-strong)] text-[var(--foreground)]',
-        success:     'bg-[var(--soft-success)] text-[#136336] ring-1 ring-inset ring-[var(--success)]/20',
-        warning:     'bg-[var(--soft-warning)] text-[#92560F] ring-1 ring-inset ring-[var(--warning)]/20',
-        destructive: 'bg-[var(--soft-danger)] text-[#9B2A2A] ring-1 ring-inset ring-[var(--destructive)]/20',
+        success:     'bg-[var(--soft-success)] text-[var(--success-on-soft)] ring-1 ring-inset ring-[var(--success-on-soft-ring)]',
+        warning:     'bg-[var(--soft-warning)] text-[var(--warning-on-soft)] ring-1 ring-inset ring-[var(--warning-on-soft-ring)]',
+        destructive: 'bg-[var(--soft-danger)] text-[var(--destructive-on-soft)] ring-1 ring-inset ring-[var(--destructive-on-soft-ring)]',
         muted:       'bg-[var(--muted)] text-[var(--muted-foreground)]',
-        violet:      'bg-[var(--soft-violet)] text-[#5E2A75] ring-1 ring-inset ring-[#742282]/20',
+        violet:      'bg-[var(--soft-violet)] text-[var(--violet-on-soft)] ring-1 ring-inset ring-[var(--violet-on-soft-ring)]',
       },
     },
     defaultVariants: { variant: 'default' },

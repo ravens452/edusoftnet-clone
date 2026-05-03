@@ -25,21 +25,21 @@ export async function GradingWindowBanner() {
           <Unlock className="h-5 w-5 text-[var(--success)]" strokeWidth={2.2} />
         </div>
         <div className="flex-1 min-w-0">
-          <div className="font-bold text-[#136336]">
+          <div className="font-bold text-[var(--success-on-soft)]">
             Captura de notas abierta
           </div>
-          <div className="text-sm text-[#136336]/85 mt-0.5">
+          <div className="text-sm text-[var(--success-on-soft)]/85 mt-0.5">
             <span className="font-medium">{w.name}</span>
             {' · '}
             cierra el <strong>{formatDateTime(w.closesAt)}</strong>
             {status.reason === 'forced-open' && ' (mantenida abierta por administración)'}
           </div>
           {open.length > 1 && (
-            <div className="text-xs text-[#136336]/70 mt-1">
+            <div className="text-xs text-[var(--success-on-soft)]/70 mt-1">
               + {open.length - 1} ventana{open.length > 2 ? 's' : ''} más abiertas
             </div>
           )}
-          {w.notes && <div className="text-xs text-[#136336]/70 mt-1 italic">{w.notes}</div>}
+          {w.notes && <div className="text-xs text-[var(--success-on-soft)]/70 mt-1 italic">{w.notes}</div>}
         </div>
       </div>
     );
@@ -51,13 +51,13 @@ export async function GradingWindowBanner() {
     return (
       <div className="rounded-2xl border border-[var(--brand-blue)]/20 bg-[var(--soft-blue)] px-5 py-4 flex items-start gap-3 mb-6">
         <div className="h-10 w-10 rounded-xl bg-[var(--brand-blue)]/12 grid place-items-center shrink-0">
-          <CalendarClock className="h-5 w-5 text-[var(--brand-blue)]" strokeWidth={2.2} />
+          <CalendarClock className="h-5 w-5 text-[var(--primary-on-soft)]" strokeWidth={2.2} />
         </div>
         <div className="flex-1 min-w-0">
-          <div className="font-bold text-[var(--brand-blue)]">
+          <div className="font-bold text-[var(--primary-on-soft)]">
             Captura de notas cerrada
           </div>
-          <div className="text-sm text-[var(--brand-blue)]/85 mt-0.5">
+          <div className="text-sm text-[var(--primary-on-soft)]/85 mt-0.5">
             Próxima apertura: <strong>{w.name}</strong> — <strong>{formatDateTime(w.opensAt)}</strong>
           </div>
         </div>

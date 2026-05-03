@@ -68,7 +68,7 @@ export function PayDialog({ invoice, trigger }: Props) {
                 <div className="text-xs opacity-80">Tu opción local más usada</div>
               </div>
             </div>
-            <div className="p-4 text-sm space-y-2 bg-white">
+            <div className="p-4 text-sm space-y-2 bg-[var(--card)]">
               <p className="font-medium">Pasos en agencia, agente Caja o Caja Móvil:</p>
               <ol className="list-decimal pl-5 space-y-1.5">
                 <li>Selecciona <strong>"Pago de servicios"</strong> → <strong>"Colegios e institutos"</strong></li>
@@ -93,7 +93,7 @@ export function PayDialog({ invoice, trigger }: Props) {
                 <div className="text-xs opacity-80">Banca Móvil · Web · Agente</div>
               </div>
             </div>
-            <div className="p-4 text-sm space-y-2 bg-white">
+            <div className="p-4 text-sm space-y-2 bg-[var(--card)]">
               <ol className="list-decimal pl-5 space-y-1.5">
                 <li>Selecciona "Pagar servicio" → "Otras instituciones"</li>
                 <li>Empresa: <strong>{SCHOOL_INFO.shortName}</strong> · Código <span className="font-mono bg-[var(--muted)] px-1.5 py-0.5 rounded">{SCHOOL_INFO.bcpCode}</span></li>
@@ -113,7 +113,7 @@ export function PayDialog({ invoice, trigger }: Props) {
                 <div className="text-xs opacity-80">App · Web · Agente Express</div>
               </div>
             </div>
-            <div className="p-4 text-sm space-y-2 bg-white">
+            <div className="p-4 text-sm space-y-2 bg-[var(--card)]">
               <ol className="list-decimal pl-5 space-y-1.5">
                 <li>Pago de servicios → Buscar <strong>{SCHOOL_INFO.shortName}</strong></li>
                 <li>Código institución: <span className="font-mono bg-[var(--muted)] px-1.5 py-0.5 rounded">{SCHOOL_INFO.interbankCode}</span></li>
@@ -132,7 +132,7 @@ export function PayDialog({ invoice, trigger }: Props) {
                 <div className="text-xs opacity-80">App · Web · Agente</div>
               </div>
             </div>
-            <div className="p-4 text-sm space-y-2 bg-white">
+            <div className="p-4 text-sm space-y-2 bg-[var(--card)]">
               <p>Ingresa al portal Scotia → Pagos y servicios → Otras instituciones</p>
               <p>Buscar <strong>{SCHOOL_INFO.shortName}</strong> · ingresar código <span className="font-mono bg-[var(--muted)] px-1.5 py-0.5 rounded">{invoice.studentCode}</span></p>
             </div>
@@ -148,7 +148,7 @@ export function PayDialog({ invoice, trigger }: Props) {
                 <div className="text-xs opacity-80">App · Web · Agente</div>
               </div>
             </div>
-            <div className="p-4 text-sm space-y-2 bg-white">
+            <div className="p-4 text-sm space-y-2 bg-[var(--card)]">
               <p>App BBVA → Pago de servicios → Otras instituciones</p>
               <p>Buscar <strong>{SCHOOL_INFO.shortName}</strong> · código alumno <span className="font-mono bg-[var(--muted)] px-1.5 py-0.5 rounded">{invoice.studentCode}</span></p>
             </div>
@@ -165,7 +165,7 @@ export function PayDialog({ invoice, trigger }: Props) {
                 <div className="text-xs opacity-80">Transferencia inmediata</div>
               </div>
             </div>
-            <div className="p-4 text-sm space-y-2 bg-white">
+            <div className="p-4 text-sm space-y-2 bg-[var(--card)]">
               <p>Yapea/Plin a este número:</p>
               <div className="flex items-center gap-2">
                 <span className="font-mono bg-[var(--muted)] px-2 py-1 rounded text-base font-semibold">
@@ -188,7 +188,7 @@ export function PayDialog({ invoice, trigger }: Props) {
                 <div className="text-xs opacity-80">Visa · Mastercard · American Express</div>
               </div>
             </div>
-            <div className="p-4 text-sm bg-white text-[var(--muted-foreground)]">
+            <div className="p-4 text-sm bg-[var(--card)] text-[var(--muted-foreground)]">
               En esta demo no se procesan tarjetas reales. En producción se integraría con Culqi,
               Niubiz o Mercado Pago. Por ahora simula la confirmación con un número de operación.
             </div>
@@ -204,7 +204,7 @@ export function PayDialog({ invoice, trigger }: Props) {
                 <div className="text-xs opacity-80">Pago presencial en el colegio</div>
               </div>
             </div>
-            <div className="p-4 text-sm bg-white">
+            <div className="p-4 text-sm bg-[var(--card)]">
               Pago en ventanilla de tesorería (lunes a viernes 7:30 a.m. – 1:00 p.m.).
               Solo el personal de tesorería puede confirmar este pago en el sistema.
             </div>

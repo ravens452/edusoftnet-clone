@@ -48,6 +48,19 @@
   --success:                #1B8A4A;
   --warning:                #C97A19;
 
+  /* ── Texto sobre fondos pastel (badges, banners) — ajustables por tema ── */
+  --primary-on-soft:        #003366;
+  --success-on-soft:        #136336;
+  --warning-on-soft:        #92560F;
+  --destructive-on-soft:    #9B2A2A;
+  --secondary-on-soft:      #7A4500;
+  --violet-on-soft:         #5E2A75;
+  --success-on-soft-ring:   rgba(27, 138, 74, 0.20);
+  --warning-on-soft-ring:   rgba(201, 122, 25, 0.20);
+  --destructive-on-soft-ring: rgba(197, 48, 48, 0.20);
+  --secondary-on-soft-ring: rgba(255, 140, 0, 0.20);
+  --violet-on-soft-ring:    rgba(116, 34, 130, 0.20);
+
   /* ── Sombras suaves multicapa ── */
   --shadow-xs:   0 1px 2px rgba(15, 23, 42, 0.04);
   --shadow-sm:   0 1px 2px rgba(15, 23, 42, 0.04), 0 1px 3px rgba(15, 23, 42, 0.05);
@@ -115,6 +128,21 @@
 
 [data-theme="dark"] .glass {
   background: rgba(18, 34, 54, 0.70);
+}
+
+/* En dark mode, los badges sobre soft-bg necesitan texto CLARO (no oscuro) */
+[data-theme="dark"] {
+  --primary-on-soft:        #8AB4E8;
+  --success-on-soft:        #6EE7A0;
+  --warning-on-soft:        #FFC97A;
+  --destructive-on-soft:    #FF8A8A;
+  --secondary-on-soft:      #FFB060;
+  --violet-on-soft:         #D5A5E8;
+  --success-on-soft-ring:   rgba(110, 231, 160, 0.30);
+  --warning-on-soft-ring:   rgba(255, 201, 122, 0.30);
+  --destructive-on-soft-ring: rgba(255, 138, 138, 0.30);
+  --secondary-on-soft-ring: rgba(255, 176, 96, 0.30);
+  --violet-on-soft-ring:    rgba(213, 165, 232, 0.30);
 }
 
 [data-theme="dark"] ::-webkit-scrollbar-thumb {
