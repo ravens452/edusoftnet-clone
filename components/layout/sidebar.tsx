@@ -8,7 +8,7 @@ import {
   Megaphone, Users, Wallet, Library, HeartPulse, Brain, ClipboardList,
   FolderOpen, HardDrive, Sparkles, ShieldCheck, FileText, Calendar,
   Settings, UserPlus, School, Stethoscope, Receipt, Bell, ListChecks,
-  Building2,
+  Building2, IdCard,
   type LucideIcon,
 } from 'lucide-react';
 import type { NavGroup, IconName } from '@/lib/navigation';
@@ -41,6 +41,7 @@ const ICONS: Record<IconName, LucideIcon> = {
   bell: Bell,
   list: ListChecks,
   building: Building2,
+  idCard: IdCard,
 };
 
 export function Sidebar({ groups, role, mobile = false }: { groups: NavGroup[]; role: string; mobile?: boolean }) {

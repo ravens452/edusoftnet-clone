@@ -5,7 +5,7 @@ export type IconName =
   | 'users' | 'wallet' | 'library' | 'heart' | 'brain' | 'clipboard'
   | 'folder' | 'drive' | 'sparkles' | 'shield' | 'file' | 'calendar'
   | 'settings' | 'userPlus' | 'school' | 'stethoscope' | 'receipt'
-  | 'bell' | 'list' | 'building';
+  | 'bell' | 'list' | 'building' | 'idCard';
 
 export type NavItem = {
   href: string;
@@ -48,6 +48,7 @@ const ITEM = {
   config:       { href: '/admin/configuracion', label: 'Configuración', icon: 'settings' as const },
   siagie:       { href: '/siagie', label: 'SIAGIE / UGEL', icon: 'building' as const },
   capturaNotas: { href: '/admin/captura-notas', label: 'Captura de notas', icon: 'clipboard' as const },
+  carnets:      { href: '/carnets', label: 'Carnets', icon: 'idCard' as const },
 };
 
 export function navFor(role: Role): NavGroup[] {
@@ -57,12 +58,12 @@ export function navFor(role: Role): NavGroup[] {
         { title: 'General', items: [ITEM.dashboard, ITEM.horario, ITEM.notifs] },
         { title: 'Académico', items: [ITEM.notas, ITEM.asistencia, ITEM.eclass, ITEM.tareas, ITEM.elibrary, ITEM.talleres] },
         { title: 'Comunicación', items: [ITEM.echat, ITEM.comunicados] },
-        { title: 'Yo', items: [ITEM.hojaVida, ITEM.salud] },
+        { title: 'Yo', items: [ITEM.hojaVida, ITEM.salud, ITEM.carnets] },
       ];
     case 'PARENT':
       return [
         { title: 'General', items: [ITEM.dashboard, ITEM.notifs] },
-        { title: 'Mis hijos', items: [ITEM.hijos, ITEM.notas, ITEM.asistencia, ITEM.tareas] },
+        { title: 'Mis hijos', items: [ITEM.hijos, ITEM.notas, ITEM.asistencia, ITEM.tareas, ITEM.carnets] },
         { title: 'Pagos', items: [ITEM.pagos] },
         { title: 'Comunicación', items: [ITEM.echat, ITEM.comunicados, ITEM.entrevistas, ITEM.mesaPartes] },
       ];
@@ -79,7 +80,7 @@ export function navFor(role: Role): NavGroup[] {
         { title: 'General', items: [ITEM.dashboard] },
         { title: 'Académico', items: [ITEM.notas, ITEM.asistencia, ITEM.emonitor, ITEM.eclass, ITEM.capturaNotas] },
         { title: 'Comunidad', items: [ITEM.comunicados, ITEM.entrevistas, ITEM.echat] },
-        { title: 'Admisión', items: [ITEM.efamily, ITEM.matriculas] },
+        { title: 'Admisión', items: [ITEM.efamily, ITEM.matriculas, ITEM.carnets] },
         { title: 'Operaciones', items: [ITEM.mesaPartes, ITEM.porteria, ITEM.tesoreria] },
         { title: 'Recursos', items: [ITEM.edocuments, ITEM.edrive, ITEM.elibrary, ITEM.talleres, ITEM.salud, ITEM.ecare] },
         { title: 'Reportes oficiales', items: [ITEM.siagie] },
@@ -104,7 +105,7 @@ export function navFor(role: Role): NavGroup[] {
     case 'SECRETARY':
       return [
         { title: 'General', items: [ITEM.dashboard, ITEM.notifs] },
-        { title: 'Atención', items: [ITEM.mesaPartes, ITEM.efamily, ITEM.matriculas, ITEM.entrevistas] },
+        { title: 'Atención', items: [ITEM.mesaPartes, ITEM.efamily, ITEM.matriculas, ITEM.entrevistas, ITEM.carnets] },
         { title: 'Académico', items: [ITEM.capturaNotas] },
         { title: 'Comunicación', items: [ITEM.echat, ITEM.comunicados] },
         { title: 'Documentos', items: [ITEM.edocuments, ITEM.edrive] },
@@ -114,7 +115,7 @@ export function navFor(role: Role): NavGroup[] {
       return [
         { title: 'General', items: [ITEM.dashboard] },
         { title: 'Académico', items: [ITEM.notas, ITEM.asistencia, ITEM.eclass, ITEM.emonitor, ITEM.elibrary, ITEM.talleres, ITEM.capturaNotas] },
-        { title: 'Comunidad', items: [ITEM.comunicados, ITEM.echat, ITEM.entrevistas, ITEM.efamily, ITEM.matriculas] },
+        { title: 'Comunidad', items: [ITEM.comunicados, ITEM.echat, ITEM.entrevistas, ITEM.efamily, ITEM.matriculas, ITEM.carnets] },
         { title: 'Operaciones', items: [ITEM.tesoreria, ITEM.mesaPartes, ITEM.porteria, ITEM.salud, ITEM.ecare] },
         { title: 'Recursos', items: [ITEM.edocuments, ITEM.edrive] },
         { title: 'Reportes oficiales', items: [ITEM.siagie] },
