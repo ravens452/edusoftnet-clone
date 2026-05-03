@@ -87,17 +87,59 @@ model SchoolYear {
 
 /// Bimestre / Trimestre
 model Period {
-  id           String       @id @default(cuid())
-  schoolYearId String
-  name         String
-  ordinal      Int
-  startDate    DateTime
-  endDate      DateTime
-  schoolYear   SchoolYear   @relation(fields: [schoolYearId], references: [id], onDelete: Cascade)
-  scores       Score[]
-  finalScores  FinalScore[]
+  id             String          @id @default(cuid())
+  schoolYearId   String
+  name           String
+  ordinal        Int
+  startDate      DateTime
+  endDate        DateTime
+  schoolYear     SchoolYear      @relation(fields: [schoolYearId], references: [id], onDelete: Cascade)
+  scores         Score[]
+  finalScores    FinalScore[]
+  gradingWindows GradingWindow[]
 
   @@index([schoolYearId])
+}
+
+/// Ventana de captura de notas controlada por administración.
+/// Determina cuándo los docentes pueden registrar/editar notas.
+model GradingWindow {
+  id        String              @id @default(cuid())
+  periodId  String
+  name      String              // "Captura mes de mayo", "Notas del I Bimestre", etc.
+  opensAt   DateTime
+  closesAt  DateTime
+  /// Alcance: GLOBAL aplica a todos. LEVEL/GRADE/SECTION/COURSE filtran.
+  scope     GradingWindowScope  @default(GLOBAL)
+  level     EducationLevel?
+  gradeId   String?
+  sectionId String?
+  courseId  String?
+  /// AUTO = abierto si hoy está entre opensAt y closesAt
+  /// FORCE_OPEN = abierto manualmente aunque la fecha haya pasado
+  /// FORCE_CLOSED = cerrado manualmente aunque la fecha esté vigente
+  state     GradingWindowState  @default(AUTO)
+  notes     String?
+  createdAt DateTime            @default(now())
+  updatedAt DateTime            @updatedAt
+  period    Period              @relation(fields: [periodId], references: [id], onDelete: Cascade)
+
+  @@index([periodId])
+  @@index([opensAt, closesAt])
+}
+
+enum GradingWindowScope {
+  GLOBAL
+  LEVEL
+  GRADE
+  SECTION
+  COURSE
+}
+
+enum GradingWindowState {
+  AUTO
+  FORCE_OPEN
+  FORCE_CLOSED
 }
 
 enum EducationLevel {

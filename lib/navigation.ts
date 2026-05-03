@@ -47,6 +47,7 @@ const ITEM = {
   usuarios:     { href: '/admin/usuarios', label: 'Usuarios', icon: 'users' as const },
   config:       { href: '/admin/configuracion', label: 'Configuración', icon: 'settings' as const },
   siagie:       { href: '/siagie', label: 'SIAGIE / UGEL', icon: 'building' as const },
+  capturaNotas: { href: '/admin/captura-notas', label: 'Captura de notas', icon: 'clipboard' as const },
 };
 
 export function navFor(role: Role): NavGroup[] {
@@ -76,7 +77,7 @@ export function navFor(role: Role): NavGroup[] {
     case 'DIRECTION':
       return [
         { title: 'General', items: [ITEM.dashboard] },
-        { title: 'Académico', items: [ITEM.notas, ITEM.asistencia, ITEM.emonitor, ITEM.eclass] },
+        { title: 'Académico', items: [ITEM.notas, ITEM.asistencia, ITEM.emonitor, ITEM.eclass, ITEM.capturaNotas] },
         { title: 'Comunidad', items: [ITEM.comunicados, ITEM.entrevistas, ITEM.echat] },
         { title: 'Admisión', items: [ITEM.efamily, ITEM.matriculas] },
         { title: 'Operaciones', items: [ITEM.mesaPartes, ITEM.porteria, ITEM.tesoreria] },
@@ -104,6 +105,7 @@ export function navFor(role: Role): NavGroup[] {
       return [
         { title: 'General', items: [ITEM.dashboard, ITEM.notifs] },
         { title: 'Atención', items: [ITEM.mesaPartes, ITEM.efamily, ITEM.matriculas, ITEM.entrevistas] },
+        { title: 'Académico', items: [ITEM.capturaNotas] },
         { title: 'Comunicación', items: [ITEM.echat, ITEM.comunicados] },
         { title: 'Documentos', items: [ITEM.edocuments, ITEM.edrive] },
         { title: 'Reportes oficiales', items: [ITEM.siagie] },
@@ -111,7 +113,7 @@ export function navFor(role: Role): NavGroup[] {
     case 'ADMIN':
       return [
         { title: 'General', items: [ITEM.dashboard] },
-        { title: 'Académico', items: [ITEM.notas, ITEM.asistencia, ITEM.eclass, ITEM.emonitor, ITEM.elibrary, ITEM.talleres] },
+        { title: 'Académico', items: [ITEM.notas, ITEM.asistencia, ITEM.eclass, ITEM.emonitor, ITEM.elibrary, ITEM.talleres, ITEM.capturaNotas] },
         { title: 'Comunidad', items: [ITEM.comunicados, ITEM.echat, ITEM.entrevistas, ITEM.efamily, ITEM.matriculas] },
         { title: 'Operaciones', items: [ITEM.tesoreria, ITEM.mesaPartes, ITEM.porteria, ITEM.salud, ITEM.ecare] },
         { title: 'Recursos', items: [ITEM.edocuments, ITEM.edrive] },

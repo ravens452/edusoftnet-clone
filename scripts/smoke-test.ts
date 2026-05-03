@@ -2,15 +2,26 @@
 import 'dotenv/config';
 import { PrismaBetterSqlite3 } from '@prisma/adapter-better-sqlite3';
 import { PrismaClient } from '../lib/generated/prisma/client';
-import { randomBytes } from 'node:crypto';
+import { createHmac } from 'node:crypto';
+
+// Reproducción de lib/auth.ts (HMAC stateless tokens)
+const SECRET = process.env.AUTH_SECRET || 'edusoftnet-demo-secret-change-in-prod';
+const b64u = (buf: Buffer | string) => Buffer.from(buf).toString('base64url');
+function sign(payload: string) {
+  return b64u(createHmac('sha256', SECRET).update(payload).digest());
+}
+function makeToken(userId: string, expMs: number): string {
+  const payload = b64u(JSON.stringify({ uid: userId, exp: expMs }));
+  return `${payload}.${sign(payload)}`;
+}
 
 const adapter = new PrismaBetterSqlite3({ url: process.env.DATABASE_URL || 'file:./prisma/dev.db' });
 const prisma = new PrismaClient({ adapter });
 
 const BASE = 'http://localhost:3000';
 const ROUTES_BY_ROLE: Record<string, string[]> = {
-  ADMIN: ['/dashboard', '/notas', '/asistencia', '/eclass', '/echat', '/comunicados', '/efamily', '/tesoreria', '/elibrary', '/ecare', '/emonitor', '/edocuments', '/edrive', '/talleres', '/porteria', '/mesa-partes', '/salud', '/entrevistas', '/matriculas', '/admin/usuarios', '/admin/configuracion'],
-  DIRECTION: ['/dashboard', '/notas', '/asistencia', '/eclass', '/comunicados', '/efamily', '/tesoreria', '/elibrary', '/ecare', '/emonitor', '/edocuments', '/edrive', '/talleres', '/porteria', '/mesa-partes', '/salud', '/entrevistas', '/matriculas'],
+  ADMIN: ['/dashboard', '/notas', '/asistencia', '/eclass', '/echat', '/comunicados', '/efamily', '/tesoreria', '/elibrary', '/ecare', '/emonitor', '/edocuments', '/edrive', '/talleres', '/porteria', '/mesa-partes', '/salud', '/entrevistas', '/matriculas', '/admin/usuarios', '/admin/configuracion', '/admin/captura-notas'],
+  DIRECTION: ['/dashboard', '/notas', '/asistencia', '/eclass', '/comunicados', '/efamily', '/tesoreria', '/elibrary', '/ecare', '/emonitor', '/edocuments', '/edrive', '/talleres', '/porteria', '/mesa-partes', '/salud', '/entrevistas', '/matriculas', '/admin/captura-notas'],
   TEACHER: ['/dashboard', '/notas', '/asistencia', '/eclass', '/echat', '/comunicados', '/horario', '/emonitor', '/elibrary', '/edrive', '/entrevistas', '/hoja-vida'],
   STUDENT: ['/dashboard', '/notas', '/asistencia', '/eclass', '/echat', '/comunicados', '/horario', '/notificaciones', '/elibrary', '/talleres', '/hoja-vida', '/salud'],
   PARENT: ['/dashboard', '/notas', '/asistencia', '/eclass', '/echat', '/comunicados', '/hijos', '/pagos', '/notificaciones', '/mesa-partes', '/entrevistas'],
@@ -29,9 +40,7 @@ const USERNAMES: Record<string, string> = {
 async function loginViaDb(username: string) {
   const user = await prisma.user.findUnique({ where: { username } });
   if (!user) throw new Error(`No user ${username}`);
-  const token = randomBytes(48).toString('hex');
-  const expiresAt = new Date(Date.now() + 1000 * 60 * 60);
-  await prisma.session.create({ data: { userId: user.id, token, expiresAt } });
+  const token = makeToken(user.id, Date.now() + 1000 * 60 * 60);
   return { token, user };
 }
 

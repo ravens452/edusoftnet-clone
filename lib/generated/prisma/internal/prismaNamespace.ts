@@ -388,6 +388,7 @@ export const ModelName = {
   Session: 'Session',
   SchoolYear: 'SchoolYear',
   Period: 'Period',
+  GradingWindow: 'GradingWindow',
   Grade: 'Grade',
   Section: 'Section',
   Course: 'Course',
@@ -448,7 +449,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "session" | "schoolYear" | "period" | "grade" | "section" | "course" | "competency" | "capability" | "performanceIndicator" | "courseAssignment" | "scheduleSlot" | "student" | "enrollment" | "parent" | "parentStudent" | "teacher" | "staff" | "score" | "finalScore" | "attendanceRecord" | "assignment" | "submission" | "lessonSession" | "curriculumPlan" | "chatThread" | "chatParticipant" | "chatMessage" | "announcement" | "notification" | "prospect" | "invoice" | "payment" | "book" | "readingProgress" | "psychologyCase" | "psychologicalTest" | "healthRecord" | "vaccination" | "studentLifeEntry" | "workshop" | "workshopEnrollment" | "document" | "driveFile" | "ticket" | "gateLog" | "interview" | "fixedAsset" | "auditLog"
+    modelProps: "user" | "session" | "schoolYear" | "period" | "gradingWindow" | "grade" | "section" | "course" | "competency" | "capability" | "performanceIndicator" | "courseAssignment" | "scheduleSlot" | "student" | "enrollment" | "parent" | "parentStudent" | "teacher" | "staff" | "score" | "finalScore" | "attendanceRecord" | "assignment" | "submission" | "lessonSession" | "curriculumPlan" | "chatThread" | "chatParticipant" | "chatMessage" | "announcement" | "notification" | "prospect" | "invoice" | "payment" | "book" | "readingProgress" | "psychologyCase" | "psychologicalTest" | "healthRecord" | "vaccination" | "studentLifeEntry" | "workshop" | "workshopEnrollment" | "document" | "driveFile" | "ticket" | "gateLog" | "interview" | "fixedAsset" | "auditLog"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -745,6 +746,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.PeriodCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.PeriodCountAggregateOutputType> | number
+        }
+      }
+    }
+    GradingWindow: {
+      payload: Prisma.$GradingWindowPayload<ExtArgs>
+      fields: Prisma.GradingWindowFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.GradingWindowFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GradingWindowPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.GradingWindowFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GradingWindowPayload>
+        }
+        findFirst: {
+          args: Prisma.GradingWindowFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GradingWindowPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.GradingWindowFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GradingWindowPayload>
+        }
+        findMany: {
+          args: Prisma.GradingWindowFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GradingWindowPayload>[]
+        }
+        create: {
+          args: Prisma.GradingWindowCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GradingWindowPayload>
+        }
+        createMany: {
+          args: Prisma.GradingWindowCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.GradingWindowCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GradingWindowPayload>[]
+        }
+        delete: {
+          args: Prisma.GradingWindowDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GradingWindowPayload>
+        }
+        update: {
+          args: Prisma.GradingWindowUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GradingWindowPayload>
+        }
+        deleteMany: {
+          args: Prisma.GradingWindowDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.GradingWindowUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.GradingWindowUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GradingWindowPayload>[]
+        }
+        upsert: {
+          args: Prisma.GradingWindowUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GradingWindowPayload>
+        }
+        aggregate: {
+          args: Prisma.GradingWindowAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateGradingWindow>
+        }
+        groupBy: {
+          args: Prisma.GradingWindowGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.GradingWindowGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.GradingWindowCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.GradingWindowCountAggregateOutputType> | number
         }
       }
     }
@@ -4169,6 +4244,26 @@ export const PeriodScalarFieldEnum = {
 export type PeriodScalarFieldEnum = (typeof PeriodScalarFieldEnum)[keyof typeof PeriodScalarFieldEnum]
 
 
+export const GradingWindowScalarFieldEnum = {
+  id: 'id',
+  periodId: 'periodId',
+  name: 'name',
+  opensAt: 'opensAt',
+  closesAt: 'closesAt',
+  scope: 'scope',
+  level: 'level',
+  gradeId: 'gradeId',
+  sectionId: 'sectionId',
+  courseId: 'courseId',
+  state: 'state',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type GradingWindowScalarFieldEnum = (typeof GradingWindowScalarFieldEnum)[keyof typeof GradingWindowScalarFieldEnum]
+
+
 export const GradeScalarFieldEnum = {
   id: 'id',
   schoolYearId: 'schoolYearId',
@@ -4806,9 +4901,23 @@ export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'In
 
 
 /**
+ * Reference to a field of type 'GradingWindowScope'
+ */
+export type EnumGradingWindowScopeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'GradingWindowScope'>
+    
+
+
+/**
  * Reference to a field of type 'EducationLevel'
  */
 export type EnumEducationLevelFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EducationLevel'>
+    
+
+
+/**
+ * Reference to a field of type 'GradingWindowState'
+ */
+export type EnumGradingWindowStateFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'GradingWindowState'>
     
 
 
@@ -5023,6 +5132,7 @@ export type GlobalOmitConfig = {
   session?: Prisma.SessionOmit
   schoolYear?: Prisma.SchoolYearOmit
   period?: Prisma.PeriodOmit
+  gradingWindow?: Prisma.GradingWindowOmit
   grade?: Prisma.GradeOmit
   section?: Prisma.SectionOmit
   course?: Prisma.CourseOmit

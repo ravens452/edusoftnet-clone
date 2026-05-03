@@ -24,6 +24,26 @@ export const Role = {
 export type Role = (typeof Role)[keyof typeof Role]
 
 
+export const GradingWindowScope = {
+  GLOBAL: 'GLOBAL',
+  LEVEL: 'LEVEL',
+  GRADE: 'GRADE',
+  SECTION: 'SECTION',
+  COURSE: 'COURSE'
+} as const
+
+export type GradingWindowScope = (typeof GradingWindowScope)[keyof typeof GradingWindowScope]
+
+
+export const GradingWindowState = {
+  AUTO: 'AUTO',
+  FORCE_OPEN: 'FORCE_OPEN',
+  FORCE_CLOSED: 'FORCE_CLOSED'
+} as const
+
+export type GradingWindowState = (typeof GradingWindowState)[keyof typeof GradingWindowState]
+
+
 export const EducationLevel = {
   INICIAL: 'INICIAL',
   PRIMARIA: 'PRIMARIA',

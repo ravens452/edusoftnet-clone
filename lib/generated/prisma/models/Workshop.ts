@@ -459,10 +459,6 @@ export type WorkshopUncheckedUpdateManyWithoutTeacherNestedInput = {
   deleteMany?: Prisma.WorkshopScalarWhereInput | Prisma.WorkshopScalarWhereInput[]
 }
 
-export type NullableEnumEducationLevelFieldUpdateOperationsInput = {
-  set?: $Enums.EducationLevel | null
-}
-
 export type WorkshopCreateNestedOneWithoutEnrollmentsInput = {
   create?: Prisma.XOR<Prisma.WorkshopCreateWithoutEnrollmentsInput, Prisma.WorkshopUncheckedCreateWithoutEnrollmentsInput>
   connectOrCreate?: Prisma.WorkshopCreateOrConnectWithoutEnrollmentsInput

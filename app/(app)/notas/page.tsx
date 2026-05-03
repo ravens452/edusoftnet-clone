@@ -5,6 +5,9 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
+import { GradingWindowBanner } from '@/components/grading-window-banner';
+import { ScoreCell } from './score-cell';
+import { isGradingOpenFor } from '@/lib/grading-window';
 
 function GradeCell({ value }: { value: number | null }) {
   if (value == null) return <span className="text-[var(--muted-foreground)]">—</span>;
@@ -27,7 +30,7 @@ export default async function NotasPage() {
 
   // ── TEACHER VIEW ──
   if (user.role === 'TEACHER') {
-    description = 'Promedios por curso y sección';
+    description = 'Registra y consulta las notas de tus cursos';
     const t = await prisma.teacher.findUnique({ where: { userId: user.id } });
     const cas = t
       ? await prisma.courseAssignment.findMany({
@@ -52,13 +55,27 @@ export default async function NotasPage() {
           if (!lookup.has(fs.studentId)) lookup.set(fs.studentId, {});
           lookup.get(fs.studentId)![fs.periodId] = fs.value;
         }
+        // Verificar ventana por periodo para este courseAssignment
+        const canEditByPeriod: Record<string, boolean> = {};
+        for (const p of periods) {
+          const r = await isGradingOpenFor({
+            periodId: p.id,
+            level: a.section.grade.level,
+            gradeId: a.section.gradeId,
+            sectionId: a.sectionId,
+            courseId: a.courseId,
+          });
+          canEditByPeriod[p.id] = r.open;
+        }
         return {
           id: a.id,
+          courseAssignmentId: a.id,
           courseName: a.course.name,
           gradeName: a.section.grade.name,
           sectionName: a.section.name,
           enrollments,
           lookup,
+          canEditByPeriod,
         };
       })
     );
@@ -72,6 +89,7 @@ export default async function NotasPage() {
       return (
         <div>
           <PageHeader title={pageTitle} description={description} />
+          <GradingWindowBanner />
           <Card><CardContent className="p-8 text-center text-sm text-[var(--muted-foreground)]">
             Aún no tienes cursos asignados.
           </CardContent></Card>
@@ -82,6 +100,7 @@ export default async function NotasPage() {
     return (
       <div>
         <PageHeader title={pageTitle} description={description} />
+        <GradingWindowBanner />
         <Tabs defaultValue={tabsData[0].id}>
           <TabsList className="flex-wrap h-auto">
             {tabsData.map((a) => (
@@ -105,11 +124,23 @@ export default async function NotasPage() {
                     <TableBody>
                       {a.enrollments.map((e) => {
                         const m = a.lookup.get(e.studentId) || {};
+                        const studentName = `${e.student.user.firstName} ${e.student.user.lastName}`;
                         return (
                           <TableRow key={e.studentId}>
                             <TableCell className="font-medium">{e.student.user.lastName}, {e.student.user.firstName}</TableCell>
                             {periods.map((p) => (
-                              <TableCell key={p.id}><GradeCell value={m[p.id] ?? null} /></TableCell>
+                              <TableCell key={p.id}>
+                                <ScoreCell
+                                  value={m[p.id] ?? null}
+                                  studentId={e.studentId}
+                                  studentName={studentName}
+                                  courseAssignmentId={a.courseAssignmentId}
+                                  periodId={p.id}
+                                  periodName={p.name}
+                                  courseName={a.courseName}
+                                  canEdit={!!a.canEditByPeriod[p.id]}
+                                />
+                              </TableCell>
                             ))}
                             <TableCell><GradeCell value={avg(m)} /></TableCell>
                           </TableRow>

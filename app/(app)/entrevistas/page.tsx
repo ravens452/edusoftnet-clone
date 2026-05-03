@@ -5,6 +5,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import { formatDateTime } from '@/lib/utils';
+import { NewInterviewDialog } from './new-interview-dialog';
 
 const STATUS: Record<string, { label: string; tone: 'warning' | 'secondary' | 'success' | 'destructive' }> = {
   REQUESTED: { label: 'Solicitada', tone: 'warning' },
@@ -29,12 +30,38 @@ export default async function EntrevistasPage() {
       teacher: { include: { user: true } },
       parent: { include: { user: true } },
     },
-    orderBy: { scheduledAt: 'asc' },
+    orderBy: { scheduledAt: 'desc' },
   });
+
+  const canCreate = ['TEACHER', 'DIRECTION', 'ADMIN', 'SECRETARY'].includes(user.role);
+  const isAdmin = ['DIRECTION', 'ADMIN', 'SECRETARY'].includes(user.role);
+
+  let parents: { id: string; label: string }[] = [];
+  let teachers: { id: string; label: string }[] = [];
+  if (canCreate) {
+    const ps = await prisma.parent.findMany({
+      include: { user: true },
+      orderBy: { user: { lastName: 'asc' } },
+      take: 200,
+    });
+    parents = ps.map((p) => ({ id: p.id, label: `${p.user.lastName}, ${p.user.firstName}` }));
+    if (isAdmin) {
+      const ts = await prisma.teacher.findMany({
+        include: { user: true },
+        orderBy: { user: { lastName: 'asc' } },
+        take: 100,
+      });
+      teachers = ts.map((t) => ({ id: t.id, label: `${t.user.lastName}, ${t.user.firstName}` }));
+    }
+  }
 
   return (
     <div className="space-y-6">
-      <PageHeader title="Entrevistas" description="Reuniones docente-familia" />
+      <PageHeader
+        title="Entrevistas"
+        description="Reuniones docente-familia"
+        action={canCreate ? <NewInterviewDialog parents={parents} teachers={teachers} isAdmin={isAdmin} /> : undefined}
+      />
       <Card>
         <CardContent className="p-0">
           <Table>
@@ -49,14 +76,20 @@ export default async function EntrevistasPage() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {items.map((i) => {
+              {items.length === 0 ? (
+                <TableRow>
+                  <TableCell colSpan={6} className="text-center text-sm text-[var(--muted-foreground)] py-8">
+                    Aún no hay entrevistas registradas.
+                  </TableCell>
+                </TableRow>
+              ) : items.map((i) => {
                 const s = STATUS[i.status];
                 return (
                   <TableRow key={i.id}>
-                    <TableCell className="text-xs">{formatDateTime(i.scheduledAt)}</TableCell>
+                    <TableCell className="text-xs whitespace-nowrap">{formatDateTime(i.scheduledAt)}</TableCell>
                     <TableCell>{i.teacher.user.firstName} {i.teacher.user.lastName}</TableCell>
                     <TableCell>{i.parent.user.firstName} {i.parent.user.lastName}</TableCell>
-                    <TableCell>{i.topic}</TableCell>
+                    <TableCell className="max-w-xs truncate">{i.topic}</TableCell>
                     <TableCell><Badge variant="outline">{i.mode === 'VIRTUAL' ? 'Virtual' : 'Presencial'}</Badge></TableCell>
                     <TableCell><Badge variant={s.tone}>{s.label}</Badge></TableCell>
                   </TableRow>

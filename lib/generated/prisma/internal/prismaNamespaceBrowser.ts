@@ -55,6 +55,7 @@ export const ModelName = {
   Session: 'Session',
   SchoolYear: 'SchoolYear',
   Period: 'Period',
+  GradingWindow: 'GradingWindow',
   Grade: 'Grade',
   Section: 'Section',
   Course: 'Course',
@@ -168,6 +169,26 @@ export const PeriodScalarFieldEnum = {
 } as const
 
 export type PeriodScalarFieldEnum = (typeof PeriodScalarFieldEnum)[keyof typeof PeriodScalarFieldEnum]
+
+
+export const GradingWindowScalarFieldEnum = {
+  id: 'id',
+  periodId: 'periodId',
+  name: 'name',
+  opensAt: 'opensAt',
+  closesAt: 'closesAt',
+  scope: 'scope',
+  level: 'level',
+  gradeId: 'gradeId',
+  sectionId: 'sectionId',
+  courseId: 'courseId',
+  state: 'state',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type GradingWindowScalarFieldEnum = (typeof GradingWindowScalarFieldEnum)[keyof typeof GradingWindowScalarFieldEnum]
 
 
 export const GradeScalarFieldEnum = {

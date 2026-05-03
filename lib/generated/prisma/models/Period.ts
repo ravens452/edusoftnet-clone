@@ -227,6 +227,7 @@ export type PeriodWhereInput = {
   schoolYear?: Prisma.XOR<Prisma.SchoolYearScalarRelationFilter, Prisma.SchoolYearWhereInput>
   scores?: Prisma.ScoreListRelationFilter
   finalScores?: Prisma.FinalScoreListRelationFilter
+  gradingWindows?: Prisma.GradingWindowListRelationFilter
 }
 
 export type PeriodOrderByWithRelationInput = {
@@ -239,6 +240,7 @@ export type PeriodOrderByWithRelationInput = {
   schoolYear?: Prisma.SchoolYearOrderByWithRelationInput
   scores?: Prisma.ScoreOrderByRelationAggregateInput
   finalScores?: Prisma.FinalScoreOrderByRelationAggregateInput
+  gradingWindows?: Prisma.GradingWindowOrderByRelationAggregateInput
 }
 
 export type PeriodWhereUniqueInput = Prisma.AtLeast<{
@@ -254,6 +256,7 @@ export type PeriodWhereUniqueInput = Prisma.AtLeast<{
   schoolYear?: Prisma.XOR<Prisma.SchoolYearScalarRelationFilter, Prisma.SchoolYearWhereInput>
   scores?: Prisma.ScoreListRelationFilter
   finalScores?: Prisma.FinalScoreListRelationFilter
+  gradingWindows?: Prisma.GradingWindowListRelationFilter
 }, "id">
 
 export type PeriodOrderByWithAggregationInput = {
@@ -291,6 +294,7 @@ export type PeriodCreateInput = {
   schoolYear: Prisma.SchoolYearCreateNestedOneWithoutPeriodsInput
   scores?: Prisma.ScoreCreateNestedManyWithoutPeriodInput
   finalScores?: Prisma.FinalScoreCreateNestedManyWithoutPeriodInput
+  gradingWindows?: Prisma.GradingWindowCreateNestedManyWithoutPeriodInput
 }
 
 export type PeriodUncheckedCreateInput = {
@@ -302,6 +306,7 @@ export type PeriodUncheckedCreateInput = {
   endDate: Date | string
   scores?: Prisma.ScoreUncheckedCreateNestedManyWithoutPeriodInput
   finalScores?: Prisma.FinalScoreUncheckedCreateNestedManyWithoutPeriodInput
+  gradingWindows?: Prisma.GradingWindowUncheckedCreateNestedManyWithoutPeriodInput
 }
 
 export type PeriodUpdateInput = {
@@ -313,6 +318,7 @@ export type PeriodUpdateInput = {
   schoolYear?: Prisma.SchoolYearUpdateOneRequiredWithoutPeriodsNestedInput
   scores?: Prisma.ScoreUpdateManyWithoutPeriodNestedInput
   finalScores?: Prisma.FinalScoreUpdateManyWithoutPeriodNestedInput
+  gradingWindows?: Prisma.GradingWindowUpdateManyWithoutPeriodNestedInput
 }
 
 export type PeriodUncheckedUpdateInput = {
@@ -324,6 +330,7 @@ export type PeriodUncheckedUpdateInput = {
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   scores?: Prisma.ScoreUncheckedUpdateManyWithoutPeriodNestedInput
   finalScores?: Prisma.FinalScoreUncheckedUpdateManyWithoutPeriodNestedInput
+  gradingWindows?: Prisma.GradingWindowUncheckedUpdateManyWithoutPeriodNestedInput
 }
 
 export type PeriodCreateManyInput = {
@@ -444,6 +451,20 @@ export type PeriodUncheckedUpdateManyWithoutSchoolYearNestedInput = {
   deleteMany?: Prisma.PeriodScalarWhereInput | Prisma.PeriodScalarWhereInput[]
 }
 
+export type PeriodCreateNestedOneWithoutGradingWindowsInput = {
+  create?: Prisma.XOR<Prisma.PeriodCreateWithoutGradingWindowsInput, Prisma.PeriodUncheckedCreateWithoutGradingWindowsInput>
+  connectOrCreate?: Prisma.PeriodCreateOrConnectWithoutGradingWindowsInput
+  connect?: Prisma.PeriodWhereUniqueInput
+}
+
+export type PeriodUpdateOneRequiredWithoutGradingWindowsNestedInput = {
+  create?: Prisma.XOR<Prisma.PeriodCreateWithoutGradingWindowsInput, Prisma.PeriodUncheckedCreateWithoutGradingWindowsInput>
+  connectOrCreate?: Prisma.PeriodCreateOrConnectWithoutGradingWindowsInput
+  upsert?: Prisma.PeriodUpsertWithoutGradingWindowsInput
+  connect?: Prisma.PeriodWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.PeriodUpdateToOneWithWhereWithoutGradingWindowsInput, Prisma.PeriodUpdateWithoutGradingWindowsInput>, Prisma.PeriodUncheckedUpdateWithoutGradingWindowsInput>
+}
+
 export type PeriodCreateNestedOneWithoutScoresInput = {
   create?: Prisma.XOR<Prisma.PeriodCreateWithoutScoresInput, Prisma.PeriodUncheckedCreateWithoutScoresInput>
   connectOrCreate?: Prisma.PeriodCreateOrConnectWithoutScoresInput
@@ -480,6 +501,7 @@ export type PeriodCreateWithoutSchoolYearInput = {
   endDate: Date | string
   scores?: Prisma.ScoreCreateNestedManyWithoutPeriodInput
   finalScores?: Prisma.FinalScoreCreateNestedManyWithoutPeriodInput
+  gradingWindows?: Prisma.GradingWindowCreateNestedManyWithoutPeriodInput
 }
 
 export type PeriodUncheckedCreateWithoutSchoolYearInput = {
@@ -490,6 +512,7 @@ export type PeriodUncheckedCreateWithoutSchoolYearInput = {
   endDate: Date | string
   scores?: Prisma.ScoreUncheckedCreateNestedManyWithoutPeriodInput
   finalScores?: Prisma.FinalScoreUncheckedCreateNestedManyWithoutPeriodInput
+  gradingWindows?: Prisma.GradingWindowUncheckedCreateNestedManyWithoutPeriodInput
 }
 
 export type PeriodCreateOrConnectWithoutSchoolYearInput = {
@@ -529,6 +552,66 @@ export type PeriodScalarWhereInput = {
   endDate?: Prisma.DateTimeFilter<"Period"> | Date | string
 }
 
+export type PeriodCreateWithoutGradingWindowsInput = {
+  id?: string
+  name: string
+  ordinal: number
+  startDate: Date | string
+  endDate: Date | string
+  schoolYear: Prisma.SchoolYearCreateNestedOneWithoutPeriodsInput
+  scores?: Prisma.ScoreCreateNestedManyWithoutPeriodInput
+  finalScores?: Prisma.FinalScoreCreateNestedManyWithoutPeriodInput
+}
+
+export type PeriodUncheckedCreateWithoutGradingWindowsInput = {
+  id?: string
+  schoolYearId: string
+  name: string
+  ordinal: number
+  startDate: Date | string
+  endDate: Date | string
+  scores?: Prisma.ScoreUncheckedCreateNestedManyWithoutPeriodInput
+  finalScores?: Prisma.FinalScoreUncheckedCreateNestedManyWithoutPeriodInput
+}
+
+export type PeriodCreateOrConnectWithoutGradingWindowsInput = {
+  where: Prisma.PeriodWhereUniqueInput
+  create: Prisma.XOR<Prisma.PeriodCreateWithoutGradingWindowsInput, Prisma.PeriodUncheckedCreateWithoutGradingWindowsInput>
+}
+
+export type PeriodUpsertWithoutGradingWindowsInput = {
+  update: Prisma.XOR<Prisma.PeriodUpdateWithoutGradingWindowsInput, Prisma.PeriodUncheckedUpdateWithoutGradingWindowsInput>
+  create: Prisma.XOR<Prisma.PeriodCreateWithoutGradingWindowsInput, Prisma.PeriodUncheckedCreateWithoutGradingWindowsInput>
+  where?: Prisma.PeriodWhereInput
+}
+
+export type PeriodUpdateToOneWithWhereWithoutGradingWindowsInput = {
+  where?: Prisma.PeriodWhereInput
+  data: Prisma.XOR<Prisma.PeriodUpdateWithoutGradingWindowsInput, Prisma.PeriodUncheckedUpdateWithoutGradingWindowsInput>
+}
+
+export type PeriodUpdateWithoutGradingWindowsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  ordinal?: Prisma.IntFieldUpdateOperationsInput | number
+  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  schoolYear?: Prisma.SchoolYearUpdateOneRequiredWithoutPeriodsNestedInput
+  scores?: Prisma.ScoreUpdateManyWithoutPeriodNestedInput
+  finalScores?: Prisma.FinalScoreUpdateManyWithoutPeriodNestedInput
+}
+
+export type PeriodUncheckedUpdateWithoutGradingWindowsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  schoolYearId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  ordinal?: Prisma.IntFieldUpdateOperationsInput | number
+  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  scores?: Prisma.ScoreUncheckedUpdateManyWithoutPeriodNestedInput
+  finalScores?: Prisma.FinalScoreUncheckedUpdateManyWithoutPeriodNestedInput
+}
+
 export type PeriodCreateWithoutScoresInput = {
   id?: string
   name: string
@@ -537,6 +620,7 @@ export type PeriodCreateWithoutScoresInput = {
   endDate: Date | string
   schoolYear: Prisma.SchoolYearCreateNestedOneWithoutPeriodsInput
   finalScores?: Prisma.FinalScoreCreateNestedManyWithoutPeriodInput
+  gradingWindows?: Prisma.GradingWindowCreateNestedManyWithoutPeriodInput
 }
 
 export type PeriodUncheckedCreateWithoutScoresInput = {
@@ -547,6 +631,7 @@ export type PeriodUncheckedCreateWithoutScoresInput = {
   startDate: Date | string
   endDate: Date | string
   finalScores?: Prisma.FinalScoreUncheckedCreateNestedManyWithoutPeriodInput
+  gradingWindows?: Prisma.GradingWindowUncheckedCreateNestedManyWithoutPeriodInput
 }
 
 export type PeriodCreateOrConnectWithoutScoresInput = {
@@ -573,6 +658,7 @@ export type PeriodUpdateWithoutScoresInput = {
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   schoolYear?: Prisma.SchoolYearUpdateOneRequiredWithoutPeriodsNestedInput
   finalScores?: Prisma.FinalScoreUpdateManyWithoutPeriodNestedInput
+  gradingWindows?: Prisma.GradingWindowUpdateManyWithoutPeriodNestedInput
 }
 
 export type PeriodUncheckedUpdateWithoutScoresInput = {
@@ -583,6 +669,7 @@ export type PeriodUncheckedUpdateWithoutScoresInput = {
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   finalScores?: Prisma.FinalScoreUncheckedUpdateManyWithoutPeriodNestedInput
+  gradingWindows?: Prisma.GradingWindowUncheckedUpdateManyWithoutPeriodNestedInput
 }
 
 export type PeriodCreateWithoutFinalScoresInput = {
@@ -593,6 +680,7 @@ export type PeriodCreateWithoutFinalScoresInput = {
   endDate: Date | string
   schoolYear: Prisma.SchoolYearCreateNestedOneWithoutPeriodsInput
   scores?: Prisma.ScoreCreateNestedManyWithoutPeriodInput
+  gradingWindows?: Prisma.GradingWindowCreateNestedManyWithoutPeriodInput
 }
 
 export type PeriodUncheckedCreateWithoutFinalScoresInput = {
@@ -603,6 +691,7 @@ export type PeriodUncheckedCreateWithoutFinalScoresInput = {
   startDate: Date | string
   endDate: Date | string
   scores?: Prisma.ScoreUncheckedCreateNestedManyWithoutPeriodInput
+  gradingWindows?: Prisma.GradingWindowUncheckedCreateNestedManyWithoutPeriodInput
 }
 
 export type PeriodCreateOrConnectWithoutFinalScoresInput = {
@@ -629,6 +718,7 @@ export type PeriodUpdateWithoutFinalScoresInput = {
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   schoolYear?: Prisma.SchoolYearUpdateOneRequiredWithoutPeriodsNestedInput
   scores?: Prisma.ScoreUpdateManyWithoutPeriodNestedInput
+  gradingWindows?: Prisma.GradingWindowUpdateManyWithoutPeriodNestedInput
 }
 
 export type PeriodUncheckedUpdateWithoutFinalScoresInput = {
@@ -639,6 +729,7 @@ export type PeriodUncheckedUpdateWithoutFinalScoresInput = {
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   scores?: Prisma.ScoreUncheckedUpdateManyWithoutPeriodNestedInput
+  gradingWindows?: Prisma.GradingWindowUncheckedUpdateManyWithoutPeriodNestedInput
 }
 
 export type PeriodCreateManySchoolYearInput = {
@@ -657,6 +748,7 @@ export type PeriodUpdateWithoutSchoolYearInput = {
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   scores?: Prisma.ScoreUpdateManyWithoutPeriodNestedInput
   finalScores?: Prisma.FinalScoreUpdateManyWithoutPeriodNestedInput
+  gradingWindows?: Prisma.GradingWindowUpdateManyWithoutPeriodNestedInput
 }
 
 export type PeriodUncheckedUpdateWithoutSchoolYearInput = {
@@ -667,6 +759,7 @@ export type PeriodUncheckedUpdateWithoutSchoolYearInput = {
   endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   scores?: Prisma.ScoreUncheckedUpdateManyWithoutPeriodNestedInput
   finalScores?: Prisma.FinalScoreUncheckedUpdateManyWithoutPeriodNestedInput
+  gradingWindows?: Prisma.GradingWindowUncheckedUpdateManyWithoutPeriodNestedInput
 }
 
 export type PeriodUncheckedUpdateManyWithoutSchoolYearInput = {
@@ -685,11 +778,13 @@ export type PeriodUncheckedUpdateManyWithoutSchoolYearInput = {
 export type PeriodCountOutputType = {
   scores: number
   finalScores: number
+  gradingWindows: number
 }
 
 export type PeriodCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   scores?: boolean | PeriodCountOutputTypeCountScoresArgs
   finalScores?: boolean | PeriodCountOutputTypeCountFinalScoresArgs
+  gradingWindows?: boolean | PeriodCountOutputTypeCountGradingWindowsArgs
 }
 
 /**
@@ -716,6 +811,13 @@ export type PeriodCountOutputTypeCountFinalScoresArgs<ExtArgs extends runtime.Ty
   where?: Prisma.FinalScoreWhereInput
 }
 
+/**
+ * PeriodCountOutputType without action
+ */
+export type PeriodCountOutputTypeCountGradingWindowsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.GradingWindowWhereInput
+}
+
 
 export type PeriodSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -727,6 +829,7 @@ export type PeriodSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   schoolYear?: boolean | Prisma.SchoolYearDefaultArgs<ExtArgs>
   scores?: boolean | Prisma.Period$scoresArgs<ExtArgs>
   finalScores?: boolean | Prisma.Period$finalScoresArgs<ExtArgs>
+  gradingWindows?: boolean | Prisma.Period$gradingWindowsArgs<ExtArgs>
   _count?: boolean | Prisma.PeriodCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["period"]>
 
@@ -764,6 +867,7 @@ export type PeriodInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   schoolYear?: boolean | Prisma.SchoolYearDefaultArgs<ExtArgs>
   scores?: boolean | Prisma.Period$scoresArgs<ExtArgs>
   finalScores?: boolean | Prisma.Period$finalScoresArgs<ExtArgs>
+  gradingWindows?: boolean | Prisma.Period$gradingWindowsArgs<ExtArgs>
   _count?: boolean | Prisma.PeriodCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type PeriodIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -779,6 +883,7 @@ export type $PeriodPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     schoolYear: Prisma.$SchoolYearPayload<ExtArgs>
     scores: Prisma.$ScorePayload<ExtArgs>[]
     finalScores: Prisma.$FinalScorePayload<ExtArgs>[]
+    gradingWindows: Prisma.$GradingWindowPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1184,6 +1289,7 @@ export interface Prisma__PeriodClient<T, Null = never, ExtArgs extends runtime.T
   schoolYear<T extends Prisma.SchoolYearDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SchoolYearDefaultArgs<ExtArgs>>): Prisma.Prisma__SchoolYearClient<runtime.Types.Result.GetResult<Prisma.$SchoolYearPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   scores<T extends Prisma.Period$scoresArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Period$scoresArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ScorePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   finalScores<T extends Prisma.Period$finalScoresArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Period$finalScoresArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FinalScorePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  gradingWindows<T extends Prisma.Period$gradingWindowsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Period$gradingWindowsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GradingWindowPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1663,6 +1769,30 @@ export type Period$finalScoresArgs<ExtArgs extends runtime.Types.Extensions.Inte
   take?: number
   skip?: number
   distinct?: Prisma.FinalScoreScalarFieldEnum | Prisma.FinalScoreScalarFieldEnum[]
+}
+
+/**
+ * Period.gradingWindows
+ */
+export type Period$gradingWindowsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the GradingWindow
+   */
+  select?: Prisma.GradingWindowSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the GradingWindow
+   */
+  omit?: Prisma.GradingWindowOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.GradingWindowInclude<ExtArgs> | null
+  where?: Prisma.GradingWindowWhereInput
+  orderBy?: Prisma.GradingWindowOrderByWithRelationInput | Prisma.GradingWindowOrderByWithRelationInput[]
+  cursor?: Prisma.GradingWindowWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.GradingWindowScalarFieldEnum | Prisma.GradingWindowScalarFieldEnum[]
 }
 
 /**

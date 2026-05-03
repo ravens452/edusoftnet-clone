@@ -62,6 +62,12 @@ export type SchoolYear = Prisma.SchoolYearModel
  */
 export type Period = Prisma.PeriodModel
 /**
+ * Model GradingWindow
+ * Ventana de captura de notas controlada por administración.
+ * Determina cuándo los docentes pueden registrar/editar notas.
+ */
+export type GradingWindow = Prisma.GradingWindowModel
+/**
  * Model Grade
  * 
  */
