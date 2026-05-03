@@ -6,6 +6,7 @@ import { StatCard } from '@/components/ui/stat-card';
 import { Badge } from '@/components/ui/badge';
 import { CalendarCheck, AlertCircle, Clock } from 'lucide-react';
 import { formatDate } from '@/lib/utils';
+import { RollCallDialog } from './mark-roll-call';
 
 const STATUS_LABEL: Record<string, { label: string; tone: 'success' | 'destructive' | 'warning' | 'muted' }> = {
   PRESENT: { label: 'Presente', tone: 'success' },
@@ -35,8 +36,19 @@ export default async function AsistenciaPage() {
       ? { courseAssignments: { some: { teacher: { userId: user.id } } } }
       : {};
     const sections = await prisma.section.findMany({
-      where, include: { grade: true, _count: { select: { enrollments: true } } }, take: 30,
+      where,
+      include: {
+        grade: true,
+        _count: { select: { enrollments: true } },
+        enrollments: { include: { student: { include: { user: true } } }, orderBy: { student: { user: { lastName: 'asc' } } } },
+      },
+      take: 30,
     });
+    const rollCallSections = sections.map((s) => ({
+      id: s.id,
+      label: `${s.grade.name} "${s.name}"`,
+      students: s.enrollments.map((e) => ({ id: e.studentId, label: `${e.student.user.lastName}, ${e.student.user.firstName}` })),
+    }));
 
     // Pre-fetch attendance counts por sección
     const cards = await Promise.all(
@@ -56,7 +68,11 @@ export default async function AsistenciaPage() {
 
     return (
       <div className="space-y-6">
-        <PageHeader title="Asistencia (onTime)" description="Control diario por sección" />
+        <PageHeader
+          title="Asistencia (onTime)"
+          description="Control diario por sección"
+          action={rollCallSections.length ? <RollCallDialog sections={rollCallSections} /> : undefined}
+        />
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
           {cards.length === 0 ? (
             <p className="text-sm text-[var(--muted-foreground)] col-span-full">Sin secciones asignadas.</p>

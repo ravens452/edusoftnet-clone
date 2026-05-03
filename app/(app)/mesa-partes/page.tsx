@@ -5,6 +5,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import { formatDate } from '@/lib/utils';
+import { NewTicketDialog } from './new-ticket-dialog';
 
 const STATUS: Record<string, { label: string; tone: 'warning' | 'secondary' | 'success' | 'destructive' | 'muted' }> = {
   OPEN: { label: 'Abierto', tone: 'warning' },
@@ -25,7 +26,7 @@ export default async function MesaPartesPage() {
 
   return (
     <div className="space-y-6">
-      <PageHeader title="Mesa de partes" description="Solicitudes y trámites" />
+      <PageHeader title="Mesa de partes" description="Solicitudes y trámites" action={<NewTicketDialog />} />
       <Card>
         <CardContent className="p-0">
           <Table>

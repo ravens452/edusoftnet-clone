@@ -5,9 +5,16 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Brain, FileText } from 'lucide-react';
 import { formatDate } from '@/lib/utils';
+import { NewCaseDialog } from './new-case-dialog';
 
 export default async function EcarePage() {
-  await requireSession();
+  const user = await requireSession();
+  const canCreate = ['PSYCHOLOGY', 'DIRECTION', 'ADMIN'].includes(user.role);
+  let students: { id: string; label: string }[] = [];
+  if (canCreate) {
+    const ss = await prisma.student.findMany({ include: { user: true }, orderBy: { user: { lastName: 'asc' } }, take: 200 });
+    students = ss.map((s) => ({ id: s.id, label: `${s.user.lastName}, ${s.user.firstName}` }));
+  }
   const cases = await prisma.psychologyCase.findMany({
     orderBy: { openedAt: 'desc' },
     include: { student: { include: { user: true } } },
@@ -20,7 +27,11 @@ export default async function EcarePage() {
 
   return (
     <div className="space-y-6">
-      <PageHeader title="ecare — Psicología" description="Casos socio-emocionales y tests" />
+      <PageHeader
+        title="ecare — Psicología"
+        description="Casos socio-emocionales y tests"
+        action={canCreate ? <NewCaseDialog students={students} /> : undefined}
+      />
 
       <div className="grid lg:grid-cols-2 gap-4">
         <Card>

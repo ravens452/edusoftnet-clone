@@ -5,9 +5,16 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Heart, Syringe } from 'lucide-react';
 import { formatDate } from '@/lib/utils';
+import { NewAttentionDialog } from './new-attention-dialog';
 
 export default async function SaludPage() {
-  await requireSession();
+  const user = await requireSession();
+  const canCreate = ['NURSE', 'DIRECTION', 'ADMIN', 'TEACHER'].includes(user.role);
+  let students: { id: string; label: string }[] = [];
+  if (canCreate) {
+    const ss = await prisma.student.findMany({ include: { user: true }, orderBy: { user: { lastName: 'asc' } }, take: 200 });
+    students = ss.map((s) => ({ id: s.id, label: `${s.user.lastName}, ${s.user.firstName}` }));
+  }
   const [records, vaccinations] = await Promise.all([
     prisma.healthRecord.findMany({
       orderBy: { date: 'desc' }, take: 50,
@@ -21,7 +28,11 @@ export default async function SaludPage() {
 
   return (
     <div className="space-y-6">
-      <PageHeader title="Salud / Enfermería" description="Atenciones, síntomas y vacunación" />
+      <PageHeader
+        title="Salud / Enfermería"
+        description="Atenciones, síntomas y vacunación"
+        action={canCreate ? <NewAttentionDialog students={students} /> : undefined}
+      />
 
       <Card>
         <CardHeader><CardTitle className="flex items-center gap-2"><Heart className="h-4 w-4" /> Atenciones recientes</CardTitle></CardHeader>
