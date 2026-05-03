@@ -1,9 +1,10 @@
 'use client';
 import { useTransition } from 'react';
 import { useRouter } from 'next/navigation';
-import { Bell, Search, LogOut, User, Menu } from 'lucide-react';
+import { Search, LogOut, User, Menu } from 'lucide-react';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { ThemeToggle } from './theme-toggle';
+import { NotifBell, type NotifItem } from './notif-bell';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -20,12 +21,14 @@ export function Topbar({
   lastName,
   role,
   unread = 0,
+  recentNotifs = [],
   onMenuClick,
 }: {
   firstName: string;
   lastName: string;
   role: string;
   unread?: number;
+  recentNotifs?: NotifItem[];
   onMenuClick?: () => void;
 }) {
   const router = useRouter();
@@ -69,14 +72,7 @@ export function Topbar({
       <ThemeToggle />
 
       {/* Notifs */}
-      <button className="relative h-9 w-9 grid place-items-center rounded-xl hover:bg-[var(--muted)] transition-colors">
-        <Bell className="h-[18px] w-[18px] text-[var(--muted-foreground)]" strokeWidth={1.8} />
-        {unread > 0 && (
-          <span className="absolute top-1.5 right-1.5 h-4 min-w-4 px-1 rounded-full bg-[var(--brand-orange)] text-white text-[9px] font-bold grid place-items-center ring-2 ring-[var(--card)]">
-            {unread > 9 ? '9+' : unread}
-          </span>
-        )}
-      </button>
+      <NotifBell unread={unread} items={recentNotifs} />
 
       {/* User */}
       <DropdownMenu>

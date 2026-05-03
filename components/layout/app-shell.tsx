@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import { Sidebar } from './sidebar';
 import { Topbar } from './topbar';
 import type { NavGroup } from '@/lib/navigation';
+import type { NotifItem } from './notif-bell';
 
 export function AppShell({
   groups,
@@ -12,6 +13,7 @@ export function AppShell({
   firstName,
   lastName,
   unread,
+  recentNotifs = [],
   children,
 }: {
   groups: NavGroup[];
@@ -19,6 +21,7 @@ export function AppShell({
   firstName: string;
   lastName: string;
   unread: number;
+  recentNotifs?: NotifItem[];
   children: React.ReactNode;
 }) {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -61,6 +64,7 @@ export function AppShell({
           lastName={lastName}
           role={role}
           unread={unread}
+          recentNotifs={recentNotifs}
           onMenuClick={() => setMobileOpen(true)}
         />
         <main className="flex-1 overflow-y-auto">

@@ -9,7 +9,14 @@ export default async function AppLayout({ children }: { children: React.ReactNod
   if (!user) redirect('/login');
 
   const groups = navFor(user.role);
-  const unread = await prisma.notification.count({ where: { userId: user.id, readAt: null } });
+  const [unread, recentNotifs] = await Promise.all([
+    prisma.notification.count({ where: { userId: user.id, readAt: null } }),
+    prisma.notification.findMany({
+      where: { userId: user.id },
+      orderBy: { createdAt: 'desc' },
+      take: 10,
+    }),
+  ]);
 
   return (
     <AppShell
@@ -18,6 +25,10 @@ export default async function AppLayout({ children }: { children: React.ReactNod
       firstName={user.firstName}
       lastName={user.lastName}
       unread={unread}
+      recentNotifs={recentNotifs.map((n) => ({
+        id: n.id, type: n.type, title: n.title, body: n.body,
+        link: n.link, readAt: n.readAt, createdAt: n.createdAt,
+      }))}
     >
       {children}
     </AppShell>
