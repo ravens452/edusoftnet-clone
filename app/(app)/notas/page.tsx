@@ -30,7 +30,7 @@ export default async function NotasPage() {
 
   // ── TEACHER VIEW ──
   if (user.role === 'TEACHER') {
-    description = 'Registra y consulta las notas de tus cursos';
+    description = 'Captura de notas por trimestre · Escala MINEDU (AD · A · B · C)';
     const t = await prisma.teacher.findUnique({ where: { userId: user.id } });
     const cas = t
       ? await prisma.courseAssignment.findMany({
@@ -42,20 +42,26 @@ export default async function NotasPage() {
     // Pre-fetch todo antes de renderizar (server components no soportan map async en JSX)
     const tabsData = await Promise.all(
       cas.map(async (a) => {
-        const enrollments = await prisma.enrollment.findMany({
-          where: { sectionId: a.sectionId },
-          include: { student: { include: { user: true } } },
-          orderBy: { student: { user: { lastName: 'asc' } } },
-        });
-        const finalScores = await prisma.finalScore.findMany({
-          where: { courseAssignmentId: a.id, studentId: { in: enrollments.map((e) => e.studentId) } },
-        });
+        const [enrollments, finalScores, competencies] = await Promise.all([
+          prisma.enrollment.findMany({
+            where: { sectionId: a.sectionId },
+            include: { student: { include: { user: true } } },
+            orderBy: { student: { user: { lastName: 'asc' } } },
+          }),
+          prisma.finalScore.findMany({
+            where: { courseAssignmentId: a.id },
+          }),
+          prisma.competency.findMany({
+            where: { courseId: a.courseId },
+            include: { capabilities: true },
+            orderBy: { code: 'asc' },
+          }),
+        ]);
         const lookup = new Map<string, Record<string, number>>();
         for (const fs of finalScores) {
           if (!lookup.has(fs.studentId)) lookup.set(fs.studentId, {});
           lookup.get(fs.studentId)![fs.periodId] = fs.value;
         }
-        // Verificar ventana por periodo para este courseAssignment
         const canEditByPeriod: Record<string, boolean> = {};
         for (const p of periods) {
           const r = await isGradingOpenFor({
@@ -76,6 +82,7 @@ export default async function NotasPage() {
           enrollments,
           lookup,
           canEditByPeriod,
+          competencies,
         };
       })
     );
@@ -110,7 +117,34 @@ export default async function NotasPage() {
             ))}
           </TabsList>
           {tabsData.map((a) => (
-            <TabsContent key={a.id} value={a.id}>
+            <TabsContent key={a.id} value={a.id} className="space-y-4">
+              {a.competencies.length > 0 && (
+                <Card>
+                  <CardContent className="p-4">
+                    <div className="text-[10px] uppercase tracking-wider font-bold text-[var(--muted-foreground)] mb-3">
+                      Competencias MINEDU del área
+                    </div>
+                    <ul className="space-y-2">
+                      {a.competencies.map((c) => (
+                        <li key={c.id} className="flex gap-3 text-sm">
+                          <span className="shrink-0 mt-0.5 inline-flex items-center justify-center min-w-[44px] h-5 px-2 rounded-md bg-[var(--soft-blue)] text-[var(--primary-on-soft)] text-[10px] font-bold tracking-wide">
+                            {c.code}
+                          </span>
+                          <div className="min-w-0">
+                            <div className="font-medium leading-snug">{c.name}</div>
+                            {c.capabilities.length > 0 && (
+                              <div className="text-xs text-[var(--muted-foreground)] mt-1">
+                                <span className="font-medium">Capacidades: </span>
+                                {c.capabilities.map((cap) => cap.name).join(' · ')}
+                              </div>
+                            )}
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  </CardContent>
+                </Card>
+              )}
               <Card>
                 <CardContent className="p-0">
                   <Table>
