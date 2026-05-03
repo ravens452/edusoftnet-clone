@@ -182,6 +182,7 @@ export type CourseAssignmentWhereInput = {
   scores?: Prisma.ScoreListRelationFilter
   finalScores?: Prisma.FinalScoreListRelationFilter
   lessons?: Prisma.LessonSessionListRelationFilter
+  competencyAssessments?: Prisma.CompetencyAssessmentListRelationFilter
 }
 
 export type CourseAssignmentOrderByWithRelationInput = {
@@ -197,6 +198,7 @@ export type CourseAssignmentOrderByWithRelationInput = {
   scores?: Prisma.ScoreOrderByRelationAggregateInput
   finalScores?: Prisma.FinalScoreOrderByRelationAggregateInput
   lessons?: Prisma.LessonSessionOrderByRelationAggregateInput
+  competencyAssessments?: Prisma.CompetencyAssessmentOrderByRelationAggregateInput
 }
 
 export type CourseAssignmentWhereUniqueInput = Prisma.AtLeast<{
@@ -216,6 +218,7 @@ export type CourseAssignmentWhereUniqueInput = Prisma.AtLeast<{
   scores?: Prisma.ScoreListRelationFilter
   finalScores?: Prisma.FinalScoreListRelationFilter
   lessons?: Prisma.LessonSessionListRelationFilter
+  competencyAssessments?: Prisma.CompetencyAssessmentListRelationFilter
 }, "id" | "courseId_sectionId_teacherId">
 
 export type CourseAssignmentOrderByWithAggregationInput = {
@@ -248,6 +251,7 @@ export type CourseAssignmentCreateInput = {
   scores?: Prisma.ScoreCreateNestedManyWithoutCourseAssignmentInput
   finalScores?: Prisma.FinalScoreCreateNestedManyWithoutCourseAssignmentInput
   lessons?: Prisma.LessonSessionCreateNestedManyWithoutCourseAssignmentInput
+  competencyAssessments?: Prisma.CompetencyAssessmentCreateNestedManyWithoutCourseAssignmentInput
 }
 
 export type CourseAssignmentUncheckedCreateInput = {
@@ -260,6 +264,7 @@ export type CourseAssignmentUncheckedCreateInput = {
   scores?: Prisma.ScoreUncheckedCreateNestedManyWithoutCourseAssignmentInput
   finalScores?: Prisma.FinalScoreUncheckedCreateNestedManyWithoutCourseAssignmentInput
   lessons?: Prisma.LessonSessionUncheckedCreateNestedManyWithoutCourseAssignmentInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUncheckedCreateNestedManyWithoutCourseAssignmentInput
 }
 
 export type CourseAssignmentUpdateInput = {
@@ -272,6 +277,7 @@ export type CourseAssignmentUpdateInput = {
   scores?: Prisma.ScoreUpdateManyWithoutCourseAssignmentNestedInput
   finalScores?: Prisma.FinalScoreUpdateManyWithoutCourseAssignmentNestedInput
   lessons?: Prisma.LessonSessionUpdateManyWithoutCourseAssignmentNestedInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUpdateManyWithoutCourseAssignmentNestedInput
 }
 
 export type CourseAssignmentUncheckedUpdateInput = {
@@ -284,6 +290,7 @@ export type CourseAssignmentUncheckedUpdateInput = {
   scores?: Prisma.ScoreUncheckedUpdateManyWithoutCourseAssignmentNestedInput
   finalScores?: Prisma.FinalScoreUncheckedUpdateManyWithoutCourseAssignmentNestedInput
   lessons?: Prisma.LessonSessionUncheckedUpdateManyWithoutCourseAssignmentNestedInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUncheckedUpdateManyWithoutCourseAssignmentNestedInput
 }
 
 export type CourseAssignmentCreateManyInput = {
@@ -314,6 +321,11 @@ export type CourseAssignmentOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
+export type CourseAssignmentScalarRelationFilter = {
+  is?: Prisma.CourseAssignmentWhereInput
+  isNot?: Prisma.CourseAssignmentWhereInput
+}
+
 export type CourseAssignmentCourseIdSectionIdTeacherIdCompoundUniqueInput = {
   courseId: string
   sectionId: string
@@ -339,11 +351,6 @@ export type CourseAssignmentMinOrderByAggregateInput = {
   courseId?: Prisma.SortOrder
   sectionId?: Prisma.SortOrder
   teacherId?: Prisma.SortOrder
-}
-
-export type CourseAssignmentScalarRelationFilter = {
-  is?: Prisma.CourseAssignmentWhereInput
-  isNot?: Prisma.CourseAssignmentWhereInput
 }
 
 export type CourseAssignmentCreateNestedManyWithoutSectionInput = {
@@ -428,6 +435,20 @@ export type CourseAssignmentUncheckedUpdateManyWithoutCourseNestedInput = {
   update?: Prisma.CourseAssignmentUpdateWithWhereUniqueWithoutCourseInput | Prisma.CourseAssignmentUpdateWithWhereUniqueWithoutCourseInput[]
   updateMany?: Prisma.CourseAssignmentUpdateManyWithWhereWithoutCourseInput | Prisma.CourseAssignmentUpdateManyWithWhereWithoutCourseInput[]
   deleteMany?: Prisma.CourseAssignmentScalarWhereInput | Prisma.CourseAssignmentScalarWhereInput[]
+}
+
+export type CourseAssignmentCreateNestedOneWithoutCompetencyAssessmentsInput = {
+  create?: Prisma.XOR<Prisma.CourseAssignmentCreateWithoutCompetencyAssessmentsInput, Prisma.CourseAssignmentUncheckedCreateWithoutCompetencyAssessmentsInput>
+  connectOrCreate?: Prisma.CourseAssignmentCreateOrConnectWithoutCompetencyAssessmentsInput
+  connect?: Prisma.CourseAssignmentWhereUniqueInput
+}
+
+export type CourseAssignmentUpdateOneRequiredWithoutCompetencyAssessmentsNestedInput = {
+  create?: Prisma.XOR<Prisma.CourseAssignmentCreateWithoutCompetencyAssessmentsInput, Prisma.CourseAssignmentUncheckedCreateWithoutCompetencyAssessmentsInput>
+  connectOrCreate?: Prisma.CourseAssignmentCreateOrConnectWithoutCompetencyAssessmentsInput
+  upsert?: Prisma.CourseAssignmentUpsertWithoutCompetencyAssessmentsInput
+  connect?: Prisma.CourseAssignmentWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CourseAssignmentUpdateToOneWithWhereWithoutCompetencyAssessmentsInput, Prisma.CourseAssignmentUpdateWithoutCompetencyAssessmentsInput>, Prisma.CourseAssignmentUncheckedUpdateWithoutCompetencyAssessmentsInput>
 }
 
 export type CourseAssignmentCreateNestedOneWithoutSchedulesInput = {
@@ -551,6 +572,7 @@ export type CourseAssignmentCreateWithoutSectionInput = {
   scores?: Prisma.ScoreCreateNestedManyWithoutCourseAssignmentInput
   finalScores?: Prisma.FinalScoreCreateNestedManyWithoutCourseAssignmentInput
   lessons?: Prisma.LessonSessionCreateNestedManyWithoutCourseAssignmentInput
+  competencyAssessments?: Prisma.CompetencyAssessmentCreateNestedManyWithoutCourseAssignmentInput
 }
 
 export type CourseAssignmentUncheckedCreateWithoutSectionInput = {
@@ -562,6 +584,7 @@ export type CourseAssignmentUncheckedCreateWithoutSectionInput = {
   scores?: Prisma.ScoreUncheckedCreateNestedManyWithoutCourseAssignmentInput
   finalScores?: Prisma.FinalScoreUncheckedCreateNestedManyWithoutCourseAssignmentInput
   lessons?: Prisma.LessonSessionUncheckedCreateNestedManyWithoutCourseAssignmentInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUncheckedCreateNestedManyWithoutCourseAssignmentInput
 }
 
 export type CourseAssignmentCreateOrConnectWithoutSectionInput = {
@@ -608,6 +631,7 @@ export type CourseAssignmentCreateWithoutCourseInput = {
   scores?: Prisma.ScoreCreateNestedManyWithoutCourseAssignmentInput
   finalScores?: Prisma.FinalScoreCreateNestedManyWithoutCourseAssignmentInput
   lessons?: Prisma.LessonSessionCreateNestedManyWithoutCourseAssignmentInput
+  competencyAssessments?: Prisma.CompetencyAssessmentCreateNestedManyWithoutCourseAssignmentInput
 }
 
 export type CourseAssignmentUncheckedCreateWithoutCourseInput = {
@@ -619,6 +643,7 @@ export type CourseAssignmentUncheckedCreateWithoutCourseInput = {
   scores?: Prisma.ScoreUncheckedCreateNestedManyWithoutCourseAssignmentInput
   finalScores?: Prisma.FinalScoreUncheckedCreateNestedManyWithoutCourseAssignmentInput
   lessons?: Prisma.LessonSessionUncheckedCreateNestedManyWithoutCourseAssignmentInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUncheckedCreateNestedManyWithoutCourseAssignmentInput
 }
 
 export type CourseAssignmentCreateOrConnectWithoutCourseInput = {
@@ -646,6 +671,70 @@ export type CourseAssignmentUpdateManyWithWhereWithoutCourseInput = {
   data: Prisma.XOR<Prisma.CourseAssignmentUpdateManyMutationInput, Prisma.CourseAssignmentUncheckedUpdateManyWithoutCourseInput>
 }
 
+export type CourseAssignmentCreateWithoutCompetencyAssessmentsInput = {
+  id?: string
+  course: Prisma.CourseCreateNestedOneWithoutAssignmentsInput
+  section: Prisma.SectionCreateNestedOneWithoutCourseAssignmentsInput
+  teacher: Prisma.TeacherCreateNestedOneWithoutAssignmentsInput
+  assignments?: Prisma.AssignmentCreateNestedManyWithoutCourseAssignmentInput
+  schedules?: Prisma.ScheduleSlotCreateNestedManyWithoutCourseAssignmentInput
+  scores?: Prisma.ScoreCreateNestedManyWithoutCourseAssignmentInput
+  finalScores?: Prisma.FinalScoreCreateNestedManyWithoutCourseAssignmentInput
+  lessons?: Prisma.LessonSessionCreateNestedManyWithoutCourseAssignmentInput
+}
+
+export type CourseAssignmentUncheckedCreateWithoutCompetencyAssessmentsInput = {
+  id?: string
+  courseId: string
+  sectionId: string
+  teacherId: string
+  assignments?: Prisma.AssignmentUncheckedCreateNestedManyWithoutCourseAssignmentInput
+  schedules?: Prisma.ScheduleSlotUncheckedCreateNestedManyWithoutCourseAssignmentInput
+  scores?: Prisma.ScoreUncheckedCreateNestedManyWithoutCourseAssignmentInput
+  finalScores?: Prisma.FinalScoreUncheckedCreateNestedManyWithoutCourseAssignmentInput
+  lessons?: Prisma.LessonSessionUncheckedCreateNestedManyWithoutCourseAssignmentInput
+}
+
+export type CourseAssignmentCreateOrConnectWithoutCompetencyAssessmentsInput = {
+  where: Prisma.CourseAssignmentWhereUniqueInput
+  create: Prisma.XOR<Prisma.CourseAssignmentCreateWithoutCompetencyAssessmentsInput, Prisma.CourseAssignmentUncheckedCreateWithoutCompetencyAssessmentsInput>
+}
+
+export type CourseAssignmentUpsertWithoutCompetencyAssessmentsInput = {
+  update: Prisma.XOR<Prisma.CourseAssignmentUpdateWithoutCompetencyAssessmentsInput, Prisma.CourseAssignmentUncheckedUpdateWithoutCompetencyAssessmentsInput>
+  create: Prisma.XOR<Prisma.CourseAssignmentCreateWithoutCompetencyAssessmentsInput, Prisma.CourseAssignmentUncheckedCreateWithoutCompetencyAssessmentsInput>
+  where?: Prisma.CourseAssignmentWhereInput
+}
+
+export type CourseAssignmentUpdateToOneWithWhereWithoutCompetencyAssessmentsInput = {
+  where?: Prisma.CourseAssignmentWhereInput
+  data: Prisma.XOR<Prisma.CourseAssignmentUpdateWithoutCompetencyAssessmentsInput, Prisma.CourseAssignmentUncheckedUpdateWithoutCompetencyAssessmentsInput>
+}
+
+export type CourseAssignmentUpdateWithoutCompetencyAssessmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  course?: Prisma.CourseUpdateOneRequiredWithoutAssignmentsNestedInput
+  section?: Prisma.SectionUpdateOneRequiredWithoutCourseAssignmentsNestedInput
+  teacher?: Prisma.TeacherUpdateOneRequiredWithoutAssignmentsNestedInput
+  assignments?: Prisma.AssignmentUpdateManyWithoutCourseAssignmentNestedInput
+  schedules?: Prisma.ScheduleSlotUpdateManyWithoutCourseAssignmentNestedInput
+  scores?: Prisma.ScoreUpdateManyWithoutCourseAssignmentNestedInput
+  finalScores?: Prisma.FinalScoreUpdateManyWithoutCourseAssignmentNestedInput
+  lessons?: Prisma.LessonSessionUpdateManyWithoutCourseAssignmentNestedInput
+}
+
+export type CourseAssignmentUncheckedUpdateWithoutCompetencyAssessmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  courseId?: Prisma.StringFieldUpdateOperationsInput | string
+  sectionId?: Prisma.StringFieldUpdateOperationsInput | string
+  teacherId?: Prisma.StringFieldUpdateOperationsInput | string
+  assignments?: Prisma.AssignmentUncheckedUpdateManyWithoutCourseAssignmentNestedInput
+  schedules?: Prisma.ScheduleSlotUncheckedUpdateManyWithoutCourseAssignmentNestedInput
+  scores?: Prisma.ScoreUncheckedUpdateManyWithoutCourseAssignmentNestedInput
+  finalScores?: Prisma.FinalScoreUncheckedUpdateManyWithoutCourseAssignmentNestedInput
+  lessons?: Prisma.LessonSessionUncheckedUpdateManyWithoutCourseAssignmentNestedInput
+}
+
 export type CourseAssignmentCreateWithoutSchedulesInput = {
   id?: string
   course: Prisma.CourseCreateNestedOneWithoutAssignmentsInput
@@ -655,6 +744,7 @@ export type CourseAssignmentCreateWithoutSchedulesInput = {
   scores?: Prisma.ScoreCreateNestedManyWithoutCourseAssignmentInput
   finalScores?: Prisma.FinalScoreCreateNestedManyWithoutCourseAssignmentInput
   lessons?: Prisma.LessonSessionCreateNestedManyWithoutCourseAssignmentInput
+  competencyAssessments?: Prisma.CompetencyAssessmentCreateNestedManyWithoutCourseAssignmentInput
 }
 
 export type CourseAssignmentUncheckedCreateWithoutSchedulesInput = {
@@ -666,6 +756,7 @@ export type CourseAssignmentUncheckedCreateWithoutSchedulesInput = {
   scores?: Prisma.ScoreUncheckedCreateNestedManyWithoutCourseAssignmentInput
   finalScores?: Prisma.FinalScoreUncheckedCreateNestedManyWithoutCourseAssignmentInput
   lessons?: Prisma.LessonSessionUncheckedCreateNestedManyWithoutCourseAssignmentInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUncheckedCreateNestedManyWithoutCourseAssignmentInput
 }
 
 export type CourseAssignmentCreateOrConnectWithoutSchedulesInput = {
@@ -693,6 +784,7 @@ export type CourseAssignmentUpdateWithoutSchedulesInput = {
   scores?: Prisma.ScoreUpdateManyWithoutCourseAssignmentNestedInput
   finalScores?: Prisma.FinalScoreUpdateManyWithoutCourseAssignmentNestedInput
   lessons?: Prisma.LessonSessionUpdateManyWithoutCourseAssignmentNestedInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUpdateManyWithoutCourseAssignmentNestedInput
 }
 
 export type CourseAssignmentUncheckedUpdateWithoutSchedulesInput = {
@@ -704,6 +796,7 @@ export type CourseAssignmentUncheckedUpdateWithoutSchedulesInput = {
   scores?: Prisma.ScoreUncheckedUpdateManyWithoutCourseAssignmentNestedInput
   finalScores?: Prisma.FinalScoreUncheckedUpdateManyWithoutCourseAssignmentNestedInput
   lessons?: Prisma.LessonSessionUncheckedUpdateManyWithoutCourseAssignmentNestedInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUncheckedUpdateManyWithoutCourseAssignmentNestedInput
 }
 
 export type CourseAssignmentCreateWithoutTeacherInput = {
@@ -715,6 +808,7 @@ export type CourseAssignmentCreateWithoutTeacherInput = {
   scores?: Prisma.ScoreCreateNestedManyWithoutCourseAssignmentInput
   finalScores?: Prisma.FinalScoreCreateNestedManyWithoutCourseAssignmentInput
   lessons?: Prisma.LessonSessionCreateNestedManyWithoutCourseAssignmentInput
+  competencyAssessments?: Prisma.CompetencyAssessmentCreateNestedManyWithoutCourseAssignmentInput
 }
 
 export type CourseAssignmentUncheckedCreateWithoutTeacherInput = {
@@ -726,6 +820,7 @@ export type CourseAssignmentUncheckedCreateWithoutTeacherInput = {
   scores?: Prisma.ScoreUncheckedCreateNestedManyWithoutCourseAssignmentInput
   finalScores?: Prisma.FinalScoreUncheckedCreateNestedManyWithoutCourseAssignmentInput
   lessons?: Prisma.LessonSessionUncheckedCreateNestedManyWithoutCourseAssignmentInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUncheckedCreateNestedManyWithoutCourseAssignmentInput
 }
 
 export type CourseAssignmentCreateOrConnectWithoutTeacherInput = {
@@ -762,6 +857,7 @@ export type CourseAssignmentCreateWithoutScoresInput = {
   schedules?: Prisma.ScheduleSlotCreateNestedManyWithoutCourseAssignmentInput
   finalScores?: Prisma.FinalScoreCreateNestedManyWithoutCourseAssignmentInput
   lessons?: Prisma.LessonSessionCreateNestedManyWithoutCourseAssignmentInput
+  competencyAssessments?: Prisma.CompetencyAssessmentCreateNestedManyWithoutCourseAssignmentInput
 }
 
 export type CourseAssignmentUncheckedCreateWithoutScoresInput = {
@@ -773,6 +869,7 @@ export type CourseAssignmentUncheckedCreateWithoutScoresInput = {
   schedules?: Prisma.ScheduleSlotUncheckedCreateNestedManyWithoutCourseAssignmentInput
   finalScores?: Prisma.FinalScoreUncheckedCreateNestedManyWithoutCourseAssignmentInput
   lessons?: Prisma.LessonSessionUncheckedCreateNestedManyWithoutCourseAssignmentInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUncheckedCreateNestedManyWithoutCourseAssignmentInput
 }
 
 export type CourseAssignmentCreateOrConnectWithoutScoresInput = {
@@ -800,6 +897,7 @@ export type CourseAssignmentUpdateWithoutScoresInput = {
   schedules?: Prisma.ScheduleSlotUpdateManyWithoutCourseAssignmentNestedInput
   finalScores?: Prisma.FinalScoreUpdateManyWithoutCourseAssignmentNestedInput
   lessons?: Prisma.LessonSessionUpdateManyWithoutCourseAssignmentNestedInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUpdateManyWithoutCourseAssignmentNestedInput
 }
 
 export type CourseAssignmentUncheckedUpdateWithoutScoresInput = {
@@ -811,6 +909,7 @@ export type CourseAssignmentUncheckedUpdateWithoutScoresInput = {
   schedules?: Prisma.ScheduleSlotUncheckedUpdateManyWithoutCourseAssignmentNestedInput
   finalScores?: Prisma.FinalScoreUncheckedUpdateManyWithoutCourseAssignmentNestedInput
   lessons?: Prisma.LessonSessionUncheckedUpdateManyWithoutCourseAssignmentNestedInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUncheckedUpdateManyWithoutCourseAssignmentNestedInput
 }
 
 export type CourseAssignmentCreateWithoutFinalScoresInput = {
@@ -822,6 +921,7 @@ export type CourseAssignmentCreateWithoutFinalScoresInput = {
   schedules?: Prisma.ScheduleSlotCreateNestedManyWithoutCourseAssignmentInput
   scores?: Prisma.ScoreCreateNestedManyWithoutCourseAssignmentInput
   lessons?: Prisma.LessonSessionCreateNestedManyWithoutCourseAssignmentInput
+  competencyAssessments?: Prisma.CompetencyAssessmentCreateNestedManyWithoutCourseAssignmentInput
 }
 
 export type CourseAssignmentUncheckedCreateWithoutFinalScoresInput = {
@@ -833,6 +933,7 @@ export type CourseAssignmentUncheckedCreateWithoutFinalScoresInput = {
   schedules?: Prisma.ScheduleSlotUncheckedCreateNestedManyWithoutCourseAssignmentInput
   scores?: Prisma.ScoreUncheckedCreateNestedManyWithoutCourseAssignmentInput
   lessons?: Prisma.LessonSessionUncheckedCreateNestedManyWithoutCourseAssignmentInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUncheckedCreateNestedManyWithoutCourseAssignmentInput
 }
 
 export type CourseAssignmentCreateOrConnectWithoutFinalScoresInput = {
@@ -860,6 +961,7 @@ export type CourseAssignmentUpdateWithoutFinalScoresInput = {
   schedules?: Prisma.ScheduleSlotUpdateManyWithoutCourseAssignmentNestedInput
   scores?: Prisma.ScoreUpdateManyWithoutCourseAssignmentNestedInput
   lessons?: Prisma.LessonSessionUpdateManyWithoutCourseAssignmentNestedInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUpdateManyWithoutCourseAssignmentNestedInput
 }
 
 export type CourseAssignmentUncheckedUpdateWithoutFinalScoresInput = {
@@ -871,6 +973,7 @@ export type CourseAssignmentUncheckedUpdateWithoutFinalScoresInput = {
   schedules?: Prisma.ScheduleSlotUncheckedUpdateManyWithoutCourseAssignmentNestedInput
   scores?: Prisma.ScoreUncheckedUpdateManyWithoutCourseAssignmentNestedInput
   lessons?: Prisma.LessonSessionUncheckedUpdateManyWithoutCourseAssignmentNestedInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUncheckedUpdateManyWithoutCourseAssignmentNestedInput
 }
 
 export type CourseAssignmentCreateWithoutAssignmentsInput = {
@@ -882,6 +985,7 @@ export type CourseAssignmentCreateWithoutAssignmentsInput = {
   scores?: Prisma.ScoreCreateNestedManyWithoutCourseAssignmentInput
   finalScores?: Prisma.FinalScoreCreateNestedManyWithoutCourseAssignmentInput
   lessons?: Prisma.LessonSessionCreateNestedManyWithoutCourseAssignmentInput
+  competencyAssessments?: Prisma.CompetencyAssessmentCreateNestedManyWithoutCourseAssignmentInput
 }
 
 export type CourseAssignmentUncheckedCreateWithoutAssignmentsInput = {
@@ -893,6 +997,7 @@ export type CourseAssignmentUncheckedCreateWithoutAssignmentsInput = {
   scores?: Prisma.ScoreUncheckedCreateNestedManyWithoutCourseAssignmentInput
   finalScores?: Prisma.FinalScoreUncheckedCreateNestedManyWithoutCourseAssignmentInput
   lessons?: Prisma.LessonSessionUncheckedCreateNestedManyWithoutCourseAssignmentInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUncheckedCreateNestedManyWithoutCourseAssignmentInput
 }
 
 export type CourseAssignmentCreateOrConnectWithoutAssignmentsInput = {
@@ -920,6 +1025,7 @@ export type CourseAssignmentUpdateWithoutAssignmentsInput = {
   scores?: Prisma.ScoreUpdateManyWithoutCourseAssignmentNestedInput
   finalScores?: Prisma.FinalScoreUpdateManyWithoutCourseAssignmentNestedInput
   lessons?: Prisma.LessonSessionUpdateManyWithoutCourseAssignmentNestedInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUpdateManyWithoutCourseAssignmentNestedInput
 }
 
 export type CourseAssignmentUncheckedUpdateWithoutAssignmentsInput = {
@@ -931,6 +1037,7 @@ export type CourseAssignmentUncheckedUpdateWithoutAssignmentsInput = {
   scores?: Prisma.ScoreUncheckedUpdateManyWithoutCourseAssignmentNestedInput
   finalScores?: Prisma.FinalScoreUncheckedUpdateManyWithoutCourseAssignmentNestedInput
   lessons?: Prisma.LessonSessionUncheckedUpdateManyWithoutCourseAssignmentNestedInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUncheckedUpdateManyWithoutCourseAssignmentNestedInput
 }
 
 export type CourseAssignmentCreateWithoutLessonsInput = {
@@ -942,6 +1049,7 @@ export type CourseAssignmentCreateWithoutLessonsInput = {
   schedules?: Prisma.ScheduleSlotCreateNestedManyWithoutCourseAssignmentInput
   scores?: Prisma.ScoreCreateNestedManyWithoutCourseAssignmentInput
   finalScores?: Prisma.FinalScoreCreateNestedManyWithoutCourseAssignmentInput
+  competencyAssessments?: Prisma.CompetencyAssessmentCreateNestedManyWithoutCourseAssignmentInput
 }
 
 export type CourseAssignmentUncheckedCreateWithoutLessonsInput = {
@@ -953,6 +1061,7 @@ export type CourseAssignmentUncheckedCreateWithoutLessonsInput = {
   schedules?: Prisma.ScheduleSlotUncheckedCreateNestedManyWithoutCourseAssignmentInput
   scores?: Prisma.ScoreUncheckedCreateNestedManyWithoutCourseAssignmentInput
   finalScores?: Prisma.FinalScoreUncheckedCreateNestedManyWithoutCourseAssignmentInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUncheckedCreateNestedManyWithoutCourseAssignmentInput
 }
 
 export type CourseAssignmentCreateOrConnectWithoutLessonsInput = {
@@ -980,6 +1089,7 @@ export type CourseAssignmentUpdateWithoutLessonsInput = {
   schedules?: Prisma.ScheduleSlotUpdateManyWithoutCourseAssignmentNestedInput
   scores?: Prisma.ScoreUpdateManyWithoutCourseAssignmentNestedInput
   finalScores?: Prisma.FinalScoreUpdateManyWithoutCourseAssignmentNestedInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUpdateManyWithoutCourseAssignmentNestedInput
 }
 
 export type CourseAssignmentUncheckedUpdateWithoutLessonsInput = {
@@ -991,6 +1101,7 @@ export type CourseAssignmentUncheckedUpdateWithoutLessonsInput = {
   schedules?: Prisma.ScheduleSlotUncheckedUpdateManyWithoutCourseAssignmentNestedInput
   scores?: Prisma.ScoreUncheckedUpdateManyWithoutCourseAssignmentNestedInput
   finalScores?: Prisma.FinalScoreUncheckedUpdateManyWithoutCourseAssignmentNestedInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUncheckedUpdateManyWithoutCourseAssignmentNestedInput
 }
 
 export type CourseAssignmentCreateManySectionInput = {
@@ -1008,6 +1119,7 @@ export type CourseAssignmentUpdateWithoutSectionInput = {
   scores?: Prisma.ScoreUpdateManyWithoutCourseAssignmentNestedInput
   finalScores?: Prisma.FinalScoreUpdateManyWithoutCourseAssignmentNestedInput
   lessons?: Prisma.LessonSessionUpdateManyWithoutCourseAssignmentNestedInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUpdateManyWithoutCourseAssignmentNestedInput
 }
 
 export type CourseAssignmentUncheckedUpdateWithoutSectionInput = {
@@ -1019,6 +1131,7 @@ export type CourseAssignmentUncheckedUpdateWithoutSectionInput = {
   scores?: Prisma.ScoreUncheckedUpdateManyWithoutCourseAssignmentNestedInput
   finalScores?: Prisma.FinalScoreUncheckedUpdateManyWithoutCourseAssignmentNestedInput
   lessons?: Prisma.LessonSessionUncheckedUpdateManyWithoutCourseAssignmentNestedInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUncheckedUpdateManyWithoutCourseAssignmentNestedInput
 }
 
 export type CourseAssignmentUncheckedUpdateManyWithoutSectionInput = {
@@ -1042,6 +1155,7 @@ export type CourseAssignmentUpdateWithoutCourseInput = {
   scores?: Prisma.ScoreUpdateManyWithoutCourseAssignmentNestedInput
   finalScores?: Prisma.FinalScoreUpdateManyWithoutCourseAssignmentNestedInput
   lessons?: Prisma.LessonSessionUpdateManyWithoutCourseAssignmentNestedInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUpdateManyWithoutCourseAssignmentNestedInput
 }
 
 export type CourseAssignmentUncheckedUpdateWithoutCourseInput = {
@@ -1053,6 +1167,7 @@ export type CourseAssignmentUncheckedUpdateWithoutCourseInput = {
   scores?: Prisma.ScoreUncheckedUpdateManyWithoutCourseAssignmentNestedInput
   finalScores?: Prisma.FinalScoreUncheckedUpdateManyWithoutCourseAssignmentNestedInput
   lessons?: Prisma.LessonSessionUncheckedUpdateManyWithoutCourseAssignmentNestedInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUncheckedUpdateManyWithoutCourseAssignmentNestedInput
 }
 
 export type CourseAssignmentUncheckedUpdateManyWithoutCourseInput = {
@@ -1076,6 +1191,7 @@ export type CourseAssignmentUpdateWithoutTeacherInput = {
   scores?: Prisma.ScoreUpdateManyWithoutCourseAssignmentNestedInput
   finalScores?: Prisma.FinalScoreUpdateManyWithoutCourseAssignmentNestedInput
   lessons?: Prisma.LessonSessionUpdateManyWithoutCourseAssignmentNestedInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUpdateManyWithoutCourseAssignmentNestedInput
 }
 
 export type CourseAssignmentUncheckedUpdateWithoutTeacherInput = {
@@ -1087,6 +1203,7 @@ export type CourseAssignmentUncheckedUpdateWithoutTeacherInput = {
   scores?: Prisma.ScoreUncheckedUpdateManyWithoutCourseAssignmentNestedInput
   finalScores?: Prisma.FinalScoreUncheckedUpdateManyWithoutCourseAssignmentNestedInput
   lessons?: Prisma.LessonSessionUncheckedUpdateManyWithoutCourseAssignmentNestedInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUncheckedUpdateManyWithoutCourseAssignmentNestedInput
 }
 
 export type CourseAssignmentUncheckedUpdateManyWithoutTeacherInput = {
@@ -1106,6 +1223,7 @@ export type CourseAssignmentCountOutputType = {
   scores: number
   finalScores: number
   lessons: number
+  competencyAssessments: number
 }
 
 export type CourseAssignmentCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1114,6 +1232,7 @@ export type CourseAssignmentCountOutputTypeSelect<ExtArgs extends runtime.Types.
   scores?: boolean | CourseAssignmentCountOutputTypeCountScoresArgs
   finalScores?: boolean | CourseAssignmentCountOutputTypeCountFinalScoresArgs
   lessons?: boolean | CourseAssignmentCountOutputTypeCountLessonsArgs
+  competencyAssessments?: boolean | CourseAssignmentCountOutputTypeCountCompetencyAssessmentsArgs
 }
 
 /**
@@ -1161,6 +1280,13 @@ export type CourseAssignmentCountOutputTypeCountLessonsArgs<ExtArgs extends runt
   where?: Prisma.LessonSessionWhereInput
 }
 
+/**
+ * CourseAssignmentCountOutputType without action
+ */
+export type CourseAssignmentCountOutputTypeCountCompetencyAssessmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CompetencyAssessmentWhereInput
+}
+
 
 export type CourseAssignmentSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1175,6 +1301,7 @@ export type CourseAssignmentSelect<ExtArgs extends runtime.Types.Extensions.Inte
   scores?: boolean | Prisma.CourseAssignment$scoresArgs<ExtArgs>
   finalScores?: boolean | Prisma.CourseAssignment$finalScoresArgs<ExtArgs>
   lessons?: boolean | Prisma.CourseAssignment$lessonsArgs<ExtArgs>
+  competencyAssessments?: boolean | Prisma.CourseAssignment$competencyAssessmentsArgs<ExtArgs>
   _count?: boolean | Prisma.CourseAssignmentCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["courseAssignment"]>
 
@@ -1215,6 +1342,7 @@ export type CourseAssignmentInclude<ExtArgs extends runtime.Types.Extensions.Int
   scores?: boolean | Prisma.CourseAssignment$scoresArgs<ExtArgs>
   finalScores?: boolean | Prisma.CourseAssignment$finalScoresArgs<ExtArgs>
   lessons?: boolean | Prisma.CourseAssignment$lessonsArgs<ExtArgs>
+  competencyAssessments?: boolean | Prisma.CourseAssignment$competencyAssessmentsArgs<ExtArgs>
   _count?: boolean | Prisma.CourseAssignmentCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type CourseAssignmentIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1239,6 +1367,7 @@ export type $CourseAssignmentPayload<ExtArgs extends runtime.Types.Extensions.In
     scores: Prisma.$ScorePayload<ExtArgs>[]
     finalScores: Prisma.$FinalScorePayload<ExtArgs>[]
     lessons: Prisma.$LessonSessionPayload<ExtArgs>[]
+    competencyAssessments: Prisma.$CompetencyAssessmentPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1647,6 +1776,7 @@ export interface Prisma__CourseAssignmentClient<T, Null = never, ExtArgs extends
   scores<T extends Prisma.CourseAssignment$scoresArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CourseAssignment$scoresArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ScorePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   finalScores<T extends Prisma.CourseAssignment$finalScoresArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CourseAssignment$finalScoresArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FinalScorePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   lessons<T extends Prisma.CourseAssignment$lessonsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CourseAssignment$lessonsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LessonSessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  competencyAssessments<T extends Prisma.CourseAssignment$competencyAssessmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CourseAssignment$competencyAssessmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CompetencyAssessmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2196,6 +2326,30 @@ export type CourseAssignment$lessonsArgs<ExtArgs extends runtime.Types.Extension
   take?: number
   skip?: number
   distinct?: Prisma.LessonSessionScalarFieldEnum | Prisma.LessonSessionScalarFieldEnum[]
+}
+
+/**
+ * CourseAssignment.competencyAssessments
+ */
+export type CourseAssignment$competencyAssessmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CompetencyAssessment
+   */
+  select?: Prisma.CompetencyAssessmentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CompetencyAssessment
+   */
+  omit?: Prisma.CompetencyAssessmentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CompetencyAssessmentInclude<ExtArgs> | null
+  where?: Prisma.CompetencyAssessmentWhereInput
+  orderBy?: Prisma.CompetencyAssessmentOrderByWithRelationInput | Prisma.CompetencyAssessmentOrderByWithRelationInput[]
+  cursor?: Prisma.CompetencyAssessmentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CompetencyAssessmentScalarFieldEnum | Prisma.CompetencyAssessmentScalarFieldEnum[]
 }
 
 /**

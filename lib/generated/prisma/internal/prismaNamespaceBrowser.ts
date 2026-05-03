@@ -60,6 +60,7 @@ export const ModelName = {
   Section: 'Section',
   Course: 'Course',
   Competency: 'Competency',
+  CompetencyAssessment: 'CompetencyAssessment',
   Capability: 'Capability',
   PerformanceIndicator: 'PerformanceIndicator',
   CourseAssignment: 'CourseAssignment',
@@ -233,6 +234,23 @@ export const CompetencyScalarFieldEnum = {
 } as const
 
 export type CompetencyScalarFieldEnum = (typeof CompetencyScalarFieldEnum)[keyof typeof CompetencyScalarFieldEnum]
+
+
+export const CompetencyAssessmentScalarFieldEnum = {
+  id: 'id',
+  studentId: 'studentId',
+  courseAssignmentId: 'courseAssignmentId',
+  competencyId: 'competencyId',
+  periodId: 'periodId',
+  m1: 'm1',
+  m2: 'm2',
+  m3: 'm3',
+  letterGrade: 'letterGrade',
+  observation: 'observation',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CompetencyAssessmentScalarFieldEnum = (typeof CompetencyAssessmentScalarFieldEnum)[keyof typeof CompetencyAssessmentScalarFieldEnum]
 
 
 export const CapabilityScalarFieldEnum = {

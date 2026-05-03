@@ -87,16 +87,17 @@ model SchoolYear {
 
 /// Bimestre / Trimestre
 model Period {
-  id             String          @id @default(cuid())
-  schoolYearId   String
-  name           String
-  ordinal        Int
-  startDate      DateTime
-  endDate        DateTime
-  schoolYear     SchoolYear      @relation(fields: [schoolYearId], references: [id], onDelete: Cascade)
-  scores         Score[]
-  finalScores    FinalScore[]
-  gradingWindows GradingWindow[]
+  id              String                 @id @default(cuid())
+  schoolYearId    String
+  name            String
+  ordinal         Int
+  startDate       DateTime
+  endDate         DateTime
+  schoolYear      SchoolYear             @relation(fields: [schoolYearId], references: [id], onDelete: Cascade)
+  scores          Score[]
+  finalScores     FinalScore[]
+  gradingWindows  GradingWindow[]
+  competencyAssessments CompetencyAssessment[]
 
   @@index([schoolYearId])
 }
@@ -188,12 +189,37 @@ model Course {
 }
 
 model Competency {
-  id           String       @id @default(cuid())
+  id           String                 @id @default(cuid())
   courseId     String
   code         String
   name         String
-  course       Course       @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  course       Course                 @relation(fields: [courseId], references: [id], onDelete: Cascade)
   capabilities Capability[]
+  assessments  CompetencyAssessment[]
+}
+
+/// Evaluación MINEDU por competencia, por trimestre.
+/// 3 sub-evaluaciones mensuales (m1, m2, m3) más una conclusión trimestral.
+/// letterGrade puede ser AD, A, B, C.
+model CompetencyAssessment {
+  id                 String           @id @default(cuid())
+  studentId          String
+  courseAssignmentId String
+  competencyId       String
+  periodId           String
+  m1                 String?          // letra del mes 1 del trimestre
+  m2                 String?          // letra del mes 2
+  m3                 String?          // letra del mes 3
+  letterGrade        String?          // calificación trimestral (auto o manual)
+  observation        String?
+  updatedAt          DateTime         @updatedAt
+  student            Student          @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  courseAssignment   CourseAssignment @relation(fields: [courseAssignmentId], references: [id], onDelete: Cascade)
+  competency         Competency       @relation(fields: [competencyId], references: [id], onDelete: Cascade)
+  period             Period           @relation(fields: [periodId], references: [id], onDelete: Cascade)
+
+  @@unique([studentId, competencyId, periodId])
+  @@index([courseAssignmentId, periodId])
 }
 
 model Capability {
@@ -216,18 +242,19 @@ model PerformanceIndicator {
 
 /// Asignación docente-curso-sección
 model CourseAssignment {
-  id          String          @id @default(cuid())
-  courseId    String
-  sectionId   String
-  teacherId   String
-  course      Course          @relation(fields: [courseId], references: [id], onDelete: Cascade)
-  section     Section         @relation(fields: [sectionId], references: [id], onDelete: Cascade)
-  teacher     Teacher         @relation(fields: [teacherId], references: [id], onDelete: Cascade)
-  assignments Assignment[]
-  schedules   ScheduleSlot[]
-  scores      Score[]
-  finalScores FinalScore[]
-  lessons     LessonSession[]
+  id                    String                 @id @default(cuid())
+  courseId              String
+  sectionId             String
+  teacherId             String
+  course                Course                 @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  section               Section                @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+  teacher               Teacher                @relation(fields: [teacherId], references: [id], onDelete: Cascade)
+  assignments           Assignment[]
+  schedules             ScheduleSlot[]
+  scores                Score[]
+  finalScores           FinalScore[]
+  lessons               LessonSession[]
+  competencyAssessments CompetencyAssessment[]
 
   @@unique([courseId, sectionId, teacherId])
 }
@@ -270,6 +297,7 @@ model Student {
   lifeRecord       StudentLifeEntry[]
   payments         Payment[]
   invoices         Invoice[]
+  competencyAssessments CompetencyAssessment[]
 }
 
 model Enrollment {

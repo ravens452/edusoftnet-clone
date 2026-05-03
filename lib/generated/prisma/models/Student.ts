@@ -221,6 +221,7 @@ export type StudentWhereInput = {
   lifeRecord?: Prisma.StudentLifeEntryListRelationFilter
   payments?: Prisma.PaymentListRelationFilter
   invoices?: Prisma.InvoiceListRelationFilter
+  competencyAssessments?: Prisma.CompetencyAssessmentListRelationFilter
 }
 
 export type StudentOrderByWithRelationInput = {
@@ -247,6 +248,7 @@ export type StudentOrderByWithRelationInput = {
   lifeRecord?: Prisma.StudentLifeEntryOrderByRelationAggregateInput
   payments?: Prisma.PaymentOrderByRelationAggregateInput
   invoices?: Prisma.InvoiceOrderByRelationAggregateInput
+  competencyAssessments?: Prisma.CompetencyAssessmentOrderByRelationAggregateInput
 }
 
 export type StudentWhereUniqueInput = Prisma.AtLeast<{
@@ -276,6 +278,7 @@ export type StudentWhereUniqueInput = Prisma.AtLeast<{
   lifeRecord?: Prisma.StudentLifeEntryListRelationFilter
   payments?: Prisma.PaymentListRelationFilter
   invoices?: Prisma.InvoiceListRelationFilter
+  competencyAssessments?: Prisma.CompetencyAssessmentListRelationFilter
 }, "id" | "userId" | "studentCode">
 
 export type StudentOrderByWithAggregationInput = {
@@ -329,6 +332,7 @@ export type StudentCreateInput = {
   lifeRecord?: Prisma.StudentLifeEntryCreateNestedManyWithoutStudentInput
   payments?: Prisma.PaymentCreateNestedManyWithoutStudentInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutStudentInput
+  competencyAssessments?: Prisma.CompetencyAssessmentCreateNestedManyWithoutStudentInput
 }
 
 export type StudentUncheckedCreateInput = {
@@ -354,6 +358,7 @@ export type StudentUncheckedCreateInput = {
   lifeRecord?: Prisma.StudentLifeEntryUncheckedCreateNestedManyWithoutStudentInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutStudentInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutStudentInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUncheckedCreateNestedManyWithoutStudentInput
 }
 
 export type StudentUpdateInput = {
@@ -379,6 +384,7 @@ export type StudentUpdateInput = {
   lifeRecord?: Prisma.StudentLifeEntryUpdateManyWithoutStudentNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutStudentNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutStudentNestedInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentUncheckedUpdateInput = {
@@ -404,6 +410,7 @@ export type StudentUncheckedUpdateInput = {
   lifeRecord?: Prisma.StudentLifeEntryUncheckedUpdateManyWithoutStudentNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutStudentNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutStudentNestedInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUncheckedUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentCreateManyInput = {
@@ -443,6 +450,11 @@ export type StudentNullableScalarRelationFilter = {
   isNot?: Prisma.StudentWhereInput | null
 }
 
+export type StudentScalarRelationFilter = {
+  is?: Prisma.StudentWhereInput
+  isNot?: Prisma.StudentWhereInput
+}
+
 export type StudentCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
@@ -476,11 +488,6 @@ export type StudentMinOrderByAggregateInput = {
   emergencyContact?: Prisma.SortOrder
 }
 
-export type StudentScalarRelationFilter = {
-  is?: Prisma.StudentWhereInput
-  isNot?: Prisma.StudentWhereInput
-}
-
 export type StudentCreateNestedOneWithoutUserInput = {
   create?: Prisma.XOR<Prisma.StudentCreateWithoutUserInput, Prisma.StudentUncheckedCreateWithoutUserInput>
   connectOrCreate?: Prisma.StudentCreateOrConnectWithoutUserInput
@@ -511,6 +518,20 @@ export type StudentUncheckedUpdateOneWithoutUserNestedInput = {
   delete?: Prisma.StudentWhereInput | boolean
   connect?: Prisma.StudentWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.StudentUpdateToOneWithWhereWithoutUserInput, Prisma.StudentUpdateWithoutUserInput>, Prisma.StudentUncheckedUpdateWithoutUserInput>
+}
+
+export type StudentCreateNestedOneWithoutCompetencyAssessmentsInput = {
+  create?: Prisma.XOR<Prisma.StudentCreateWithoutCompetencyAssessmentsInput, Prisma.StudentUncheckedCreateWithoutCompetencyAssessmentsInput>
+  connectOrCreate?: Prisma.StudentCreateOrConnectWithoutCompetencyAssessmentsInput
+  connect?: Prisma.StudentWhereUniqueInput
+}
+
+export type StudentUpdateOneRequiredWithoutCompetencyAssessmentsNestedInput = {
+  create?: Prisma.XOR<Prisma.StudentCreateWithoutCompetencyAssessmentsInput, Prisma.StudentUncheckedCreateWithoutCompetencyAssessmentsInput>
+  connectOrCreate?: Prisma.StudentCreateOrConnectWithoutCompetencyAssessmentsInput
+  upsert?: Prisma.StudentUpsertWithoutCompetencyAssessmentsInput
+  connect?: Prisma.StudentWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.StudentUpdateToOneWithWhereWithoutCompetencyAssessmentsInput, Prisma.StudentUpdateWithoutCompetencyAssessmentsInput>, Prisma.StudentUncheckedUpdateWithoutCompetencyAssessmentsInput>
 }
 
 export type StudentCreateNestedOneWithoutEnrollmentsInput = {
@@ -731,6 +752,7 @@ export type StudentCreateWithoutUserInput = {
   lifeRecord?: Prisma.StudentLifeEntryCreateNestedManyWithoutStudentInput
   payments?: Prisma.PaymentCreateNestedManyWithoutStudentInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutStudentInput
+  competencyAssessments?: Prisma.CompetencyAssessmentCreateNestedManyWithoutStudentInput
 }
 
 export type StudentUncheckedCreateWithoutUserInput = {
@@ -755,6 +777,7 @@ export type StudentUncheckedCreateWithoutUserInput = {
   lifeRecord?: Prisma.StudentLifeEntryUncheckedCreateNestedManyWithoutStudentInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutStudentInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutStudentInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUncheckedCreateNestedManyWithoutStudentInput
 }
 
 export type StudentCreateOrConnectWithoutUserInput = {
@@ -795,10 +818,128 @@ export type StudentUpdateWithoutUserInput = {
   lifeRecord?: Prisma.StudentLifeEntryUpdateManyWithoutStudentNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutStudentNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutStudentNestedInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  studentCode?: Prisma.StringFieldUpdateOperationsInput | string
+  birthDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bloodType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutStudentNestedInput
+  parents?: Prisma.ParentStudentUncheckedUpdateManyWithoutStudentNestedInput
+  scores?: Prisma.ScoreUncheckedUpdateManyWithoutStudentNestedInput
+  finalScores?: Prisma.FinalScoreUncheckedUpdateManyWithoutStudentNestedInput
+  attendance?: Prisma.AttendanceRecordUncheckedUpdateManyWithoutStudentNestedInput
+  submissions?: Prisma.SubmissionUncheckedUpdateManyWithoutStudentNestedInput
+  workshops?: Prisma.WorkshopEnrollmentUncheckedUpdateManyWithoutStudentNestedInput
+  readings?: Prisma.ReadingProgressUncheckedUpdateManyWithoutStudentNestedInput
+  psychCases?: Prisma.PsychologyCaseUncheckedUpdateManyWithoutStudentNestedInput
+  healthRecords?: Prisma.HealthRecordUncheckedUpdateManyWithoutStudentNestedInput
+  vaccinations?: Prisma.VaccinationUncheckedUpdateManyWithoutStudentNestedInput
+  lifeRecord?: Prisma.StudentLifeEntryUncheckedUpdateManyWithoutStudentNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutStudentNestedInput
+  invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutStudentNestedInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUncheckedUpdateManyWithoutStudentNestedInput
+}
+
+export type StudentCreateWithoutCompetencyAssessmentsInput = {
+  id?: string
+  studentCode: string
+  birthDate: Date | string
+  gender?: string | null
+  address?: string | null
+  bloodType?: string | null
+  emergencyContact?: string | null
+  user: Prisma.UserCreateNestedOneWithoutStudentInput
+  enrollments?: Prisma.EnrollmentCreateNestedManyWithoutStudentInput
+  parents?: Prisma.ParentStudentCreateNestedManyWithoutStudentInput
+  scores?: Prisma.ScoreCreateNestedManyWithoutStudentInput
+  finalScores?: Prisma.FinalScoreCreateNestedManyWithoutStudentInput
+  attendance?: Prisma.AttendanceRecordCreateNestedManyWithoutStudentInput
+  submissions?: Prisma.SubmissionCreateNestedManyWithoutStudentInput
+  workshops?: Prisma.WorkshopEnrollmentCreateNestedManyWithoutStudentInput
+  readings?: Prisma.ReadingProgressCreateNestedManyWithoutStudentInput
+  psychCases?: Prisma.PsychologyCaseCreateNestedManyWithoutStudentInput
+  healthRecords?: Prisma.HealthRecordCreateNestedManyWithoutStudentInput
+  vaccinations?: Prisma.VaccinationCreateNestedManyWithoutStudentInput
+  lifeRecord?: Prisma.StudentLifeEntryCreateNestedManyWithoutStudentInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutStudentInput
+  invoices?: Prisma.InvoiceCreateNestedManyWithoutStudentInput
+}
+
+export type StudentUncheckedCreateWithoutCompetencyAssessmentsInput = {
+  id?: string
+  userId: string
+  studentCode: string
+  birthDate: Date | string
+  gender?: string | null
+  address?: string | null
+  bloodType?: string | null
+  emergencyContact?: string | null
+  enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutStudentInput
+  parents?: Prisma.ParentStudentUncheckedCreateNestedManyWithoutStudentInput
+  scores?: Prisma.ScoreUncheckedCreateNestedManyWithoutStudentInput
+  finalScores?: Prisma.FinalScoreUncheckedCreateNestedManyWithoutStudentInput
+  attendance?: Prisma.AttendanceRecordUncheckedCreateNestedManyWithoutStudentInput
+  submissions?: Prisma.SubmissionUncheckedCreateNestedManyWithoutStudentInput
+  workshops?: Prisma.WorkshopEnrollmentUncheckedCreateNestedManyWithoutStudentInput
+  readings?: Prisma.ReadingProgressUncheckedCreateNestedManyWithoutStudentInput
+  psychCases?: Prisma.PsychologyCaseUncheckedCreateNestedManyWithoutStudentInput
+  healthRecords?: Prisma.HealthRecordUncheckedCreateNestedManyWithoutStudentInput
+  vaccinations?: Prisma.VaccinationUncheckedCreateNestedManyWithoutStudentInput
+  lifeRecord?: Prisma.StudentLifeEntryUncheckedCreateNestedManyWithoutStudentInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutStudentInput
+  invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutStudentInput
+}
+
+export type StudentCreateOrConnectWithoutCompetencyAssessmentsInput = {
+  where: Prisma.StudentWhereUniqueInput
+  create: Prisma.XOR<Prisma.StudentCreateWithoutCompetencyAssessmentsInput, Prisma.StudentUncheckedCreateWithoutCompetencyAssessmentsInput>
+}
+
+export type StudentUpsertWithoutCompetencyAssessmentsInput = {
+  update: Prisma.XOR<Prisma.StudentUpdateWithoutCompetencyAssessmentsInput, Prisma.StudentUncheckedUpdateWithoutCompetencyAssessmentsInput>
+  create: Prisma.XOR<Prisma.StudentCreateWithoutCompetencyAssessmentsInput, Prisma.StudentUncheckedCreateWithoutCompetencyAssessmentsInput>
+  where?: Prisma.StudentWhereInput
+}
+
+export type StudentUpdateToOneWithWhereWithoutCompetencyAssessmentsInput = {
+  where?: Prisma.StudentWhereInput
+  data: Prisma.XOR<Prisma.StudentUpdateWithoutCompetencyAssessmentsInput, Prisma.StudentUncheckedUpdateWithoutCompetencyAssessmentsInput>
+}
+
+export type StudentUpdateWithoutCompetencyAssessmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  studentCode?: Prisma.StringFieldUpdateOperationsInput | string
+  birthDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bloodType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emergencyContact?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  user?: Prisma.UserUpdateOneRequiredWithoutStudentNestedInput
+  enrollments?: Prisma.EnrollmentUpdateManyWithoutStudentNestedInput
+  parents?: Prisma.ParentStudentUpdateManyWithoutStudentNestedInput
+  scores?: Prisma.ScoreUpdateManyWithoutStudentNestedInput
+  finalScores?: Prisma.FinalScoreUpdateManyWithoutStudentNestedInput
+  attendance?: Prisma.AttendanceRecordUpdateManyWithoutStudentNestedInput
+  submissions?: Prisma.SubmissionUpdateManyWithoutStudentNestedInput
+  workshops?: Prisma.WorkshopEnrollmentUpdateManyWithoutStudentNestedInput
+  readings?: Prisma.ReadingProgressUpdateManyWithoutStudentNestedInput
+  psychCases?: Prisma.PsychologyCaseUpdateManyWithoutStudentNestedInput
+  healthRecords?: Prisma.HealthRecordUpdateManyWithoutStudentNestedInput
+  vaccinations?: Prisma.VaccinationUpdateManyWithoutStudentNestedInput
+  lifeRecord?: Prisma.StudentLifeEntryUpdateManyWithoutStudentNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutStudentNestedInput
+  invoices?: Prisma.InvoiceUpdateManyWithoutStudentNestedInput
+}
+
+export type StudentUncheckedUpdateWithoutCompetencyAssessmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
   studentCode?: Prisma.StringFieldUpdateOperationsInput | string
   birthDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gender?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -843,6 +984,7 @@ export type StudentCreateWithoutEnrollmentsInput = {
   lifeRecord?: Prisma.StudentLifeEntryCreateNestedManyWithoutStudentInput
   payments?: Prisma.PaymentCreateNestedManyWithoutStudentInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutStudentInput
+  competencyAssessments?: Prisma.CompetencyAssessmentCreateNestedManyWithoutStudentInput
 }
 
 export type StudentUncheckedCreateWithoutEnrollmentsInput = {
@@ -867,6 +1009,7 @@ export type StudentUncheckedCreateWithoutEnrollmentsInput = {
   lifeRecord?: Prisma.StudentLifeEntryUncheckedCreateNestedManyWithoutStudentInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutStudentInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutStudentInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUncheckedCreateNestedManyWithoutStudentInput
 }
 
 export type StudentCreateOrConnectWithoutEnrollmentsInput = {
@@ -907,6 +1050,7 @@ export type StudentUpdateWithoutEnrollmentsInput = {
   lifeRecord?: Prisma.StudentLifeEntryUpdateManyWithoutStudentNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutStudentNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutStudentNestedInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentUncheckedUpdateWithoutEnrollmentsInput = {
@@ -931,6 +1075,7 @@ export type StudentUncheckedUpdateWithoutEnrollmentsInput = {
   lifeRecord?: Prisma.StudentLifeEntryUncheckedUpdateManyWithoutStudentNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutStudentNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutStudentNestedInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUncheckedUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentCreateWithoutParentsInput = {
@@ -955,6 +1100,7 @@ export type StudentCreateWithoutParentsInput = {
   lifeRecord?: Prisma.StudentLifeEntryCreateNestedManyWithoutStudentInput
   payments?: Prisma.PaymentCreateNestedManyWithoutStudentInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutStudentInput
+  competencyAssessments?: Prisma.CompetencyAssessmentCreateNestedManyWithoutStudentInput
 }
 
 export type StudentUncheckedCreateWithoutParentsInput = {
@@ -979,6 +1125,7 @@ export type StudentUncheckedCreateWithoutParentsInput = {
   lifeRecord?: Prisma.StudentLifeEntryUncheckedCreateNestedManyWithoutStudentInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutStudentInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutStudentInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUncheckedCreateNestedManyWithoutStudentInput
 }
 
 export type StudentCreateOrConnectWithoutParentsInput = {
@@ -1019,6 +1166,7 @@ export type StudentUpdateWithoutParentsInput = {
   lifeRecord?: Prisma.StudentLifeEntryUpdateManyWithoutStudentNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutStudentNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutStudentNestedInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentUncheckedUpdateWithoutParentsInput = {
@@ -1043,6 +1191,7 @@ export type StudentUncheckedUpdateWithoutParentsInput = {
   lifeRecord?: Prisma.StudentLifeEntryUncheckedUpdateManyWithoutStudentNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutStudentNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutStudentNestedInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUncheckedUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentCreateWithoutScoresInput = {
@@ -1067,6 +1216,7 @@ export type StudentCreateWithoutScoresInput = {
   lifeRecord?: Prisma.StudentLifeEntryCreateNestedManyWithoutStudentInput
   payments?: Prisma.PaymentCreateNestedManyWithoutStudentInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutStudentInput
+  competencyAssessments?: Prisma.CompetencyAssessmentCreateNestedManyWithoutStudentInput
 }
 
 export type StudentUncheckedCreateWithoutScoresInput = {
@@ -1091,6 +1241,7 @@ export type StudentUncheckedCreateWithoutScoresInput = {
   lifeRecord?: Prisma.StudentLifeEntryUncheckedCreateNestedManyWithoutStudentInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutStudentInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutStudentInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUncheckedCreateNestedManyWithoutStudentInput
 }
 
 export type StudentCreateOrConnectWithoutScoresInput = {
@@ -1131,6 +1282,7 @@ export type StudentUpdateWithoutScoresInput = {
   lifeRecord?: Prisma.StudentLifeEntryUpdateManyWithoutStudentNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutStudentNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutStudentNestedInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentUncheckedUpdateWithoutScoresInput = {
@@ -1155,6 +1307,7 @@ export type StudentUncheckedUpdateWithoutScoresInput = {
   lifeRecord?: Prisma.StudentLifeEntryUncheckedUpdateManyWithoutStudentNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutStudentNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutStudentNestedInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUncheckedUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentCreateWithoutFinalScoresInput = {
@@ -1179,6 +1332,7 @@ export type StudentCreateWithoutFinalScoresInput = {
   lifeRecord?: Prisma.StudentLifeEntryCreateNestedManyWithoutStudentInput
   payments?: Prisma.PaymentCreateNestedManyWithoutStudentInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutStudentInput
+  competencyAssessments?: Prisma.CompetencyAssessmentCreateNestedManyWithoutStudentInput
 }
 
 export type StudentUncheckedCreateWithoutFinalScoresInput = {
@@ -1203,6 +1357,7 @@ export type StudentUncheckedCreateWithoutFinalScoresInput = {
   lifeRecord?: Prisma.StudentLifeEntryUncheckedCreateNestedManyWithoutStudentInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutStudentInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutStudentInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUncheckedCreateNestedManyWithoutStudentInput
 }
 
 export type StudentCreateOrConnectWithoutFinalScoresInput = {
@@ -1243,6 +1398,7 @@ export type StudentUpdateWithoutFinalScoresInput = {
   lifeRecord?: Prisma.StudentLifeEntryUpdateManyWithoutStudentNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutStudentNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutStudentNestedInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentUncheckedUpdateWithoutFinalScoresInput = {
@@ -1267,6 +1423,7 @@ export type StudentUncheckedUpdateWithoutFinalScoresInput = {
   lifeRecord?: Prisma.StudentLifeEntryUncheckedUpdateManyWithoutStudentNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutStudentNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutStudentNestedInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUncheckedUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentCreateWithoutAttendanceInput = {
@@ -1291,6 +1448,7 @@ export type StudentCreateWithoutAttendanceInput = {
   lifeRecord?: Prisma.StudentLifeEntryCreateNestedManyWithoutStudentInput
   payments?: Prisma.PaymentCreateNestedManyWithoutStudentInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutStudentInput
+  competencyAssessments?: Prisma.CompetencyAssessmentCreateNestedManyWithoutStudentInput
 }
 
 export type StudentUncheckedCreateWithoutAttendanceInput = {
@@ -1315,6 +1473,7 @@ export type StudentUncheckedCreateWithoutAttendanceInput = {
   lifeRecord?: Prisma.StudentLifeEntryUncheckedCreateNestedManyWithoutStudentInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutStudentInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutStudentInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUncheckedCreateNestedManyWithoutStudentInput
 }
 
 export type StudentCreateOrConnectWithoutAttendanceInput = {
@@ -1355,6 +1514,7 @@ export type StudentUpdateWithoutAttendanceInput = {
   lifeRecord?: Prisma.StudentLifeEntryUpdateManyWithoutStudentNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutStudentNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutStudentNestedInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentUncheckedUpdateWithoutAttendanceInput = {
@@ -1379,6 +1539,7 @@ export type StudentUncheckedUpdateWithoutAttendanceInput = {
   lifeRecord?: Prisma.StudentLifeEntryUncheckedUpdateManyWithoutStudentNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutStudentNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutStudentNestedInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUncheckedUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentCreateWithoutSubmissionsInput = {
@@ -1403,6 +1564,7 @@ export type StudentCreateWithoutSubmissionsInput = {
   lifeRecord?: Prisma.StudentLifeEntryCreateNestedManyWithoutStudentInput
   payments?: Prisma.PaymentCreateNestedManyWithoutStudentInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutStudentInput
+  competencyAssessments?: Prisma.CompetencyAssessmentCreateNestedManyWithoutStudentInput
 }
 
 export type StudentUncheckedCreateWithoutSubmissionsInput = {
@@ -1427,6 +1589,7 @@ export type StudentUncheckedCreateWithoutSubmissionsInput = {
   lifeRecord?: Prisma.StudentLifeEntryUncheckedCreateNestedManyWithoutStudentInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutStudentInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutStudentInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUncheckedCreateNestedManyWithoutStudentInput
 }
 
 export type StudentCreateOrConnectWithoutSubmissionsInput = {
@@ -1467,6 +1630,7 @@ export type StudentUpdateWithoutSubmissionsInput = {
   lifeRecord?: Prisma.StudentLifeEntryUpdateManyWithoutStudentNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutStudentNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutStudentNestedInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentUncheckedUpdateWithoutSubmissionsInput = {
@@ -1491,6 +1655,7 @@ export type StudentUncheckedUpdateWithoutSubmissionsInput = {
   lifeRecord?: Prisma.StudentLifeEntryUncheckedUpdateManyWithoutStudentNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutStudentNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutStudentNestedInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUncheckedUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentCreateWithoutInvoicesInput = {
@@ -1515,6 +1680,7 @@ export type StudentCreateWithoutInvoicesInput = {
   vaccinations?: Prisma.VaccinationCreateNestedManyWithoutStudentInput
   lifeRecord?: Prisma.StudentLifeEntryCreateNestedManyWithoutStudentInput
   payments?: Prisma.PaymentCreateNestedManyWithoutStudentInput
+  competencyAssessments?: Prisma.CompetencyAssessmentCreateNestedManyWithoutStudentInput
 }
 
 export type StudentUncheckedCreateWithoutInvoicesInput = {
@@ -1539,6 +1705,7 @@ export type StudentUncheckedCreateWithoutInvoicesInput = {
   vaccinations?: Prisma.VaccinationUncheckedCreateNestedManyWithoutStudentInput
   lifeRecord?: Prisma.StudentLifeEntryUncheckedCreateNestedManyWithoutStudentInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutStudentInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUncheckedCreateNestedManyWithoutStudentInput
 }
 
 export type StudentCreateOrConnectWithoutInvoicesInput = {
@@ -1579,6 +1746,7 @@ export type StudentUpdateWithoutInvoicesInput = {
   vaccinations?: Prisma.VaccinationUpdateManyWithoutStudentNestedInput
   lifeRecord?: Prisma.StudentLifeEntryUpdateManyWithoutStudentNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutStudentNestedInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentUncheckedUpdateWithoutInvoicesInput = {
@@ -1603,6 +1771,7 @@ export type StudentUncheckedUpdateWithoutInvoicesInput = {
   vaccinations?: Prisma.VaccinationUncheckedUpdateManyWithoutStudentNestedInput
   lifeRecord?: Prisma.StudentLifeEntryUncheckedUpdateManyWithoutStudentNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutStudentNestedInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUncheckedUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentCreateWithoutPaymentsInput = {
@@ -1627,6 +1796,7 @@ export type StudentCreateWithoutPaymentsInput = {
   vaccinations?: Prisma.VaccinationCreateNestedManyWithoutStudentInput
   lifeRecord?: Prisma.StudentLifeEntryCreateNestedManyWithoutStudentInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutStudentInput
+  competencyAssessments?: Prisma.CompetencyAssessmentCreateNestedManyWithoutStudentInput
 }
 
 export type StudentUncheckedCreateWithoutPaymentsInput = {
@@ -1651,6 +1821,7 @@ export type StudentUncheckedCreateWithoutPaymentsInput = {
   vaccinations?: Prisma.VaccinationUncheckedCreateNestedManyWithoutStudentInput
   lifeRecord?: Prisma.StudentLifeEntryUncheckedCreateNestedManyWithoutStudentInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutStudentInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUncheckedCreateNestedManyWithoutStudentInput
 }
 
 export type StudentCreateOrConnectWithoutPaymentsInput = {
@@ -1691,6 +1862,7 @@ export type StudentUpdateWithoutPaymentsInput = {
   vaccinations?: Prisma.VaccinationUpdateManyWithoutStudentNestedInput
   lifeRecord?: Prisma.StudentLifeEntryUpdateManyWithoutStudentNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutStudentNestedInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentUncheckedUpdateWithoutPaymentsInput = {
@@ -1715,6 +1887,7 @@ export type StudentUncheckedUpdateWithoutPaymentsInput = {
   vaccinations?: Prisma.VaccinationUncheckedUpdateManyWithoutStudentNestedInput
   lifeRecord?: Prisma.StudentLifeEntryUncheckedUpdateManyWithoutStudentNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutStudentNestedInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUncheckedUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentCreateWithoutReadingsInput = {
@@ -1739,6 +1912,7 @@ export type StudentCreateWithoutReadingsInput = {
   lifeRecord?: Prisma.StudentLifeEntryCreateNestedManyWithoutStudentInput
   payments?: Prisma.PaymentCreateNestedManyWithoutStudentInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutStudentInput
+  competencyAssessments?: Prisma.CompetencyAssessmentCreateNestedManyWithoutStudentInput
 }
 
 export type StudentUncheckedCreateWithoutReadingsInput = {
@@ -1763,6 +1937,7 @@ export type StudentUncheckedCreateWithoutReadingsInput = {
   lifeRecord?: Prisma.StudentLifeEntryUncheckedCreateNestedManyWithoutStudentInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutStudentInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutStudentInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUncheckedCreateNestedManyWithoutStudentInput
 }
 
 export type StudentCreateOrConnectWithoutReadingsInput = {
@@ -1803,6 +1978,7 @@ export type StudentUpdateWithoutReadingsInput = {
   lifeRecord?: Prisma.StudentLifeEntryUpdateManyWithoutStudentNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutStudentNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutStudentNestedInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentUncheckedUpdateWithoutReadingsInput = {
@@ -1827,6 +2003,7 @@ export type StudentUncheckedUpdateWithoutReadingsInput = {
   lifeRecord?: Prisma.StudentLifeEntryUncheckedUpdateManyWithoutStudentNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutStudentNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutStudentNestedInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUncheckedUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentCreateWithoutPsychCasesInput = {
@@ -1851,6 +2028,7 @@ export type StudentCreateWithoutPsychCasesInput = {
   lifeRecord?: Prisma.StudentLifeEntryCreateNestedManyWithoutStudentInput
   payments?: Prisma.PaymentCreateNestedManyWithoutStudentInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutStudentInput
+  competencyAssessments?: Prisma.CompetencyAssessmentCreateNestedManyWithoutStudentInput
 }
 
 export type StudentUncheckedCreateWithoutPsychCasesInput = {
@@ -1875,6 +2053,7 @@ export type StudentUncheckedCreateWithoutPsychCasesInput = {
   lifeRecord?: Prisma.StudentLifeEntryUncheckedCreateNestedManyWithoutStudentInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutStudentInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutStudentInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUncheckedCreateNestedManyWithoutStudentInput
 }
 
 export type StudentCreateOrConnectWithoutPsychCasesInput = {
@@ -1915,6 +2094,7 @@ export type StudentUpdateWithoutPsychCasesInput = {
   lifeRecord?: Prisma.StudentLifeEntryUpdateManyWithoutStudentNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutStudentNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutStudentNestedInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentUncheckedUpdateWithoutPsychCasesInput = {
@@ -1939,6 +2119,7 @@ export type StudentUncheckedUpdateWithoutPsychCasesInput = {
   lifeRecord?: Prisma.StudentLifeEntryUncheckedUpdateManyWithoutStudentNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutStudentNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutStudentNestedInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUncheckedUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentCreateWithoutHealthRecordsInput = {
@@ -1963,6 +2144,7 @@ export type StudentCreateWithoutHealthRecordsInput = {
   lifeRecord?: Prisma.StudentLifeEntryCreateNestedManyWithoutStudentInput
   payments?: Prisma.PaymentCreateNestedManyWithoutStudentInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutStudentInput
+  competencyAssessments?: Prisma.CompetencyAssessmentCreateNestedManyWithoutStudentInput
 }
 
 export type StudentUncheckedCreateWithoutHealthRecordsInput = {
@@ -1987,6 +2169,7 @@ export type StudentUncheckedCreateWithoutHealthRecordsInput = {
   lifeRecord?: Prisma.StudentLifeEntryUncheckedCreateNestedManyWithoutStudentInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutStudentInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutStudentInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUncheckedCreateNestedManyWithoutStudentInput
 }
 
 export type StudentCreateOrConnectWithoutHealthRecordsInput = {
@@ -2027,6 +2210,7 @@ export type StudentUpdateWithoutHealthRecordsInput = {
   lifeRecord?: Prisma.StudentLifeEntryUpdateManyWithoutStudentNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutStudentNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutStudentNestedInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentUncheckedUpdateWithoutHealthRecordsInput = {
@@ -2051,6 +2235,7 @@ export type StudentUncheckedUpdateWithoutHealthRecordsInput = {
   lifeRecord?: Prisma.StudentLifeEntryUncheckedUpdateManyWithoutStudentNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutStudentNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutStudentNestedInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUncheckedUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentCreateWithoutVaccinationsInput = {
@@ -2075,6 +2260,7 @@ export type StudentCreateWithoutVaccinationsInput = {
   lifeRecord?: Prisma.StudentLifeEntryCreateNestedManyWithoutStudentInput
   payments?: Prisma.PaymentCreateNestedManyWithoutStudentInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutStudentInput
+  competencyAssessments?: Prisma.CompetencyAssessmentCreateNestedManyWithoutStudentInput
 }
 
 export type StudentUncheckedCreateWithoutVaccinationsInput = {
@@ -2099,6 +2285,7 @@ export type StudentUncheckedCreateWithoutVaccinationsInput = {
   lifeRecord?: Prisma.StudentLifeEntryUncheckedCreateNestedManyWithoutStudentInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutStudentInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutStudentInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUncheckedCreateNestedManyWithoutStudentInput
 }
 
 export type StudentCreateOrConnectWithoutVaccinationsInput = {
@@ -2139,6 +2326,7 @@ export type StudentUpdateWithoutVaccinationsInput = {
   lifeRecord?: Prisma.StudentLifeEntryUpdateManyWithoutStudentNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutStudentNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutStudentNestedInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentUncheckedUpdateWithoutVaccinationsInput = {
@@ -2163,6 +2351,7 @@ export type StudentUncheckedUpdateWithoutVaccinationsInput = {
   lifeRecord?: Prisma.StudentLifeEntryUncheckedUpdateManyWithoutStudentNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutStudentNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutStudentNestedInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUncheckedUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentCreateWithoutLifeRecordInput = {
@@ -2187,6 +2376,7 @@ export type StudentCreateWithoutLifeRecordInput = {
   vaccinations?: Prisma.VaccinationCreateNestedManyWithoutStudentInput
   payments?: Prisma.PaymentCreateNestedManyWithoutStudentInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutStudentInput
+  competencyAssessments?: Prisma.CompetencyAssessmentCreateNestedManyWithoutStudentInput
 }
 
 export type StudentUncheckedCreateWithoutLifeRecordInput = {
@@ -2211,6 +2401,7 @@ export type StudentUncheckedCreateWithoutLifeRecordInput = {
   vaccinations?: Prisma.VaccinationUncheckedCreateNestedManyWithoutStudentInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutStudentInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutStudentInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUncheckedCreateNestedManyWithoutStudentInput
 }
 
 export type StudentCreateOrConnectWithoutLifeRecordInput = {
@@ -2251,6 +2442,7 @@ export type StudentUpdateWithoutLifeRecordInput = {
   vaccinations?: Prisma.VaccinationUpdateManyWithoutStudentNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutStudentNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutStudentNestedInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentUncheckedUpdateWithoutLifeRecordInput = {
@@ -2275,6 +2467,7 @@ export type StudentUncheckedUpdateWithoutLifeRecordInput = {
   vaccinations?: Prisma.VaccinationUncheckedUpdateManyWithoutStudentNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutStudentNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutStudentNestedInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUncheckedUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentCreateWithoutWorkshopsInput = {
@@ -2299,6 +2492,7 @@ export type StudentCreateWithoutWorkshopsInput = {
   lifeRecord?: Prisma.StudentLifeEntryCreateNestedManyWithoutStudentInput
   payments?: Prisma.PaymentCreateNestedManyWithoutStudentInput
   invoices?: Prisma.InvoiceCreateNestedManyWithoutStudentInput
+  competencyAssessments?: Prisma.CompetencyAssessmentCreateNestedManyWithoutStudentInput
 }
 
 export type StudentUncheckedCreateWithoutWorkshopsInput = {
@@ -2323,6 +2517,7 @@ export type StudentUncheckedCreateWithoutWorkshopsInput = {
   lifeRecord?: Prisma.StudentLifeEntryUncheckedCreateNestedManyWithoutStudentInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutStudentInput
   invoices?: Prisma.InvoiceUncheckedCreateNestedManyWithoutStudentInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUncheckedCreateNestedManyWithoutStudentInput
 }
 
 export type StudentCreateOrConnectWithoutWorkshopsInput = {
@@ -2363,6 +2558,7 @@ export type StudentUpdateWithoutWorkshopsInput = {
   lifeRecord?: Prisma.StudentLifeEntryUpdateManyWithoutStudentNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutStudentNestedInput
   invoices?: Prisma.InvoiceUpdateManyWithoutStudentNestedInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUpdateManyWithoutStudentNestedInput
 }
 
 export type StudentUncheckedUpdateWithoutWorkshopsInput = {
@@ -2387,6 +2583,7 @@ export type StudentUncheckedUpdateWithoutWorkshopsInput = {
   lifeRecord?: Prisma.StudentLifeEntryUncheckedUpdateManyWithoutStudentNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutStudentNestedInput
   invoices?: Prisma.InvoiceUncheckedUpdateManyWithoutStudentNestedInput
+  competencyAssessments?: Prisma.CompetencyAssessmentUncheckedUpdateManyWithoutStudentNestedInput
 }
 
 
@@ -2409,6 +2606,7 @@ export type StudentCountOutputType = {
   lifeRecord: number
   payments: number
   invoices: number
+  competencyAssessments: number
 }
 
 export type StudentCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2426,6 +2624,7 @@ export type StudentCountOutputTypeSelect<ExtArgs extends runtime.Types.Extension
   lifeRecord?: boolean | StudentCountOutputTypeCountLifeRecordArgs
   payments?: boolean | StudentCountOutputTypeCountPaymentsArgs
   invoices?: boolean | StudentCountOutputTypeCountInvoicesArgs
+  competencyAssessments?: boolean | StudentCountOutputTypeCountCompetencyAssessmentsArgs
 }
 
 /**
@@ -2536,6 +2735,13 @@ export type StudentCountOutputTypeCountInvoicesArgs<ExtArgs extends runtime.Type
   where?: Prisma.InvoiceWhereInput
 }
 
+/**
+ * StudentCountOutputType without action
+ */
+export type StudentCountOutputTypeCountCompetencyAssessmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CompetencyAssessmentWhereInput
+}
+
 
 export type StudentSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -2561,6 +2767,7 @@ export type StudentSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   lifeRecord?: boolean | Prisma.Student$lifeRecordArgs<ExtArgs>
   payments?: boolean | Prisma.Student$paymentsArgs<ExtArgs>
   invoices?: boolean | Prisma.Student$invoicesArgs<ExtArgs>
+  competencyAssessments?: boolean | Prisma.Student$competencyAssessmentsArgs<ExtArgs>
   _count?: boolean | Prisma.StudentCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["student"]>
 
@@ -2616,6 +2823,7 @@ export type StudentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
   lifeRecord?: boolean | Prisma.Student$lifeRecordArgs<ExtArgs>
   payments?: boolean | Prisma.Student$paymentsArgs<ExtArgs>
   invoices?: boolean | Prisma.Student$invoicesArgs<ExtArgs>
+  competencyAssessments?: boolean | Prisma.Student$competencyAssessmentsArgs<ExtArgs>
   _count?: boolean | Prisma.StudentCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type StudentIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2643,6 +2851,7 @@ export type $StudentPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     lifeRecord: Prisma.$StudentLifeEntryPayload<ExtArgs>[]
     payments: Prisma.$PaymentPayload<ExtArgs>[]
     invoices: Prisma.$InvoicePayload<ExtArgs>[]
+    competencyAssessments: Prisma.$CompetencyAssessmentPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -3062,6 +3271,7 @@ export interface Prisma__StudentClient<T, Null = never, ExtArgs extends runtime.
   lifeRecord<T extends Prisma.Student$lifeRecordArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Student$lifeRecordArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StudentLifeEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   payments<T extends Prisma.Student$paymentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Student$paymentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   invoices<T extends Prisma.Student$invoicesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Student$invoicesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InvoicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  competencyAssessments<T extends Prisma.Student$competencyAssessmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Student$competencyAssessmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CompetencyAssessmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3831,6 +4041,30 @@ export type Student$invoicesArgs<ExtArgs extends runtime.Types.Extensions.Intern
   take?: number
   skip?: number
   distinct?: Prisma.InvoiceScalarFieldEnum | Prisma.InvoiceScalarFieldEnum[]
+}
+
+/**
+ * Student.competencyAssessments
+ */
+export type Student$competencyAssessmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CompetencyAssessment
+   */
+  select?: Prisma.CompetencyAssessmentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CompetencyAssessment
+   */
+  omit?: Prisma.CompetencyAssessmentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CompetencyAssessmentInclude<ExtArgs> | null
+  where?: Prisma.CompetencyAssessmentWhereInput
+  orderBy?: Prisma.CompetencyAssessmentOrderByWithRelationInput | Prisma.CompetencyAssessmentOrderByWithRelationInput[]
+  cursor?: Prisma.CompetencyAssessmentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CompetencyAssessmentScalarFieldEnum | Prisma.CompetencyAssessmentScalarFieldEnum[]
 }
 
 /**

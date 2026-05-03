@@ -7,6 +7,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
 import { GradingWindowBanner } from '@/components/grading-window-banner';
 import { ScoreCell } from './score-cell';
+import { CompetencyGradingTable } from './competency-table';
 import { isGradingOpenFor } from '@/lib/grading-window';
 
 function GradeCell({ value }: { value: number | null }) {
@@ -42,7 +43,7 @@ export default async function NotasPage() {
     // Pre-fetch todo antes de renderizar (server components no soportan map async en JSX)
     const tabsData = await Promise.all(
       cas.map(async (a) => {
-        const [enrollments, finalScores, competencies] = await Promise.all([
+        const [enrollments, finalScores, competencies, competencyAssessments] = await Promise.all([
           prisma.enrollment.findMany({
             where: { sectionId: a.sectionId },
             include: { student: { include: { user: true } } },
@@ -55,6 +56,9 @@ export default async function NotasPage() {
             where: { courseId: a.courseId },
             include: { capabilities: true },
             orderBy: { code: 'asc' },
+          }),
+          prisma.competencyAssessment.findMany({
+            where: { courseAssignmentId: a.id },
           }),
         ]);
         const lookup = new Map<string, Record<string, number>>();
@@ -83,6 +87,7 @@ export default async function NotasPage() {
           lookup,
           canEditByPeriod,
           competencies,
+          competencyAssessments,
         };
       })
     );
@@ -118,72 +123,75 @@ export default async function NotasPage() {
           </TabsList>
           {tabsData.map((a) => (
             <TabsContent key={a.id} value={a.id} className="space-y-4">
+              {/* Vista PRINCIPAL: calificación por competencia × mes */}
               {a.competencies.length > 0 && (
                 <Card>
-                  <CardContent className="p-4">
-                    <div className="text-[10px] uppercase tracking-wider font-bold text-[var(--muted-foreground)] mb-3">
-                      Competencias MINEDU del área
+                  <CardContent className="p-3 sm:p-4">
+                    <div className="flex items-baseline justify-between flex-wrap gap-2 mb-3">
+                      <div className="text-[11px] uppercase tracking-wider font-bold text-[var(--muted-foreground)]">
+                        Calificación por competencia · MINEDU
+                      </div>
+                      <details className="text-xs">
+                        <summary className="cursor-pointer text-[var(--primary)] font-medium">¿Qué competencias evalúo?</summary>
+                        <ul className="mt-2 space-y-1.5 text-[var(--muted-foreground)]">
+                          {a.competencies.map((c) => (
+                            <li key={c.id} className="text-xs">
+                              <strong className="text-[var(--foreground)]">{c.code}</strong> — {c.name}
+                            </li>
+                          ))}
+                        </ul>
+                      </details>
                     </div>
-                    <ul className="space-y-2">
-                      {a.competencies.map((c) => (
-                        <li key={c.id} className="flex gap-3 text-sm">
-                          <span className="shrink-0 mt-0.5 inline-flex items-center justify-center min-w-[44px] h-5 px-2 rounded-md bg-[var(--soft-blue)] text-[var(--primary-on-soft)] text-[10px] font-bold tracking-wide">
-                            {c.code}
-                          </span>
-                          <div className="min-w-0">
-                            <div className="font-medium leading-snug">{c.name}</div>
-                            {c.capabilities.length > 0 && (
-                              <div className="text-xs text-[var(--muted-foreground)] mt-1">
-                                <span className="font-medium">Capacidades: </span>
-                                {c.capabilities.map((cap) => cap.name).join(' · ')}
-                              </div>
-                            )}
-                          </div>
-                        </li>
-                      ))}
-                    </ul>
+                    <CompetencyGradingTable
+                      students={a.enrollments.map((e) => ({ id: e.studentId, firstName: e.student.user.firstName, lastName: e.student.user.lastName }))}
+                      competencies={a.competencies.map((c) => ({ id: c.id, code: c.code, name: c.name }))}
+                      periods={periods.map((p) => ({ id: p.id, name: p.name, ordinal: p.ordinal }))}
+                      assessments={a.competencyAssessments.map((x) => ({
+                        id: x.id, studentId: x.studentId, competencyId: x.competencyId, periodId: x.periodId,
+                        m1: x.m1 as any, m2: x.m2 as any, m3: x.m3 as any, letterGrade: x.letterGrade as any,
+                      }))}
+                      courseAssignmentId={a.courseAssignmentId}
+                      canEditByPeriod={a.canEditByPeriod}
+                    />
                   </CardContent>
                 </Card>
               )}
-              <Card>
-                <CardContent className="p-0">
-                  <Table>
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead>Estudiante</TableHead>
-                        {periods.map((p) => <TableHead key={p.id}>{p.name}</TableHead>)}
-                        <TableHead>Promedio</TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {a.enrollments.map((e) => {
-                        const m = a.lookup.get(e.studentId) || {};
-                        const studentName = `${e.student.user.firstName} ${e.student.user.lastName}`;
-                        return (
-                          <TableRow key={e.studentId}>
-                            <TableCell className="font-medium">{e.student.user.lastName}, {e.student.user.firstName}</TableCell>
-                            {periods.map((p) => (
-                              <TableCell key={p.id}>
-                                <ScoreCell
-                                  value={m[p.id] ?? null}
-                                  studentId={e.studentId}
-                                  studentName={studentName}
-                                  courseAssignmentId={a.courseAssignmentId}
-                                  periodId={p.id}
-                                  periodName={p.name}
-                                  courseName={a.courseName}
-                                  canEdit={!!a.canEditByPeriod[p.id]}
-                                />
-                              </TableCell>
-                            ))}
-                            <TableCell><GradeCell value={avg(m)} /></TableCell>
-                          </TableRow>
-                        );
-                      })}
-                    </TableBody>
-                  </Table>
-                </CardContent>
-              </Card>
+
+              {/* Vista RESUMEN (legacy): resumen numérico por trimestre */}
+              <details className="rounded-2xl border border-[var(--border)] bg-[var(--card)]">
+                <summary className="cursor-pointer px-4 py-3 text-sm font-semibold list-none flex items-center justify-between">
+                  <span>Vista clásica: nota numérica del trimestre</span>
+                  <span className="text-xs text-[var(--muted-foreground)]">▾</span>
+                </summary>
+                <div className="border-t border-[var(--border)]">
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Estudiante</TableHead>
+                      {periods.map((p) => <TableHead key={p.id}>{p.name}</TableHead>)}
+                      <TableHead>Promedio</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {a.enrollments.map((e) => {
+                      const m = a.lookup.get(e.studentId) || {};
+                      const studentName = `${e.student.user.firstName} ${e.student.user.lastName}`;
+                      return (
+                        <TableRow key={e.studentId}>
+                          <TableCell className="font-medium">{e.student.user.lastName}, {e.student.user.firstName}</TableCell>
+                          {periods.map((p) => (
+                            <TableCell key={p.id}>
+                              <ScoreCell value={m[p.id] ?? null} studentId={e.studentId} studentName={studentName} courseAssignmentId={a.courseAssignmentId} periodId={p.id} periodName={p.name} courseName={a.courseName} canEdit={!!a.canEditByPeriod[p.id]} />
+                            </TableCell>
+                          ))}
+                          <TableCell><GradeCell value={avg(m)} /></TableCell>
+                        </TableRow>
+                      );
+                    })}
+                  </TableBody>
+                </Table>
+                </div>
+              </details>
             </TabsContent>
           ))}
         </Tabs>

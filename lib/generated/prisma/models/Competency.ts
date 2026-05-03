@@ -176,6 +176,7 @@ export type CompetencyWhereInput = {
   name?: Prisma.StringFilter<"Competency"> | string
   course?: Prisma.XOR<Prisma.CourseScalarRelationFilter, Prisma.CourseWhereInput>
   capabilities?: Prisma.CapabilityListRelationFilter
+  assessments?: Prisma.CompetencyAssessmentListRelationFilter
 }
 
 export type CompetencyOrderByWithRelationInput = {
@@ -185,6 +186,7 @@ export type CompetencyOrderByWithRelationInput = {
   name?: Prisma.SortOrder
   course?: Prisma.CourseOrderByWithRelationInput
   capabilities?: Prisma.CapabilityOrderByRelationAggregateInput
+  assessments?: Prisma.CompetencyAssessmentOrderByRelationAggregateInput
 }
 
 export type CompetencyWhereUniqueInput = Prisma.AtLeast<{
@@ -197,6 +199,7 @@ export type CompetencyWhereUniqueInput = Prisma.AtLeast<{
   name?: Prisma.StringFilter<"Competency"> | string
   course?: Prisma.XOR<Prisma.CourseScalarRelationFilter, Prisma.CourseWhereInput>
   capabilities?: Prisma.CapabilityListRelationFilter
+  assessments?: Prisma.CompetencyAssessmentListRelationFilter
 }, "id">
 
 export type CompetencyOrderByWithAggregationInput = {
@@ -225,6 +228,7 @@ export type CompetencyCreateInput = {
   name: string
   course: Prisma.CourseCreateNestedOneWithoutCompetenciesInput
   capabilities?: Prisma.CapabilityCreateNestedManyWithoutCompetencyInput
+  assessments?: Prisma.CompetencyAssessmentCreateNestedManyWithoutCompetencyInput
 }
 
 export type CompetencyUncheckedCreateInput = {
@@ -233,6 +237,7 @@ export type CompetencyUncheckedCreateInput = {
   code: string
   name: string
   capabilities?: Prisma.CapabilityUncheckedCreateNestedManyWithoutCompetencyInput
+  assessments?: Prisma.CompetencyAssessmentUncheckedCreateNestedManyWithoutCompetencyInput
 }
 
 export type CompetencyUpdateInput = {
@@ -241,6 +246,7 @@ export type CompetencyUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   course?: Prisma.CourseUpdateOneRequiredWithoutCompetenciesNestedInput
   capabilities?: Prisma.CapabilityUpdateManyWithoutCompetencyNestedInput
+  assessments?: Prisma.CompetencyAssessmentUpdateManyWithoutCompetencyNestedInput
 }
 
 export type CompetencyUncheckedUpdateInput = {
@@ -249,6 +255,7 @@ export type CompetencyUncheckedUpdateInput = {
   code?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   capabilities?: Prisma.CapabilityUncheckedUpdateManyWithoutCompetencyNestedInput
+  assessments?: Prisma.CompetencyAssessmentUncheckedUpdateManyWithoutCompetencyNestedInput
 }
 
 export type CompetencyCreateManyInput = {
@@ -349,6 +356,20 @@ export type CompetencyUncheckedUpdateManyWithoutCourseNestedInput = {
   deleteMany?: Prisma.CompetencyScalarWhereInput | Prisma.CompetencyScalarWhereInput[]
 }
 
+export type CompetencyCreateNestedOneWithoutAssessmentsInput = {
+  create?: Prisma.XOR<Prisma.CompetencyCreateWithoutAssessmentsInput, Prisma.CompetencyUncheckedCreateWithoutAssessmentsInput>
+  connectOrCreate?: Prisma.CompetencyCreateOrConnectWithoutAssessmentsInput
+  connect?: Prisma.CompetencyWhereUniqueInput
+}
+
+export type CompetencyUpdateOneRequiredWithoutAssessmentsNestedInput = {
+  create?: Prisma.XOR<Prisma.CompetencyCreateWithoutAssessmentsInput, Prisma.CompetencyUncheckedCreateWithoutAssessmentsInput>
+  connectOrCreate?: Prisma.CompetencyCreateOrConnectWithoutAssessmentsInput
+  upsert?: Prisma.CompetencyUpsertWithoutAssessmentsInput
+  connect?: Prisma.CompetencyWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CompetencyUpdateToOneWithWhereWithoutAssessmentsInput, Prisma.CompetencyUpdateWithoutAssessmentsInput>, Prisma.CompetencyUncheckedUpdateWithoutAssessmentsInput>
+}
+
 export type CompetencyCreateNestedOneWithoutCapabilitiesInput = {
   create?: Prisma.XOR<Prisma.CompetencyCreateWithoutCapabilitiesInput, Prisma.CompetencyUncheckedCreateWithoutCapabilitiesInput>
   connectOrCreate?: Prisma.CompetencyCreateOrConnectWithoutCapabilitiesInput
@@ -368,6 +389,7 @@ export type CompetencyCreateWithoutCourseInput = {
   code: string
   name: string
   capabilities?: Prisma.CapabilityCreateNestedManyWithoutCompetencyInput
+  assessments?: Prisma.CompetencyAssessmentCreateNestedManyWithoutCompetencyInput
 }
 
 export type CompetencyUncheckedCreateWithoutCourseInput = {
@@ -375,6 +397,7 @@ export type CompetencyUncheckedCreateWithoutCourseInput = {
   code: string
   name: string
   capabilities?: Prisma.CapabilityUncheckedCreateNestedManyWithoutCompetencyInput
+  assessments?: Prisma.CompetencyAssessmentUncheckedCreateNestedManyWithoutCompetencyInput
 }
 
 export type CompetencyCreateOrConnectWithoutCourseInput = {
@@ -412,11 +435,60 @@ export type CompetencyScalarWhereInput = {
   name?: Prisma.StringFilter<"Competency"> | string
 }
 
+export type CompetencyCreateWithoutAssessmentsInput = {
+  id?: string
+  code: string
+  name: string
+  course: Prisma.CourseCreateNestedOneWithoutCompetenciesInput
+  capabilities?: Prisma.CapabilityCreateNestedManyWithoutCompetencyInput
+}
+
+export type CompetencyUncheckedCreateWithoutAssessmentsInput = {
+  id?: string
+  courseId: string
+  code: string
+  name: string
+  capabilities?: Prisma.CapabilityUncheckedCreateNestedManyWithoutCompetencyInput
+}
+
+export type CompetencyCreateOrConnectWithoutAssessmentsInput = {
+  where: Prisma.CompetencyWhereUniqueInput
+  create: Prisma.XOR<Prisma.CompetencyCreateWithoutAssessmentsInput, Prisma.CompetencyUncheckedCreateWithoutAssessmentsInput>
+}
+
+export type CompetencyUpsertWithoutAssessmentsInput = {
+  update: Prisma.XOR<Prisma.CompetencyUpdateWithoutAssessmentsInput, Prisma.CompetencyUncheckedUpdateWithoutAssessmentsInput>
+  create: Prisma.XOR<Prisma.CompetencyCreateWithoutAssessmentsInput, Prisma.CompetencyUncheckedCreateWithoutAssessmentsInput>
+  where?: Prisma.CompetencyWhereInput
+}
+
+export type CompetencyUpdateToOneWithWhereWithoutAssessmentsInput = {
+  where?: Prisma.CompetencyWhereInput
+  data: Prisma.XOR<Prisma.CompetencyUpdateWithoutAssessmentsInput, Prisma.CompetencyUncheckedUpdateWithoutAssessmentsInput>
+}
+
+export type CompetencyUpdateWithoutAssessmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  course?: Prisma.CourseUpdateOneRequiredWithoutCompetenciesNestedInput
+  capabilities?: Prisma.CapabilityUpdateManyWithoutCompetencyNestedInput
+}
+
+export type CompetencyUncheckedUpdateWithoutAssessmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  courseId?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  capabilities?: Prisma.CapabilityUncheckedUpdateManyWithoutCompetencyNestedInput
+}
+
 export type CompetencyCreateWithoutCapabilitiesInput = {
   id?: string
   code: string
   name: string
   course: Prisma.CourseCreateNestedOneWithoutCompetenciesInput
+  assessments?: Prisma.CompetencyAssessmentCreateNestedManyWithoutCompetencyInput
 }
 
 export type CompetencyUncheckedCreateWithoutCapabilitiesInput = {
@@ -424,6 +496,7 @@ export type CompetencyUncheckedCreateWithoutCapabilitiesInput = {
   courseId: string
   code: string
   name: string
+  assessments?: Prisma.CompetencyAssessmentUncheckedCreateNestedManyWithoutCompetencyInput
 }
 
 export type CompetencyCreateOrConnectWithoutCapabilitiesInput = {
@@ -447,6 +520,7 @@ export type CompetencyUpdateWithoutCapabilitiesInput = {
   code?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   course?: Prisma.CourseUpdateOneRequiredWithoutCompetenciesNestedInput
+  assessments?: Prisma.CompetencyAssessmentUpdateManyWithoutCompetencyNestedInput
 }
 
 export type CompetencyUncheckedUpdateWithoutCapabilitiesInput = {
@@ -454,6 +528,7 @@ export type CompetencyUncheckedUpdateWithoutCapabilitiesInput = {
   courseId?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  assessments?: Prisma.CompetencyAssessmentUncheckedUpdateManyWithoutCompetencyNestedInput
 }
 
 export type CompetencyCreateManyCourseInput = {
@@ -467,6 +542,7 @@ export type CompetencyUpdateWithoutCourseInput = {
   code?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   capabilities?: Prisma.CapabilityUpdateManyWithoutCompetencyNestedInput
+  assessments?: Prisma.CompetencyAssessmentUpdateManyWithoutCompetencyNestedInput
 }
 
 export type CompetencyUncheckedUpdateWithoutCourseInput = {
@@ -474,6 +550,7 @@ export type CompetencyUncheckedUpdateWithoutCourseInput = {
   code?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   capabilities?: Prisma.CapabilityUncheckedUpdateManyWithoutCompetencyNestedInput
+  assessments?: Prisma.CompetencyAssessmentUncheckedUpdateManyWithoutCompetencyNestedInput
 }
 
 export type CompetencyUncheckedUpdateManyWithoutCourseInput = {
@@ -489,10 +566,12 @@ export type CompetencyUncheckedUpdateManyWithoutCourseInput = {
 
 export type CompetencyCountOutputType = {
   capabilities: number
+  assessments: number
 }
 
 export type CompetencyCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   capabilities?: boolean | CompetencyCountOutputTypeCountCapabilitiesArgs
+  assessments?: boolean | CompetencyCountOutputTypeCountAssessmentsArgs
 }
 
 /**
@@ -512,6 +591,13 @@ export type CompetencyCountOutputTypeCountCapabilitiesArgs<ExtArgs extends runti
   where?: Prisma.CapabilityWhereInput
 }
 
+/**
+ * CompetencyCountOutputType without action
+ */
+export type CompetencyCountOutputTypeCountAssessmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CompetencyAssessmentWhereInput
+}
+
 
 export type CompetencySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -520,6 +606,7 @@ export type CompetencySelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   name?: boolean
   course?: boolean | Prisma.CourseDefaultArgs<ExtArgs>
   capabilities?: boolean | Prisma.Competency$capabilitiesArgs<ExtArgs>
+  assessments?: boolean | Prisma.Competency$assessmentsArgs<ExtArgs>
   _count?: boolean | Prisma.CompetencyCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["competency"]>
 
@@ -550,6 +637,7 @@ export type CompetencyOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs
 export type CompetencyInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   course?: boolean | Prisma.CourseDefaultArgs<ExtArgs>
   capabilities?: boolean | Prisma.Competency$capabilitiesArgs<ExtArgs>
+  assessments?: boolean | Prisma.Competency$assessmentsArgs<ExtArgs>
   _count?: boolean | Prisma.CompetencyCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type CompetencyIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -564,6 +652,7 @@ export type $CompetencyPayload<ExtArgs extends runtime.Types.Extensions.Internal
   objects: {
     course: Prisma.$CoursePayload<ExtArgs>
     capabilities: Prisma.$CapabilityPayload<ExtArgs>[]
+    assessments: Prisma.$CompetencyAssessmentPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -966,6 +1055,7 @@ export interface Prisma__CompetencyClient<T, Null = never, ExtArgs extends runti
   readonly [Symbol.toStringTag]: "PrismaPromise"
   course<T extends Prisma.CourseDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CourseDefaultArgs<ExtArgs>>): Prisma.Prisma__CourseClient<runtime.Types.Result.GetResult<Prisma.$CoursePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   capabilities<T extends Prisma.Competency$capabilitiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Competency$capabilitiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CapabilityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  assessments<T extends Prisma.Competency$assessmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Competency$assessmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CompetencyAssessmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1419,6 +1509,30 @@ export type Competency$capabilitiesArgs<ExtArgs extends runtime.Types.Extensions
   take?: number
   skip?: number
   distinct?: Prisma.CapabilityScalarFieldEnum | Prisma.CapabilityScalarFieldEnum[]
+}
+
+/**
+ * Competency.assessments
+ */
+export type Competency$assessmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CompetencyAssessment
+   */
+  select?: Prisma.CompetencyAssessmentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CompetencyAssessment
+   */
+  omit?: Prisma.CompetencyAssessmentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CompetencyAssessmentInclude<ExtArgs> | null
+  where?: Prisma.CompetencyAssessmentWhereInput
+  orderBy?: Prisma.CompetencyAssessmentOrderByWithRelationInput | Prisma.CompetencyAssessmentOrderByWithRelationInput[]
+  cursor?: Prisma.CompetencyAssessmentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CompetencyAssessmentScalarFieldEnum | Prisma.CompetencyAssessmentScalarFieldEnum[]
 }
 
 /**

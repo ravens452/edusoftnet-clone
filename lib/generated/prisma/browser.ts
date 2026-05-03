@@ -64,6 +64,13 @@ export type Course = Prisma.CourseModel
  */
 export type Competency = Prisma.CompetencyModel
 /**
+ * Model CompetencyAssessment
+ * Evaluación MINEDU por competencia, por trimestre.
+ * 3 sub-evaluaciones mensuales (m1, m2, m3) más una conclusión trimestral.
+ * letterGrade puede ser AD, A, B, C.
+ */
+export type CompetencyAssessment = Prisma.CompetencyAssessmentModel
+/**
  * Model Capability
  * 
  */

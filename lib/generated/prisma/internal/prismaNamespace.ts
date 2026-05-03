@@ -393,6 +393,7 @@ export const ModelName = {
   Section: 'Section',
   Course: 'Course',
   Competency: 'Competency',
+  CompetencyAssessment: 'CompetencyAssessment',
   Capability: 'Capability',
   PerformanceIndicator: 'PerformanceIndicator',
   CourseAssignment: 'CourseAssignment',
@@ -449,7 +450,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "session" | "schoolYear" | "period" | "gradingWindow" | "grade" | "section" | "course" | "competency" | "capability" | "performanceIndicator" | "courseAssignment" | "scheduleSlot" | "student" | "enrollment" | "parent" | "parentStudent" | "teacher" | "staff" | "score" | "finalScore" | "attendanceRecord" | "assignment" | "submission" | "lessonSession" | "curriculumPlan" | "chatThread" | "chatParticipant" | "chatMessage" | "announcement" | "notification" | "prospect" | "invoice" | "payment" | "book" | "readingProgress" | "psychologyCase" | "psychologicalTest" | "healthRecord" | "vaccination" | "studentLifeEntry" | "workshop" | "workshopEnrollment" | "document" | "driveFile" | "ticket" | "gateLog" | "interview" | "fixedAsset" | "auditLog"
+    modelProps: "user" | "session" | "schoolYear" | "period" | "gradingWindow" | "grade" | "section" | "course" | "competency" | "competencyAssessment" | "capability" | "performanceIndicator" | "courseAssignment" | "scheduleSlot" | "student" | "enrollment" | "parent" | "parentStudent" | "teacher" | "staff" | "score" | "finalScore" | "attendanceRecord" | "assignment" | "submission" | "lessonSession" | "curriculumPlan" | "chatThread" | "chatParticipant" | "chatMessage" | "announcement" | "notification" | "prospect" | "invoice" | "payment" | "book" | "readingProgress" | "psychologyCase" | "psychologicalTest" | "healthRecord" | "vaccination" | "studentLifeEntry" | "workshop" | "workshopEnrollment" | "document" | "driveFile" | "ticket" | "gateLog" | "interview" | "fixedAsset" | "auditLog"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1116,6 +1117,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.CompetencyCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.CompetencyCountAggregateOutputType> | number
+        }
+      }
+    }
+    CompetencyAssessment: {
+      payload: Prisma.$CompetencyAssessmentPayload<ExtArgs>
+      fields: Prisma.CompetencyAssessmentFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CompetencyAssessmentFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompetencyAssessmentPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CompetencyAssessmentFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompetencyAssessmentPayload>
+        }
+        findFirst: {
+          args: Prisma.CompetencyAssessmentFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompetencyAssessmentPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CompetencyAssessmentFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompetencyAssessmentPayload>
+        }
+        findMany: {
+          args: Prisma.CompetencyAssessmentFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompetencyAssessmentPayload>[]
+        }
+        create: {
+          args: Prisma.CompetencyAssessmentCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompetencyAssessmentPayload>
+        }
+        createMany: {
+          args: Prisma.CompetencyAssessmentCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CompetencyAssessmentCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompetencyAssessmentPayload>[]
+        }
+        delete: {
+          args: Prisma.CompetencyAssessmentDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompetencyAssessmentPayload>
+        }
+        update: {
+          args: Prisma.CompetencyAssessmentUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompetencyAssessmentPayload>
+        }
+        deleteMany: {
+          args: Prisma.CompetencyAssessmentDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CompetencyAssessmentUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CompetencyAssessmentUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompetencyAssessmentPayload>[]
+        }
+        upsert: {
+          args: Prisma.CompetencyAssessmentUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompetencyAssessmentPayload>
+        }
+        aggregate: {
+          args: Prisma.CompetencyAssessmentAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCompetencyAssessment>
+        }
+        groupBy: {
+          args: Prisma.CompetencyAssessmentGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CompetencyAssessmentGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CompetencyAssessmentCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CompetencyAssessmentCountAggregateOutputType> | number
         }
       }
     }
@@ -4308,6 +4383,23 @@ export const CompetencyScalarFieldEnum = {
 export type CompetencyScalarFieldEnum = (typeof CompetencyScalarFieldEnum)[keyof typeof CompetencyScalarFieldEnum]
 
 
+export const CompetencyAssessmentScalarFieldEnum = {
+  id: 'id',
+  studentId: 'studentId',
+  courseAssignmentId: 'courseAssignmentId',
+  competencyId: 'competencyId',
+  periodId: 'periodId',
+  m1: 'm1',
+  m2: 'm2',
+  m3: 'm3',
+  letterGrade: 'letterGrade',
+  observation: 'observation',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CompetencyAssessmentScalarFieldEnum = (typeof CompetencyAssessmentScalarFieldEnum)[keyof typeof CompetencyAssessmentScalarFieldEnum]
+
+
 export const CapabilityScalarFieldEnum = {
   id: 'id',
   competencyId: 'competencyId',
@@ -5137,6 +5229,7 @@ export type GlobalOmitConfig = {
   section?: Prisma.SectionOmit
   course?: Prisma.CourseOmit
   competency?: Prisma.CompetencyOmit
+  competencyAssessment?: Prisma.CompetencyAssessmentOmit
   capability?: Prisma.CapabilityOmit
   performanceIndicator?: Prisma.PerformanceIndicatorOmit
   courseAssignment?: Prisma.CourseAssignmentOmit
