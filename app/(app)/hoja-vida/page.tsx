@@ -4,6 +4,22 @@ import { PageHeader } from '@/components/ui/page-header';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { formatDate } from '@/lib/utils';
+import { NewLifeEntryDialog } from './new-entry-dialog';
+
+const TONE: Record<string, 'success' | 'destructive' | 'warning' | 'secondary' | 'muted'> = {
+  ACHIEVEMENT: 'success',
+  RECOGNITION: 'success',
+  COMMENT: 'muted',
+  CONDUCT: 'warning',
+  INCIDENT: 'destructive',
+};
+const LABEL: Record<string, string> = {
+  ACHIEVEMENT: 'Logro',
+  RECOGNITION: 'Reconocimiento',
+  COMMENT: 'Comentario',
+  CONDUCT: 'Conducta',
+  INCIDENT: 'Incidencia',
+};
 
 export default async function HojaVidaPage() {
   const user = await requireSession();
@@ -23,11 +39,30 @@ export default async function HojaVidaPage() {
     take: 50,
   });
 
+  const canCreate = ['TEACHER', 'DIRECTION', 'ADMIN', 'PSYCHOLOGY'].includes(user.role);
+  let students: { id: string; label: string }[] = [];
+  if (canCreate) {
+    const ss = await prisma.student.findMany({
+      include: { user: true },
+      orderBy: { user: { lastName: 'asc' } },
+      take: 200,
+    });
+    students = ss.map((s) => ({ id: s.id, label: `${s.user.lastName}, ${s.user.firstName}` }));
+  }
+
   return (
     <div className="space-y-6">
-      <PageHeader title="Hoja de vida estudiantil" description="Logros, incidencias y reconocimientos" />
+      <PageHeader
+        title="Hoja de vida estudiantil"
+        description="Logros, incidencias y reconocimientos"
+        action={canCreate ? <NewLifeEntryDialog students={students} /> : undefined}
+      />
       <div className="space-y-3">
-        {entries.map((e) => (
+        {entries.length === 0 ? (
+          <Card><CardContent className="p-8 text-center text-sm text-[var(--muted-foreground)]">
+            Sin entradas registradas.
+          </CardContent></Card>
+        ) : entries.map((e) => (
           <Card key={e.id}>
             <CardContent className="p-4">
               <div className="flex items-start justify-between gap-4">
@@ -37,9 +72,9 @@ export default async function HojaVidaPage() {
                     {e.student.user.firstName} {e.student.user.lastName} · {formatDate(e.date)}
                   </div>
                 </div>
-                <Badge variant="outline">{e.type}</Badge>
+                <Badge variant={TONE[e.type] || 'muted'}>{LABEL[e.type] || e.type}</Badge>
               </div>
-              <p className="text-sm mt-3">{e.body}</p>
+              <p className="text-sm mt-3 whitespace-pre-wrap">{e.body}</p>
             </CardContent>
           </Card>
         ))}

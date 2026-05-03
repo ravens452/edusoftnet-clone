@@ -5,6 +5,7 @@ import { PageHeader } from '@/components/ui/page-header';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { formatDate } from '@/lib/utils';
+import { NewAssignmentDialog } from './new-assignment-dialog';
 
 const TYPE_LABEL: Record<string, string> = {
   HOMEWORK: 'Tarea',
@@ -72,18 +73,32 @@ export default async function EclassPage() {
   if (user.role === 'TEACHER') {
     const t = await prisma.teacher.findUnique({ where: { userId: user.id } });
     if (!t) return <div>Sin perfil</div>;
-    const assignments = await prisma.assignment.findMany({
-      where: { courseAssignment: { teacherId: t.id } },
-      include: {
-        courseAssignment: { include: { course: true, section: { include: { grade: true } } } },
-        submissions: true,
-      },
-      orderBy: { dueDate: 'desc' },
-      take: 50,
-    });
+    const [assignments, courseAssignments] = await Promise.all([
+      prisma.assignment.findMany({
+        where: { courseAssignment: { teacherId: t.id } },
+        include: {
+          courseAssignment: { include: { course: true, section: { include: { grade: true } } } },
+          submissions: true,
+        },
+        orderBy: { dueDate: 'desc' },
+        take: 50,
+      }),
+      prisma.courseAssignment.findMany({
+        where: { teacherId: t.id },
+        include: { course: true, section: { include: { grade: true } } },
+      }),
+    ]);
+    const courses = courseAssignments.map((c) => ({
+      id: c.id,
+      label: `${c.course.name} · ${c.section.grade.name} "${c.section.name}"`,
+    }));
     return (
       <div className="space-y-6">
-        <PageHeader title="eclass" description="Tareas y entregas de tus cursos" />
+        <PageHeader
+          title="eclass"
+          description="Tareas y entregas de tus cursos"
+          action={courses.length ? <NewAssignmentDialog courses={courses} /> : undefined}
+        />
         <div className="grid md:grid-cols-2 gap-4">
           {assignments.map((a) => {
             const total = a.submissions.length;
