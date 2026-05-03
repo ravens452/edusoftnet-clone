@@ -157,41 +157,6 @@ export default async function NotasPage() {
                 </Card>
               )}
 
-              {/* Vista RESUMEN (legacy): resumen numérico por trimestre */}
-              <details className="rounded-2xl border border-[var(--border)] bg-[var(--card)]">
-                <summary className="cursor-pointer px-4 py-3 text-sm font-semibold list-none flex items-center justify-between">
-                  <span>Vista clásica: nota numérica del trimestre</span>
-                  <span className="text-xs text-[var(--muted-foreground)]">▾</span>
-                </summary>
-                <div className="border-t border-[var(--border)]">
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>Estudiante</TableHead>
-                      {periods.map((p) => <TableHead key={p.id}>{p.name}</TableHead>)}
-                      <TableHead>Promedio</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {a.enrollments.map((e) => {
-                      const m = a.lookup.get(e.studentId) || {};
-                      const studentName = `${e.student.user.firstName} ${e.student.user.lastName}`;
-                      return (
-                        <TableRow key={e.studentId}>
-                          <TableCell className="font-medium">{e.student.user.lastName}, {e.student.user.firstName}</TableCell>
-                          {periods.map((p) => (
-                            <TableCell key={p.id}>
-                              <ScoreCell value={m[p.id] ?? null} studentId={e.studentId} studentName={studentName} courseAssignmentId={a.courseAssignmentId} periodId={p.id} periodName={p.name} courseName={a.courseName} canEdit={!!a.canEditByPeriod[p.id]} />
-                            </TableCell>
-                          ))}
-                          <TableCell><GradeCell value={avg(m)} /></TableCell>
-                        </TableRow>
-                      );
-                    })}
-                  </TableBody>
-                </Table>
-                </div>
-              </details>
             </TabsContent>
           ))}
         </Tabs>

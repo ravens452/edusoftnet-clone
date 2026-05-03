@@ -7,32 +7,25 @@ import { setCompetencyMonthAction } from './competency-actions';
 export type Letter = 'AD' | 'A' | 'B' | 'C' | null;
 
 const COLORS: Record<string, string> = {
-  AD: 'bg-[var(--success)] text-white',
-  A:  'bg-[var(--brand-blue)] text-white',
-  B:  'bg-[var(--warning)] text-white',
-  C:  'bg-[var(--destructive)] text-white',
-  '': 'bg-[var(--muted)] text-[var(--muted-foreground)]',
-};
-const HOVER: Record<string, string> = {
-  AD: 'hover:bg-[var(--success)]/15 hover:text-[var(--success-on-soft)]',
-  A:  'hover:bg-[var(--soft-blue)] hover:text-[var(--primary-on-soft)]',
-  B:  'hover:bg-[var(--soft-warning)] hover:text-[var(--warning-on-soft)]',
-  C:  'hover:bg-[var(--soft-danger)] hover:text-[var(--destructive-on-soft)]',
+  AD: 'bg-[var(--success)] text-white border-[var(--success)]',
+  A:  'bg-[var(--brand-blue)] text-white border-[var(--brand-blue)]',
+  B:  'bg-[var(--warning)] text-white border-[var(--warning)]',
+  C:  'bg-[var(--destructive)] text-white border-[var(--destructive)]',
 };
 const LABELS: Record<string, string> = {
-  AD: 'Logro destacado',
-  A: 'Logro esperado',
-  B: 'En proceso',
-  C: 'En inicio',
+  AD: 'AD · Logro destacado',
+  A:  'A · Logro esperado',
+  B:  'B · En proceso',
+  C:  'C · En inicio',
 };
 
 export function LetterChip({ value, size = 'sm' }: { value: Letter | undefined; size?: 'xs' | 'sm' | 'md' }) {
-  const cls = value ? COLORS[value] : COLORS[''];
   const sizeCls = size === 'xs' ? 'h-6 w-6 text-[10px]' : size === 'md' ? 'h-9 min-w-9 px-2 text-sm' : 'h-7 min-w-7 px-1.5 text-xs';
+  const cls = value ? COLORS[value] : 'bg-[var(--muted)] text-[var(--muted-foreground)] border-[var(--border)]';
   return (
     <span
-      title={value ? `${value} — ${LABELS[value]}` : 'Sin calificar'}
-      className={`inline-flex items-center justify-center rounded-md font-bold leading-none ${sizeCls} ${cls}`}
+      title={value ? LABELS[value] : 'Sin calificar'}
+      className={`inline-flex items-center justify-center rounded-md font-bold leading-none border ${sizeCls} ${cls}`}
     >
       {value ?? '—'}
     </span>
@@ -40,9 +33,8 @@ export function LetterChip({ value, size = 'sm' }: { value: Letter | undefined; 
 }
 
 /**
- * Picker de letra MINEDU con 4 botones.
- * Si haces clic en la letra ya seleccionada, la quita (toggle).
- * Optimistic UI + server action.
+ * Picker de letra MINEDU usando un <select> nativo.
+ * Súper intuitivo en mobile (toca → aparece picker del sistema).
  */
 export function LetterPicker({
   value,
@@ -66,23 +58,22 @@ export function LetterPicker({
   const router = useRouter();
   const [, start] = useTransition();
   const [optimistic, setOptimistic] = useState<Letter>(value);
-  const [open, setOpen] = useState(false);
+  const [pending, setPending] = useState(false);
 
   if (!canEdit) {
     return <LetterChip value={optimistic} size={size} />;
   }
 
-  function pick(letter: Letter) {
-    const newVal = optimistic === letter ? null : letter;
-    setOptimistic(newVal);
-    setOpen(false);
+  function onChange(e: React.ChangeEvent<HTMLSelectElement>) {
+    const next = (e.target.value || null) as Letter;
+    setOptimistic(next);
+    setPending(true);
     start(async () => {
       const r = await setCompetencyMonthAction({
-        studentId, courseAssignmentId, competencyId, periodId,
-        field, value: newVal,
+        studentId, courseAssignmentId, competencyId, periodId, field, value: next,
       });
+      setPending(false);
       if (!('ok' in r) || !r.ok) {
-        // Revert
         setOptimistic(value);
       } else {
         router.refresh();
@@ -90,35 +81,36 @@ export function LetterPicker({
     });
   }
 
-  const triggerSize = size === 'md' ? 'h-9 min-w-9 px-2 text-sm' : 'h-7 min-w-7 px-1.5 text-xs';
-  const valColor = optimistic ? COLORS[optimistic] : `${COLORS['']} border border-dashed border-[var(--border-strong)]`;
+  const sizeCls = size === 'md'
+    ? 'h-9 min-w-[44px] text-sm'
+    : 'h-7 min-w-[36px] text-xs';
+  const colorCls = optimistic
+    ? COLORS[optimistic]
+    : 'bg-[var(--card)] text-[var(--muted-foreground)] border-dashed border-[var(--border-strong)]';
 
   return (
-    <div className="relative inline-block">
-      <button
-        type="button"
-        onClick={() => setOpen((v) => !v)}
-        onBlur={() => setTimeout(() => setOpen(false), 150)}
-        className={`inline-flex items-center justify-center rounded-md font-bold leading-none transition active:scale-95 ${triggerSize} ${valColor}`}
-        title={optimistic ? `${optimistic} — ${LABELS[optimistic]}` : 'Calificar'}
+    <div className={`relative inline-block ${pending ? 'opacity-60' : ''}`}>
+      <select
+        value={optimistic ?? ''}
+        onChange={onChange}
+        disabled={pending}
+        title={optimistic ? LABELS[optimistic] : 'Calificar'}
+        aria-label="Calificación MINEDU"
+        className={`appearance-none rounded-md font-bold leading-none border px-2 pr-5 cursor-pointer transition active:scale-95 ${sizeCls} ${colorCls}`}
+        style={{
+          // Flecha del select pintada con SVG inline para que se vea consistente en color
+          backgroundImage: 'url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'8\' height=\'8\' viewBox=\'0 0 8 8\'%3e%3cpath fill=\'currentColor\' d=\'M4 6L0 2h8z\'/%3e%3c/svg%3e")',
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: `right 4px center`,
+          paddingRight: '14px',
+        }}
       >
-        {optimistic ?? '+'}
-      </button>
-      {open && (
-        <div className="absolute z-30 top-full left-0 mt-1 flex gap-0.5 p-1 rounded-lg bg-[var(--card)] border border-[var(--border-strong)] shadow-md">
-          {(['AD','A','B','C'] as const).map((L) => (
-            <button
-              key={L}
-              type="button"
-              onMouseDown={(e) => { e.preventDefault(); pick(L); }}
-              className={`h-7 min-w-8 px-1.5 rounded-md text-xs font-bold leading-none transition ${optimistic === L ? COLORS[L] : `bg-transparent ${HOVER[L]} text-[var(--foreground)]`}`}
-              title={`${L} — ${LABELS[L]}`}
-            >
-              {L}
-            </button>
-          ))}
-        </div>
-      )}
+        <option value="">—</option>
+        <option value="AD">AD</option>
+        <option value="A">A</option>
+        <option value="B">B</option>
+        <option value="C">C</option>
+      </select>
     </div>
   );
 }
